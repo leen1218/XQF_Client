@@ -1,0 +1,25 @@
+//
+//  XQFRequestManager.h
+//  XueQuFang
+//
+//  Created by en li on 16/5/10.
+//  Copyright © 2016年 en li. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "XQFRequest.h"
+
+typedef enum {
+	ENUM_REQUEST_TEST = 0,
+	ENUM_REQUEST_SEARCH,
+} EnumRequestType;
+
+@interface XQFRequestManager : NSObject
+
+// singleton
++(XQFRequestManager*) sharedManager;
+
+// request factory
+-(XQFRequest*) createRequest:(EnumRequestType) requestType;
+
+@end

@@ -15,6 +15,9 @@
 		8D5E564A1EC1F03B00132BBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D5E56481EC1F03B00132BBA /* LaunchScreen.storyboard */; };
 		8DACECFA1EC488A5008E3B31 /* SearchMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DACECF91EC488A5008E3B31 /* SearchMainVC.swift */; };
 		8DACECFD1EC4916F008E3B31 /* SearchResultItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DACECFC1EC4916F008E3B31 /* SearchResultItem.swift */; };
+		8DACED081EC765D7008E3B31 /* XQFRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DACED021EC765D7008E3B31 /* XQFRequestManager.m */; };
+		8DACED091EC765D7008E3B31 /* XQFRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DACED051EC765D7008E3B31 /* XQFRequest.m */; };
+		8DACED0A1EC765D7008E3B31 /* XQFSearchRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DACED071EC765D7008E3B31 /* XQFSearchRequest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +30,13 @@
 		8D5E564B1EC1F03B00132BBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DACECF91EC488A5008E3B31 /* SearchMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchMainVC.swift; path = UI/SearchMainVC.swift; sourceTree = "<group>"; };
 		8DACECFC1EC4916F008E3B31 /* SearchResultItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchResultItem.swift; path = Model/SearchResultItem.swift; sourceTree = "<group>"; };
+		8DACED011EC765D7008E3B31 /* XQFRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQFRequestManager.h; sourceTree = "<group>"; };
+		8DACED021EC765D7008E3B31 /* XQFRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XQFRequestManager.m; sourceTree = "<group>"; };
+		8DACED041EC765D7008E3B31 /* XQFRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQFRequest.h; sourceTree = "<group>"; };
+		8DACED051EC765D7008E3B31 /* XQFRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XQFRequest.m; sourceTree = "<group>"; };
+		8DACED061EC765D7008E3B31 /* XQFSearchRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQFSearchRequest.h; sourceTree = "<group>"; };
+		8DACED071EC765D7008E3B31 /* XQFSearchRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XQFSearchRequest.m; sourceTree = "<group>"; };
+		8DACED0B1EC76997008E3B31 /* XueQuFang-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XueQuFang-Bridging-Header.h"; sourceTree = "<group>"; };
 		BC6B98B768BA65AEFB78845C /* Pods-XueQuFang.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XueQuFang.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XueQuFang/Pods-XueQuFang.debug.xcconfig"; sourceTree = "<group>"; };
 		C4AB87CFF743D57E9AAE9144 /* Pods-XueQuFang.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XueQuFang.release.xcconfig"; path = "Pods/Target Support Files/Pods-XueQuFang/Pods-XueQuFang.release.xcconfig"; sourceTree = "<group>"; };
 		D34607F5CE1D73146809B115 /* libPods-XueQuFang.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-XueQuFang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,6 +84,8 @@
 		8D5E563E1EC1F03B00132BBA /* XueQuFang */ = {
 			isa = PBXGroup;
 			children = (
+				8DACED001EC765D7008E3B31 /* Manager */,
+				8DACED031EC765D7008E3B31 /* Request */,
 				8DACECFB1EC49151008E3B31 /* Model */,
 				8DACECF81EC48876008E3B31 /* UI */,
 				8D5E563F1EC1F03B00132BBA /* AppDelegate.swift */,
@@ -82,6 +94,7 @@
 				8D5E56461EC1F03B00132BBA /* Assets.xcassets */,
 				8D5E56481EC1F03B00132BBA /* LaunchScreen.storyboard */,
 				8D5E564B1EC1F03B00132BBA /* Info.plist */,
+				8DACED0B1EC76997008E3B31 /* XueQuFang-Bridging-Header.h */,
 			);
 			path = XueQuFang;
 			sourceTree = "<group>";
@@ -100,6 +113,26 @@
 				8DACECFC1EC4916F008E3B31 /* SearchResultItem.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		8DACED001EC765D7008E3B31 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				8DACED011EC765D7008E3B31 /* XQFRequestManager.h */,
+				8DACED021EC765D7008E3B31 /* XQFRequestManager.m */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		8DACED031EC765D7008E3B31 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				8DACED041EC765D7008E3B31 /* XQFRequest.h */,
+				8DACED051EC765D7008E3B31 /* XQFRequest.m */,
+				8DACED061EC765D7008E3B31 /* XQFSearchRequest.h */,
+				8DACED071EC765D7008E3B31 /* XQFSearchRequest.m */,
+			);
+			path = Request;
 			sourceTree = "<group>";
 		};
 		C630D70E11D033973AB9B5E1 /* Frameworks */ = {
@@ -234,10 +267,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DACED0A1EC765D7008E3B31 /* XQFSearchRequest.m in Sources */,
+				8DACED081EC765D7008E3B31 /* XQFRequestManager.m in Sources */,
 				8DACECFA1EC488A5008E3B31 /* SearchMainVC.swift in Sources */,
 				8DACECFD1EC4916F008E3B31 /* SearchResultItem.swift in Sources */,
 				8D5E56421EC1F03B00132BBA /* ViewController.swift in Sources */,
 				8D5E56401EC1F03B00132BBA /* AppDelegate.swift in Sources */,
+				8DACED091EC765D7008E3B31 /* XQFRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +402,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = xqf.com.XueQuFang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "XueQuFang/XueQuFang-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -380,6 +417,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = xqf.com.XueQuFang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "XueQuFang/XueQuFang-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
