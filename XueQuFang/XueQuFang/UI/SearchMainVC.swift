@@ -22,6 +22,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	var searchbar:UISearchBar!
 	
 	var searchRecords = [SearchResultItem]()
+	var searchResults = [SearchResultItem]()
 	
 	func setupUI()
 	{
@@ -104,7 +105,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	
 // Search Result TableView Delegate
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return self.searchRecords.count
+		return self.searchResults.count
 	}
 	func numberOfSections(in tableView: UITableView) -> Int {
 		return 1
@@ -119,22 +120,18 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 			cell = UITableViewCell.init(style: UITableViewCellStyle.default, reuseIdentifier: cellId)
 		}
 
-		cell!.textLabel?.text = self.searchRecords[indexPath.row].name
+		cell!.textLabel?.text = self.searchResults[indexPath.row].name
 		return cell!
 	}
 	
 // Search Request Delegate
 	func onSuccess(_ response: Any!) {
-		let result_json = response as? Dictionary<String, String>
-		if (result_json != nil) {
-			if (result_json?["msg"] != nil) {
-				let msg = result_json?["msg"]
-				print("服务器收到返回搜索请求!")
-			}
-		}
+		self.searchResults.append(SearchResultItem.init(item_name: "搜索请求成功！"))
+		self.searchResultTV.reloadData()
 	}
 	
 	func onFailure(_ error: Error!) {
-		print("搜索请求失败！")
+		self.searchResults.append(SearchResultItem.init(item_name: "搜索请求失败！"))
+		self.searchResultTV.reloadData()
 	}
 }
