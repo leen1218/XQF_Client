@@ -18,9 +18,13 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 		self.setupUI()
 	}
 	
-	var searchResultTV:UITableView!
 	var searchbar:UISearchBar!
 	
+	
+	// Search Result TableView
+	var searchResultTV:UITableView!
+	let searchResultItemHeight:Int = 44
+	let searchResultItemMaxCount = 10
 	var searchRecords = [SearchResultItem]()
 	var searchResults = [SearchResultItem]()
 	
@@ -41,6 +45,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 		self.searchResultTV.isHidden = true // Invisible at initial
 		self.view.addSubview(self.searchResultTV)
 		
+		// Autolayout
 		// Left
 		self.searchResultTV.translatesAutoresizingMaskIntoConstraints = false
 		self.view.addConstraint(NSLayoutConstraint.init(item: self.searchResultTV, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.left, multiplier: 1.0, constant: 0.0))
@@ -126,8 +131,25 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	
 // Search Request Delegate
 	func onSuccess(_ response: Any!) {
-		self.searchResults.append(SearchResultItem.init(item_name: "搜索请求成功！"))
-		self.searchResultTV.reloadData()
+		let result_json = response as? Dictionary<String, Any>
+		if (result_json != nil) {
+			if (result_json?["status"] != nil && result_json?["status"] as! String == "200") {
+				self.searchResults.removeAll()
+				let searchResults = result_json?["data"] as! [String]
+				for searchResult in searchResults
+				{
+					self.searchResults.append(SearchResultItem.init(item_name: searchResult))
+				}
+				self.searchResultTV.reloadData()
+			}
+			if (result_json?["status"] != nil && result_json?["status"] as! String == "201")
+			{
+				self.searchResults.removeAll()
+				self.searchResults.append(SearchResultItem.init(item_name: result_json?["msg"] as! String))
+				self.searchResultTV.reloadData()
+			}
+		}
+		
 	}
 	
 	func onFailure(_ error: Error!) {
