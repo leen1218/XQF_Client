@@ -146,6 +146,26 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 		self.search(searchText: searchText)
 	}
 	
+	func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+		print("searchBar: " + searchBar.text!)
+		print("replacementText: " + text)
+		print("Range : " + String(range.location) + " " + String(range.length))
+		
+		var searchText:String = searchBar.text!
+		if range.length == 0  // 新输入拼音
+		{
+			searchText += text
+		}
+		else  // 删除拼音
+		{
+			let nsString = searchBar.text as NSString?
+			searchText = (nsString?.replacingCharacters(in: range, with: text))!
+		}
+		searchText = searchText.replacingOccurrences(of: " ", with: "")  // replace char is not a space!!!
+		
+		return true
+	}
+	
 	func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 		if (searchBar.text == "") {
 			return
