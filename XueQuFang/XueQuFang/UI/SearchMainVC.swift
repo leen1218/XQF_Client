@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, RequestHandler
+class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, RequestHandler, MAMapViewDelegate, AMapSearchDelegate
 {
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -32,6 +32,31 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	var searchRecords = [SearchResultItem]()
 	var searchResults = [SearchResultItem]()
 	var useSearchRecord:Bool!
+    
+    var mapView: MAMapView!
+    var search: AMapSearchAPI!
+    
+    func initMapView() {
+        
+        mapView = MAMapView(frame: self.view.bounds)
+        mapView.delegate = self
+        self.view.addSubview(mapView!)
+        
+        self.mapView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addConstraint(NSLayoutConstraint.init(item: self.mapView, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.left, multiplier: 1.0, constant: 0.0))
+        // Top
+        self.view.addConstraint(NSLayoutConstraint.init(item: self.mapView, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self.searchbar, attribute: NSLayoutAttribute.bottom, multiplier: 1.0, constant: 0.0))
+        // Bottom
+        self.view.addConstraint(NSLayoutConstraint.init(item: self.mapView, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.bottom, multiplier: 1.0, constant: 0.0))
+        // Width
+        self.view.addConstraint(NSLayoutConstraint.init(item: self.mapView, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.width, multiplier: 1.0, constant: 0.0))
+        
+    }
+    
+    func initSearch() {
+        search = AMapSearchAPI()
+        search.delegate = self
+    }
 	
 	func setupUI()
 	{
@@ -62,6 +87,8 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 		self.view.addConstraint(NSLayoutConstraint.init(item: self.searchResultTV, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.width, multiplier: 1.0, constant: 0.0))
 		
 		// TODO: Add Map View Here
+        initMapView()
+        initSearch()
 	}
 	
 	func setupModel()
@@ -165,7 +192,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	
 // Search Result TableView Delegate
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		if (self.useSearchRecord)
+		if (self.useSearchRecord == true)
 		{
 			return self.searchRecords.count
 		}
@@ -173,6 +200,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 		{
 			return self.searchResults.count
 		}
+        
 	}
 	func numberOfSections(in tableView: UITableView) -> Int {
 		return 1
