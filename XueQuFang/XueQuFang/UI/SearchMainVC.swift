@@ -268,4 +268,14 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 		self.searchResults.append(SearchResultItem.init(item_name: "搜索请求失败！"))
 		self.searchResultTV.reloadData()
 	}
+    
+// Map Search API
+    func searchXiaoQu(name xiaoQu: String, inCity city: String) -> Bool {
+        return true
+    }
+    
+    func searchXueXiao(name xueXiao: String, withPolygon polygon: String) -> Bool {
+        return true
+    }
+    
 }
