@@ -51,6 +51,11 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
         // Width
         self.view.addConstraint(NSLayoutConstraint.init(item: self.mapView, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.width, multiplier: 1.0, constant: 0.0))
         
+        // to current position
+        AMapServices.shared().enableHTTPS = true
+        mapView.isShowsUserLocation = true
+        mapView.userTrackingMode = MAUserTrackingMode.follow
+        
     }
     
     func initSearch() {
