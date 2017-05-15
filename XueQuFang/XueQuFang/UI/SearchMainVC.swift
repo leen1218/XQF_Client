@@ -319,7 +319,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
         let request = AMapPOIPolygonSearchRequest()
         var points = Array<AMapGeoPoint>.init()
         for p in polygonPoints {
-            points.append(AMapGeoPoint.location(withLatitude: p.x, longitude: p.y))
+            points.append(AMapGeoPoint.location(withLatitude: p.y, longitude: p.x))
         }
         request.polygon = AMapGeoPolygon.init(points: points)
         
@@ -379,12 +379,12 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
         }
         return nil
     }
-
+    
     func drawPolygon(polygonPoints: Array<CGPoint>) {
         
         var coord = Array<CLLocationCoordinate2D>.init()
         for p in polygonPoints {
-            coord.append(CLLocationCoordinate2D.init(latitude: Double(p.x), longitude: Double(p.y)))
+            coord.append(CLLocationCoordinate2D.init(latitude: Double(p.y), longitude: Double(p.x)))
         }
         let polygon = MAPolygon.init(coordinates: &coord, count: UInt(coord.count))
         
@@ -392,6 +392,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
         polygons.append(polygon!)
         
         self.mapView.addOverlays(polygons)
+        self.mapView.setVisibleMapRect(CommonUtility.mapRect(forOverlays: polygons), animated: true)
     }
 
     
