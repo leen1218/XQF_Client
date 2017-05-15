@@ -259,6 +259,10 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 		self.searchResultTV.isHidden = true
 		
 		self.useSearchRecord = true
+        
+//        let polygonPoints = getPointsFromPolygonString("120.119437,30.282234,120.119941,30.276262,120.110972,30.276114,120.109298,30.281821")
+//        drawPolygon(polygonPoints: polygonPoints)
+//        searchXueXiao(name: "嘉绿苑小学", withType: "小学", withPolygon: polygonPoints)
 	}
 	
 // Search Request Delegate
@@ -308,10 +312,16 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
         mapSearch.aMapGeocodeSearch(request)
     }
     
-    func searchXueXiao(name xueXiao: String, withType type: String, withPolygon polygon: String) {
-        let request = AMapPOIPolygonSearchRequest()
+    func searchXueXiao(name xueXiao: String, withType type: String, withPolygon polygonPoints: Array<CGPoint>) {
         
-        request.polygon = AMapGeoPolygon.init(points: getPointsFromPolygonString(polygon))
+        
+        // search with polygon
+        let request = AMapPOIPolygonSearchRequest()
+        var points = Array<AMapGeoPoint>.init()
+        for p in polygonPoints {
+            points.append(AMapGeoPoint.location(withLatitude: p.x, longitude: p.y))
+        }
+        request.polygon = AMapGeoPolygon.init(points: points)
         
         request.keywords            = xueXiao
         request.types = type;
@@ -320,8 +330,17 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
         mapSearch.aMapPOIPolygonSearch(request)
         
     }
-    func getPointsFromPolygonString(_ polygon: String) -> [AMapGeoPoint] {
-        return [AMapGeoPoint.location(withLatitude: CGFloat(39.990459), longitude: CGFloat(116.481476)), AMapGeoPoint.location(withLatitude: CGFloat(39.890459), longitude: CGFloat(116.581476))]
+    
+    func getPointsFromPolygonString(_ polygon: String) -> [CGPoint] {
+        let pointsXy = polygon.components(separatedBy: ",")
+        let len = (pointsXy.count % 2 == 0) ? pointsXy.count : pointsXy.count - 1
+        var result = Array<CGPoint>.init()
+        var i = 0
+        while (i < len) {
+            result.append(CGPoint.init(x: Double(pointsXy[i])!, y: Double(pointsXy[i+1])!))
+            i += 2
+        }
+        return result
     }
     
     //MARK: - MAMapViewDelegate
@@ -349,6 +368,32 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
         
         return nil
     }
+    
+    func mapView(_ mapView: MAMapView!, rendererFor overlay: MAOverlay!) -> MAOverlayRenderer! {
+        if (overlay.isKind(of: MAPolygon.classForCoder())) {
+            let polygonRenderer = MAPolygonRenderer.init(overlay: overlay)
+            polygonRenderer?.lineWidth = 4.0
+            polygonRenderer?.strokeColor = UIColor.green
+            polygonRenderer?.fillColor   = UIColor.red
+            return polygonRenderer
+        }
+        return nil
+    }
+
+    func drawPolygon(polygonPoints: Array<CGPoint>) {
+        
+        var coord = Array<CLLocationCoordinate2D>.init()
+        for p in polygonPoints {
+            coord.append(CLLocationCoordinate2D.init(latitude: Double(p.x), longitude: Double(p.y)))
+        }
+        let polygon = MAPolygon.init(coordinates: &coord, count: UInt(coord.count))
+        
+        var polygons = Array<MAPolygon>.init()
+        polygons.append(polygon!)
+        
+        self.mapView.addOverlays(polygons)
+    }
+
     
     //MARK: - AMapSearchDelegate
     
@@ -397,7 +442,22 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
                 mapView.selectAnnotation(anno, animated: false)
             }
         } else if (request.isKind(of: AMapPOIPolygonSearchRequest.classForCoder())) {
+            mapView.removeAnnotations(mapView.annotations)
             
+            if response.count == 0 {
+                return
+            }
+            
+            if let aPOI = response.pois.first {
+                let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(aPOI.location.latitude), longitude: CLLocationDegrees(aPOI.location.longitude))
+                let anno = MAPointAnnotation()
+                anno.coordinate = coordinate
+                anno.title = aPOI.name
+                anno.subtitle = aPOI.address
+                
+                mapView.addAnnotation(anno)
+                mapView.selectAnnotation(anno, animated: false)
+            }
         }
         
     }
