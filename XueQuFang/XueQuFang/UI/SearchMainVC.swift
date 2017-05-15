@@ -34,7 +34,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	var useSearchRecord:Bool!
     
     var mapView: MAMapView!
-    var search: AMapSearchAPI!
+    var mapSearch: AMapSearchAPI!
     
     func initMapView() {
         
@@ -59,8 +59,8 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     func initSearch() {
-        search = AMapSearchAPI()
-        search.delegate = self
+        mapSearch = AMapSearchAPI()
+        mapSearch.delegate = self
     }
 	
 	func setupUI()
@@ -270,12 +270,116 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	}
     
 // Map Search API
-    func searchXiaoQu(name xiaoQu: String, inCity city: String) -> Bool {
-        return true
+    func searchXiaoQu(name xiaoQu: String, inCity city: String) {
+        let request = AMapPOIKeywordsSearchRequest()
+        request.keywords = xiaoQu
+        request.requireExtension = true
+        request.types = "住宅区"
+        request.city = city
+        
+        request.cityLimit = true
+        request.requireSubPOIs = true
+        mapSearch.aMapPOIKeywordsSearch(request)
     }
     
-    func searchXueXiao(name xueXiao: String, withPolygon polygon: String) -> Bool {
-        return true
+    func searchXiaoqu(address: String) {
+        let request = AMapGeocodeSearchRequest()
+        request.address = address
+        mapSearch.aMapGeocodeSearch(request)
+    }
+    
+    func searchXueXiao(name xueXiao: String, withType type: String, withPolygon polygon: String) {
+        let request = AMapPOIPolygonSearchRequest()
+        
+        request.polygon = AMapGeoPolygon.init(points: getPointsFromPolygonString(polygon))
+        
+        request.keywords            = xueXiao
+        request.types = type;
+        request.requireExtension    = true
+        
+        mapSearch.aMapPOIPolygonSearch(request)
+        
+    }
+    func getPointsFromPolygonString(_ polygon: String) -> [AMapGeoPoint] {
+        return [AMapGeoPoint.location(withLatitude: CGFloat(39.990459), longitude: CGFloat(116.481476)), AMapGeoPoint.location(withLatitude: CGFloat(39.890459), longitude: CGFloat(116.581476))]
+    }
+    
+    //MARK: - MAMapViewDelegate
+    
+    func mapView(_ mapView: MAMapView!, annotationView view: MAAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
+        print("name: \(view.annotation.title)")
+    }
+    
+    func mapView(_ mapView: MAMapView!, viewFor annotation: MAAnnotation!) -> MAAnnotationView! {
+        
+        if annotation.isKind(of: MAPointAnnotation.self) {
+            let pointReuseIndetifier = "pointReuseIndetifier"
+            var annotationView: MAPinAnnotationView? = mapView.dequeueReusableAnnotationView(withIdentifier: pointReuseIndetifier) as! MAPinAnnotationView?
+            
+            if annotationView == nil {
+                annotationView = MAPinAnnotationView(annotation: annotation, reuseIdentifier: pointReuseIndetifier)
+            }
+            
+            annotationView!.canShowCallout = true
+            annotationView!.isDraggable = false
+            annotationView!.rightCalloutAccessoryView = UIButton(type: UIButtonType.detailDisclosure)
+            
+            return annotationView!
+        }
+        
+        return nil
+    }
+    
+    //MARK: - AMapSearchDelegate
+    
+    func aMapSearchRequest(_ request: Any!, didFailWithError error: Error!) {
+//        let nsErr:NSError? = error as NSError
+//        NSLog("Error:\(error) - \(ErrorInfoUtility.errorDescription(withCode: (nsErr?.code)!))")
+    }
+    
+    func onGeocodeSearchDone(_ request: AMapGeocodeSearchRequest!, response: AMapGeocodeSearchResponse!) {
+        
+        if response.geocodes == nil {
+            return
+        }
+        
+        mapView.removeAnnotations(mapView.annotations)
+        
+        if let geocode = response.geocodes.first {
+            let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(geocode.location.latitude), longitude: CLLocationDegrees(geocode.location.longitude))
+            let anno = MAPointAnnotation()
+            anno.coordinate = coordinate
+            anno.title = geocode.formattedAddress
+            anno.subtitle = geocode.location.description
+            
+            mapView.addAnnotation(anno)
+            mapView.selectAnnotation(anno, animated: false)
+        }
+    }
+    
+    func onPOISearchDone(_ request: AMapPOISearchBaseRequest!, response: AMapPOISearchResponse!) {
+        
+        if (request.isKind(of: AMapPOIKeywordsSearchRequest.classForCoder())) {
+            mapView.removeAnnotations(mapView.annotations)
+            
+            if response.count == 0 {
+                return
+            }
+            
+            if let aPOI = response.pois.first {
+                let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(aPOI.location.latitude), longitude: CLLocationDegrees(aPOI.location.longitude))
+                let anno = MAPointAnnotation()
+                anno.coordinate = coordinate
+                anno.title = aPOI.name
+                anno.subtitle = aPOI.address
+                
+                mapView.addAnnotation(anno)
+                mapView.selectAnnotation(anno, animated: false)
+            }
+        } else if (request.isKind(of: AMapPOIPolygonSearchRequest.classForCoder())) {
+            
+        }
+        
     }
     
 }
