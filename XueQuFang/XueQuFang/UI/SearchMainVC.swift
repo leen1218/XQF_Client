@@ -65,11 +65,15 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	
 	func setupUI()
 	{
-		// 搜索框
+        // 搜索框
 		let searchbarTop = UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.height)!
 		self.searchbar = UISearchBar.init(frame: CGRect.init(x: 0, y: searchbarTop, width: self.view.bounds.size.width, height: 44))
 		self.searchbar.delegate = self
 		self.view.addSubview(self.searchbar)
+        
+        // TODO: Add Map View Here
+        initMapView()
+        initSearch()
 		
 		// 搜索结果的TableView
 		self.searchResultTV = UITableView.init()
@@ -90,10 +94,6 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 		self.view.addConstraint(NSLayoutConstraint.init(item: self.searchResultTV, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.bottom, multiplier: 1.0, constant: 0.0))
 		// Width
 		self.view.addConstraint(NSLayoutConstraint.init(item: self.searchResultTV, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.width, multiplier: 1.0, constant: 0.0))
-		
-		// TODO: Add Map View Here
-        initMapView()
-        initSearch()
 	}
 	
 	func setupModel()
