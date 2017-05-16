@@ -71,7 +71,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 		self.searchbar.delegate = self
 		self.view.addSubview(self.searchbar)
         
-        // TODO: Add Map View Here
+        // 地图
         initMapView()
         initSearch()
 		
@@ -84,7 +84,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 		self.searchResultTV.isHidden = true // Invisible at initial
 		self.view.addSubview(self.searchResultTV)
 		
-		// Autolayout
+		//TODO: 根据结果数据计算frame
 		// Left
 		self.searchResultTV.translatesAutoresizingMaskIntoConstraints = false
 		self.view.addConstraint(NSLayoutConstraint.init(item: self.searchResultTV, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.left, multiplier: 1.0, constant: 0.0))
@@ -125,14 +125,6 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
 		self.searchbar.showsCancelButton = true
 		self.searchResultTV.isHidden = false
-		if searchBar.text == ""
-		{
-			self.useSearchRecord = true
-		}
-		else
-		{
-			self.useSearchRecord = false
-		}
 		self.searchResultTV.reloadData()
 	}
 	
@@ -147,22 +139,26 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	}
 	
 	func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-		print("searchBar: " + searchBar.text!)
-		print("replacementText: " + text)
-		print("Range : " + String(range.location) + " " + String(range.length))
-		
-		var searchText:String = searchBar.text!
+		var inputText:String = searchBar.text!
 		if range.length == 0  // 新输入拼音
 		{
-			searchText += text
+			inputText += text
 		}
 		else  // 删除拼音
 		{
 			let nsString = searchBar.text as NSString?
-			searchText = (nsString?.replacingCharacters(in: range, with: text))!
+			inputText = (nsString?.replacingCharacters(in: range, with: text))!
 		}
-		searchText = searchText.replacingOccurrences(of: " ", with: "")  // replace char is not a space!!!
+		inputText = inputText.replacingOccurrences(of: " ", with: "")  // replace char is not a space!!!
 		
+		if (inputText == "") {
+			self.useSearchRecord = true
+			self.searchResultTV.reloadData()
+			return true
+		}
+		
+		// Search from server
+		self.search(searchText: inputText)
 		return true
 	}
 	
@@ -276,12 +272,14 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 				{
 					self.searchResults.append(SearchResultItem.init(item_name: searchResult))
 				}
+				self.useSearchRecord = false
 				self.searchResultTV.reloadData()
 			}
 			if (result_json?["status"] != nil && result_json?["status"] as! String == "201")
 			{
 				self.searchResults.removeAll()
 				self.searchResults.append(SearchResultItem.init(item_name: result_json?["msg"] as! String))
+				self.useSearchRecord = false
 				self.searchResultTV.reloadData()
 			}
 		}
@@ -289,6 +287,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	}
 	
 	func onFailure(_ error: Error!) {
+		self.useSearchRecord = false
 		self.searchResults.append(SearchResultItem.init(item_name: "搜索请求失败！"))
 		self.searchResultTV.reloadData()
 	}
