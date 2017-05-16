@@ -99,14 +99,14 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	func setupModel()
 	{
 		// 搜索记录来自于沙盒数据
-		guard let recordsSearchStr = UserDefaults.standard.string(forKey: "searchRecords") else {
+		guard let searchRecordsSaved = UserDefaults.standard.array(forKey: "searchRecords") else {
 			self.useSearchRecord = true
 			return
 		}
-		let records:[String] = recordsSearchStr.components(separatedBy: ",")
-		for record in records
+		for searchRecordSaved in searchRecordsSaved
 		{
-			self.searchRecords.append(SearchResultItem.init(item_name: record))
+			var searchRecord = searchRecordSaved as! Dictionary<String, Any>
+			self.searchRecords.append(SearchResultItem.init(item_name: searchRecord["name"] as! String, item_id: searchRecord["id"] as! Int, item_isXueXiao: searchRecord["isXueXiao"] as! Bool))
 			self.useSearchRecord = true
 		}
 	}
@@ -121,7 +121,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 		request.start()
 	}
 	
-// SearchBar Delegate
+	//MARK: SearchBar Delegate
 	func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
 		self.searchbar.showsCancelButton = true
 		self.searchResultTV.isHidden = false
@@ -173,9 +173,6 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 		}
 		self.search(searchText: searchBar.text!)
 		
-		// 更新search records
-		self.updateSearchRecords(searchText: searchBar.text!)
-		
 		// 更新UI
 		self.searchbar.resignFirstResponder()
 	}
@@ -192,10 +189,10 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 		self.searchResultTV.isHidden = true
 	}
 	
-	func updateSearchRecords(searchText:String)
+	func updateSearchRecords(searchItem:SearchResultItem)
 	{
 		for i in 0 ..< self.searchRecords.count {
-			if self.searchRecords[i].name == searchText
+			if self.searchRecords[i].name == searchItem.name
 			{
 				if i > 0 {
 					swap(&self.searchRecords[0], &self.searchRecords[i])
@@ -203,20 +200,25 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 				return
 			}
 		}
-		self.searchRecords.insert(SearchResultItem.init(item_name: searchText), at: 0)
+		self.searchRecords.insert(SearchResultItem.init(item:searchItem), at: 0)
 		if (self.searchRecords.count > 10) {
 			self.searchRecords.removeLast()
 		}
-		var searchRecordsStr:String = self.searchRecords[0].name
-		for i in 1 ..< self.searchRecords.count
+		// Save searchRecords into UserDefault
+		var searchRecordSaved = [Dictionary<String, Any>]()
+		for i in 0 ..< self.searchRecords.count
 		{
-			searchRecordsStr += "," + self.searchRecords[i].name
+			var searchRecord = Dictionary<String, Any>()
+			searchRecord["name"] = self.searchRecords[i].name
+			searchRecord["id"] = self.searchRecords[i].id
+			searchRecord["isXueXiao"] = self.searchRecords[i].isXueXiao
+			searchRecordSaved.append(searchRecord)
 		}
-		UserDefaults.standard.set(searchRecordsStr, forKey: "searchRecords")
+		UserDefaults.standard.set(searchRecordSaved, forKey: "searchRecords")
 	}
 
 	
-// Search Result TableView Delegate
+	//MARK: Search Result TableView Delegate
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		if (self.useSearchRecord == true)
 		{
@@ -247,11 +249,10 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		// TODO : Go Server for selected item info
-		let selectedItem = self.useSearchRecord! ? self.searchRecords[indexPath.row].name : self.searchResults[indexPath.row].name
-		print("selected item : " + selectedItem!)
+		let selectedItem = self.useSearchRecord! ? self.searchRecords[indexPath.row] : self.searchResults[indexPath.row]
 		
 		// 添加search records
-		self.updateSearchRecords(searchText: selectedItem!)
+		self.updateSearchRecords(searchItem: selectedItem)
 		
 		// 更新UI
 		self.searchbar.resignFirstResponder()
@@ -261,21 +262,21 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 		
 		self.useSearchRecord = true
         
-//        let polygonPoints = getPointsFromPolygonString("120.119437,30.282234,120.119941,30.276262,120.110972,30.276114,120.109298,30.281821")
-//        drawPolygon(polygonPoints: polygonPoints)
-//        searchXueXiao(name: "嘉绿苑小学", withType: "小学", withPolygon: polygonPoints)
+        let polygonPoints = getPointsFromPolygonString("120.119437,30.282234,120.119941,30.276262,120.110972,30.276114,120.109298,30.281821")
+        drawPolygon(polygonPoints: polygonPoints)
+        searchXueXiao(name: "嘉绿苑小学", withType: "小学", withPolygon: polygonPoints)
 	}
 	
-// Search Request Delegate
+	//MARK: Search Request Delegate
 	func onSuccess(_ response: Any!) {
 		let result_json = response as? Dictionary<String, Any>
 		if (result_json != nil) {
 			if (result_json?["status"] != nil && result_json?["status"] as! String == "200") {
 				self.searchResults.removeAll()
-				let searchResults = result_json?["data"] as! [String]
+				let searchResults = result_json?["data"] as! [Dictionary<String, Any>]
 				for searchResult in searchResults
 				{
-					self.searchResults.append(SearchResultItem.init(item_name: searchResult))
+					self.searchResults.append(SearchResultItem.init(item_name: searchResult["name"] as! String, item_id: searchResult["id"] as! Int, item_isXueXiao: searchResult["isXueXiao"] as! String == "0" ? false : true))
 				}
 				self.useSearchRecord = false
 				self.searchResultTV.reloadData()
@@ -298,7 +299,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 		self.searchResultTV.reloadData()
 	}
     
-// Map Search API
+	//MARK: Map Search API
     func searchXiaoQu(name xiaoQu: String, inCity city: String) {
         let request = AMapPOIKeywordsSearchRequest()
         request.keywords = xiaoQu
@@ -351,7 +352,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
     //MARK: - MAMapViewDelegate
     
     func mapView(_ mapView: MAMapView!, annotationView view: MAAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
-        print("name: \(view.annotation.title)")
+        // print("name: \(view.annotation.title)")
     }
     
     func mapView(_ mapView: MAMapView!, viewFor annotation: MAAnnotation!) -> MAAnnotationView! {
