@@ -125,6 +125,11 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
 		self.searchbar.showsCancelButton = true
 		self.searchResultTV.isHidden = false
+		if (searchBar.text == "") {
+			self.useSearchRecord = true
+		} else {
+			self.useSearchRecord = false
+		}
 		self.searchResultTV.reloadData()
 	}
 	
@@ -288,6 +293,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	
 	func onFailure(_ error: Error!) {
 		self.useSearchRecord = false
+		self.searchResults.removeAll()
 		self.searchResults.append(SearchResultItem.init(item_name: "搜索请求失败！"))
 		self.searchResultTV.reloadData()
 	}
