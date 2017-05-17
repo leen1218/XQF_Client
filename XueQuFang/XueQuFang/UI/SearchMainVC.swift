@@ -406,9 +406,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
     func mapView(_ mapView: MAMapView!, rendererFor overlay: MAOverlay!) -> MAOverlayRenderer! {
         if (overlay.isKind(of: MAPolygon.classForCoder())) {
             let polygonRenderer = MAPolygonRenderer.init(overlay: overlay)
-            polygonRenderer?.lineWidth = 4.0
-            polygonRenderer?.strokeColor = UIColor.green
-            polygonRenderer?.fillColor   = UIColor.red
+            polygonRenderer?.fillColor   = UIColor.init(red: 0.29412, green: 0.6, blue: 0.98824, alpha: 0.35)
             return polygonRenderer
         }
         return nil
@@ -428,7 +426,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
         polygons.append(polygon!)
         
         self.mapView.addOverlays(polygons)
-        self.mapView.setVisibleMapRect(CommonUtility.mapRect(forOverlays: polygons), animated: true)
+        self.mapView.setVisibleMapRect(CommonUtility.mapRect(forOverlays: polygons), edgePadding: UIEdgeInsetsMake(40, 40, 40, 40), animated: true)
     }
 
     
