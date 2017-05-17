@@ -15,7 +15,7 @@ class MapCustomDelegate : NSObject, MAMapViewDelegate, AMapSearchDelegate {
         self.delegate = delegateVC
     }
     
-    var delegate:SearchMainVC!
+    weak var delegate:SearchMainVC!
     
     //MARK: - MAMapViewDelegate
     
