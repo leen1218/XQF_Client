@@ -25,7 +25,7 @@ class SchoolHandler: BaseHandler
 				if schoolInfo["xuequ_polygon"] != nil
 				{
 					let polygonPoints = self.delegate.getPointsFromPolygonString(schoolInfo["xuequ_polygon"] as! String)
-					self.delegate.drawPolygon(polygonPoints: polygonPoints)
+//					self.delegate.drawPolygon(polygonPoints: polygonPoints)
 					self.delegate.searchXueXiao(name: schoolInfo["xiaoxue_name"] as! String, withType: "小学", withPolygon: polygonPoints)
 				}
 				else

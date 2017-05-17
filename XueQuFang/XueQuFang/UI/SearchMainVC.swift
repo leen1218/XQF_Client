@@ -35,6 +35,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
     
     var mapView: MAMapView!
     var mapSearch: AMapSearchAPI!
+    var mapCustomDelegate: MapCustomDelegate!
 	
 	// Request handler
 	var schoolHandler: SchoolHandler!
@@ -43,7 +44,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
     func initMapView() {
         
         mapView = MAMapView(frame: self.view.bounds)
-        mapView.delegate = self
+//        mapView.delegate = self
         self.view.addSubview(mapView!)
         
         self.mapView.translatesAutoresizingMaskIntoConstraints = false
@@ -64,7 +65,14 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
     
     func initSearch() {
         mapSearch = AMapSearchAPI()
-        mapSearch.delegate = self
+//        mapSearch.delegate = self
+    }
+    
+    func initMapCustomDelegate() {
+        mapCustomDelegate = MapCustomDelegate(delegateVC: self)
+        self.mapView.delegate = mapCustomDelegate
+        self.mapSearch.delegate = mapCustomDelegate
+        
     }
 	
 	func setupUI()
@@ -78,6 +86,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
         // 地图
         initMapView()
         initSearch()
+        initMapCustomDelegate()
 		
 		// 搜索结果的TableView
 		self.searchResultTV = UITableView.init()
@@ -329,6 +338,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
     
 	//MARK: Map Search API
     func searchXiaoQu(name xiaoQu: String, inCity city: String, withType type: String) {
+        self.clearAnnotationsAndOverlays()
         let request = AMapPOIKeywordsSearchRequest()
         request.keywords = xiaoQu
         request.requireExtension = true
@@ -341,13 +351,16 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     func searchDetailAddress(address: String) {
+        self.clearAnnotationsAndOverlays()
         let request = AMapGeocodeSearchRequest()
         request.address = address
         mapSearch.aMapGeocodeSearch(request)
     }
     
     func searchXueXiao(name xueXiao: String, withType type: String, withPolygon polygonPoints: Array<CGPoint>) {
+        self.clearAnnotationsAndOverlays()
         
+        self.drawPolygon(polygonPoints: polygonPoints)
         
         // search with polygon
         let request = AMapPOIPolygonSearchRequest()
@@ -377,44 +390,8 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
         return result
     }
     
-    //MARK: - MAMapViewDelegate
-    
-    func mapView(_ mapView: MAMapView!, annotationView view: MAAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
-        // print("name: \(view.annotation.title)")
-    }
-    
-    func mapView(_ mapView: MAMapView!, viewFor annotation: MAAnnotation!) -> MAAnnotationView! {
-        
-        if annotation.isKind(of: MAPointAnnotation.self) {
-            let pointReuseIndetifier = "pointReuseIndetifier"
-            var annotationView: MAPinAnnotationView? = mapView.dequeueReusableAnnotationView(withIdentifier: pointReuseIndetifier) as! MAPinAnnotationView?
-            
-            if annotationView == nil {
-                annotationView = MAPinAnnotationView(annotation: annotation, reuseIdentifier: pointReuseIndetifier)
-            }
-            
-            annotationView!.canShowCallout = true
-            annotationView!.isDraggable = false
-            annotationView!.rightCalloutAccessoryView = UIButton(type: UIButtonType.detailDisclosure)
-            
-            return annotationView!
-        }
-        
-        return nil
-    }
-    
-    func mapView(_ mapView: MAMapView!, rendererFor overlay: MAOverlay!) -> MAOverlayRenderer! {
-        if (overlay.isKind(of: MAPolygon.classForCoder())) {
-            let polygonRenderer = MAPolygonRenderer.init(overlay: overlay)
-            polygonRenderer?.fillColor   = UIColor.init(red: 0.29412, green: 0.6, blue: 0.98824, alpha: 0.35)
-            return polygonRenderer
-        }
-        return nil
-    }
-    
     func drawPolygon(polygonPoints: Array<CGPoint>) {
         
-        self.mapView.removeOverlays(self.mapView.overlays)
         
         var coord = Array<CLLocationCoordinate2D>.init()
         for p in polygonPoints {
@@ -425,76 +402,26 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
         var polygons = Array<MAPolygon>.init()
         polygons.append(polygon!)
         
-        self.mapView.addOverlays(polygons)
-        self.mapView.setVisibleMapRect(CommonUtility.mapRect(forOverlays: polygons), edgePadding: UIEdgeInsetsMake(40, 40, 40, 40), animated: true)
+        self.addOverlays(overlays: polygons, edgePadding: UIEdgeInsetsMake(40, 40, 40, 40), animated: true)
+        
+//        self.mapView.addOverlays(polygons)
+//        self.mapView.setVisibleMapRect(CommonUtility.mapRect(forOverlays: polygons), edgePadding: UIEdgeInsetsMake(40, 40, 40, 40), animated: true)
     }
 
-    
-    //MARK: - AMapSearchDelegate
-    
-    func aMapSearchRequest(_ request: Any!, didFailWithError error: Error!) {
-//        let nsErr:NSError? = error as NSError
-//        NSLog("Error:\(error) - \(ErrorInfoUtility.errorDescription(withCode: (nsErr?.code)!))")
+// MapCustomDelegate callback
+    func clearAnnotationsAndOverlays() {
+        self.mapView.removeAnnotations(self.mapView.annotations)
+        self.mapView.removeOverlays(self.mapView.overlays)
     }
     
-    func onGeocodeSearchDone(_ request: AMapGeocodeSearchRequest!, response: AMapGeocodeSearchResponse!) {
-        
-        if response.geocodes == nil {
-            return
-        }
-        
-        mapView.removeAnnotations(mapView.annotations)
-        
-        if let geocode = response.geocodes.first {
-            let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(geocode.location.latitude), longitude: CLLocationDegrees(geocode.location.longitude))
-            let anno = MAPointAnnotation()
-            anno.coordinate = coordinate
-            anno.title = geocode.formattedAddress
-            anno.subtitle = geocode.location.description
-            
-            mapView.addAnnotation(anno)
-            mapView.selectAnnotation(anno, animated: false)
-        }
+    func addAnnotation(annotation: MAPointAnnotation, animated: Bool) {
+        self.mapView.addAnnotation(annotation)
+        self.mapView.selectAnnotation(annotation, animated: animated)
     }
     
-    func onPOISearchDone(_ request: AMapPOISearchBaseRequest!, response: AMapPOISearchResponse!) {
-        
-        if (request.isKind(of: AMapPOIKeywordsSearchRequest.classForCoder())) {
-            mapView.removeAnnotations(mapView.annotations)
-            
-            if response.count == 0 {
-                return
-            }
-            
-            if let aPOI = response.pois.first {
-                let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(aPOI.location.latitude), longitude: CLLocationDegrees(aPOI.location.longitude))
-                let anno = MAPointAnnotation()
-                anno.coordinate = coordinate
-                anno.title = aPOI.name
-                anno.subtitle = aPOI.address
-                
-                mapView.addAnnotation(anno)
-                mapView.selectAnnotation(anno, animated: false)
-            }
-        } else if (request.isKind(of: AMapPOIPolygonSearchRequest.classForCoder())) {
-            mapView.removeAnnotations(mapView.annotations)
-            
-            if response.count == 0 {
-                return
-            }
-            
-            if let aPOI = response.pois.first {
-                let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(aPOI.location.latitude), longitude: CLLocationDegrees(aPOI.location.longitude))
-                let anno = MAPointAnnotation()
-                anno.coordinate = coordinate
-                anno.title = aPOI.name
-                anno.subtitle = aPOI.address
-                
-                mapView.addAnnotation(anno)
-                mapView.selectAnnotation(anno, animated: false)
-            }
-        }
-        
+    func addOverlays(overlays: Array<MAPolygon>, edgePadding insets:UIEdgeInsets, animated: Bool) {
+        self.mapView.addOverlays(overlays)
+        self.mapView.setVisibleMapRect(CommonUtility.mapRect(forOverlays: overlays), edgePadding: insets, animated: animated)
     }
     
 }
