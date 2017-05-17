@@ -15,7 +15,7 @@ class HouseHandler: BaseHandler
 		self.delegate = delegateVC
 	}
 	
-	var delegate:SearchMainVC!
+	weak var delegate:SearchMainVC!
 	
 	override func onSuccess(_ response: Any!) {
 		let result_json = response as? Dictionary<String, Any>
