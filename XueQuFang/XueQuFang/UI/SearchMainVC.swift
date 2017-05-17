@@ -28,6 +28,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	var searchResultTV:UITableView!
 	let searchResultItemHeight:Int = 44
 	let searchResultItemMaxCount = 10
+    let defaultMapZoomLevel = 14.6
 	
 	var searchRecords = [SearchResultItem]()
 	var searchResults = [SearchResultItem]()
@@ -46,6 +47,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
         mapView = MAMapView(frame: self.view.bounds)
 //        mapView.delegate = self
         self.view.addSubview(mapView!)
+        self.mapView.setZoomLevel(defaultMapZoomLevel, animated: true)
         
         self.mapView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addConstraint(NSLayoutConstraint.init(item: self.mapView, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.left, multiplier: 1.0, constant: 0.0))
@@ -339,6 +341,8 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	//MARK: Map Search API
     func searchXiaoQu(name xiaoQu: String, inCity city: String, withType type: String) {
         self.clearAnnotationsAndOverlays()
+        self.mapView.setZoomLevel(defaultMapZoomLevel, animated: true)
+        
         let request = AMapPOIKeywordsSearchRequest()
         request.keywords = xiaoQu
         request.requireExtension = true
@@ -352,6 +356,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
     
     func searchDetailAddress(address: String) {
         self.clearAnnotationsAndOverlays()
+        self.mapView.setZoomLevel(defaultMapZoomLevel, animated: true)
         let request = AMapGeocodeSearchRequest()
         request.address = address
         mapSearch.aMapGeocodeSearch(request)
