@@ -38,6 +38,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	
 	// Request handler
 	var schoolHandler: SchoolHandler!
+	var houseHandler: HouseHandler!
     
     func initMapView() {
         
@@ -138,7 +139,12 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	//小区信息请求
 	func xiaoquInfo(xiaoquId:Int)
 	{
-		
+		let request:XQFRequest = XQFRequestManager.shared().createRequest(ENUM_REQUEST_HOUSE)
+		let params:Dictionary<String, String> = ["id":String(xiaoquId)]
+		request.params = params
+		self.houseHandler = HouseHandler(delegateVC: self)
+		request.handler = self.houseHandler
+		request.start()
 	}
 	
 	//MARK: SearchBar Delegate
@@ -276,7 +282,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 		}
 		else  // Search XiaoQu
 		{
-			
+			self.xiaoquInfo(xiaoquId: selectedItem.id)
 		}
 		// 添加search records
 		self.updateSearchRecords(searchItem: selectedItem)

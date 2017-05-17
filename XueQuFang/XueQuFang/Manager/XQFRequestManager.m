@@ -9,12 +9,13 @@
 #import "XQFRequestManager.h"
 #import "XQFSearchRequest.h"
 #import "XQFSchoolRequest.h"
+#import "XQFHouseRequest.h"
 
 static XQFRequestManager* mSharedManager = nil;
 
-NSString* const hostAPIURL = @"http://106.14.121.220:7600/%@";	// 云服务器
+//NSString* const hostAPIURL = @"http://106.14.121.220:7600/%@";	// 云服务器
 //NSString* const hostAPIURL = @"http://10.197.113.99:7600/%@";	//
-//NSString* const hostAPIURL = @"http://localhost:7600/%@";
+NSString* const hostAPIURL = @"http://localhost:7600/%@";
 
 @interface XQFRequestManager()
 
@@ -42,6 +43,10 @@ NSString* const hostAPIURL = @"http://106.14.121.220:7600/%@";	// 云服务器
 		case ENUM_REQUEST_SCHOOL:
 			request = [[XQFSchoolRequest alloc] init];
 			request.method = [NSString stringWithFormat:hostAPIURL, @"school"];
+			break;
+		case ENUM_REQUEST_HOUSE:
+			request = [[XQFHouseRequest alloc] init];
+			request.method = [NSString stringWithFormat:hostAPIURL, @"house"];
 			break;
 		default:
 			break;
