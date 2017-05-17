@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		2761F62784C9F1D6E767D90E /* libPods-XueQuFang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D34607F5CE1D73146809B115 /* libPods-XueQuFang.a */; };
 		6D8A5F3F1ECA1842004D8D2C /* CommonUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A5F3E1ECA1842004D8D2C /* CommonUtility.m */; };
+		8D5C01EB1ECBE87E00694C6B /* XQFSchoolRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5C01EA1ECBE87E00694C6B /* XQFSchoolRequest.m */; };
+		8D5C01ED1ECBEF6900694C6B /* SchoolInfoHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5C01EC1ECBEF6900694C6B /* SchoolInfoHandler.swift */; };
+		8D5C01F01ECBF03900694C6B /* BaseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5C01EF1ECBF03900694C6B /* BaseHandler.swift */; };
+		8D5C01F21ECBF51100694C6B /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5C01F11ECBF51100694C6B /* Utils.swift */; };
 		8D5E56401EC1F03B00132BBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5E563F1EC1F03B00132BBA /* AppDelegate.swift */; };
 		8D5E56421EC1F03B00132BBA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5E56411EC1F03B00132BBA /* ViewController.swift */; };
 		8D5E56451EC1F03B00132BBA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D5E56431EC1F03B00132BBA /* Main.storyboard */; };
@@ -24,6 +28,11 @@
 /* Begin PBXFileReference section */
 		6D8A5F3D1ECA1842004D8D2C /* CommonUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonUtility.h; sourceTree = "<group>"; };
 		6D8A5F3E1ECA1842004D8D2C /* CommonUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUtility.m; sourceTree = "<group>"; };
+		8D5C01E91ECBE87E00694C6B /* XQFSchoolRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQFSchoolRequest.h; sourceTree = "<group>"; };
+		8D5C01EA1ECBE87E00694C6B /* XQFSchoolRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XQFSchoolRequest.m; sourceTree = "<group>"; };
+		8D5C01EC1ECBEF6900694C6B /* SchoolInfoHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SchoolInfoHandler.swift; path = UI/SchoolInfoHandler.swift; sourceTree = "<group>"; };
+		8D5C01EF1ECBF03900694C6B /* BaseHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseHandler.swift; path = Handler/BaseHandler.swift; sourceTree = "<group>"; };
+		8D5C01F11ECBF51100694C6B /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		8D5E563C1EC1F03B00132BBA /* XueQuFang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XueQuFang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5E563F1EC1F03B00132BBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D5E56411EC1F03B00132BBA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +71,7 @@
 			children = (
 				6D8A5F3D1ECA1842004D8D2C /* CommonUtility.h */,
 				6D8A5F3E1ECA1842004D8D2C /* CommonUtility.m */,
+				8D5C01F11ECBF51100694C6B /* Utils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -73,6 +83,15 @@
 				C4AB87CFF743D57E9AAE9144 /* Pods-XueQuFang.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		8D5C01EE1ECBF01A00694C6B /* Handler */ = {
+			isa = PBXGroup;
+			children = (
+				8D5C01EF1ECBF03900694C6B /* BaseHandler.swift */,
+				8D5C01EC1ECBEF6900694C6B /* SchoolInfoHandler.swift */,
+			);
+			name = Handler;
 			sourceTree = "<group>";
 		};
 		8D5E56331EC1F03B00132BBA = {
@@ -96,6 +115,7 @@
 		8D5E563E1EC1F03B00132BBA /* XueQuFang */ = {
 			isa = PBXGroup;
 			children = (
+				8D5C01EE1ECBF01A00694C6B /* Handler */,
 				6D8A5F3C1ECA1842004D8D2C /* Utils */,
 				8DACED001EC765D7008E3B31 /* Manager */,
 				8DACED031EC765D7008E3B31 /* Request */,
@@ -144,6 +164,8 @@
 				8DACED051EC765D7008E3B31 /* XQFRequest.m */,
 				8DACED061EC765D7008E3B31 /* XQFSearchRequest.h */,
 				8DACED071EC765D7008E3B31 /* XQFSearchRequest.m */,
+				8D5C01E91ECBE87E00694C6B /* XQFSchoolRequest.h */,
+				8D5C01EA1ECBE87E00694C6B /* XQFSchoolRequest.m */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -280,14 +302,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D5C01F01ECBF03900694C6B /* BaseHandler.swift in Sources */,
 				8DACED0A1EC765D7008E3B31 /* XQFSearchRequest.m in Sources */,
 				8DACED081EC765D7008E3B31 /* XQFRequestManager.m in Sources */,
 				8DACECFA1EC488A5008E3B31 /* SearchMainVC.swift in Sources */,
+				8D5C01EB1ECBE87E00694C6B /* XQFSchoolRequest.m in Sources */,
 				8DACECFD1EC4916F008E3B31 /* SearchResultItem.swift in Sources */,
 				8D5E56421EC1F03B00132BBA /* ViewController.swift in Sources */,
+				8D5C01ED1ECBEF6900694C6B /* SchoolInfoHandler.swift in Sources */,
 				8D5E56401EC1F03B00132BBA /* AppDelegate.swift in Sources */,
 				8DACED091EC765D7008E3B31 /* XQFRequest.m in Sources */,
 				6D8A5F3F1ECA1842004D8D2C /* CommonUtility.m in Sources */,
+				8D5C01F21ECBF51100694C6B /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

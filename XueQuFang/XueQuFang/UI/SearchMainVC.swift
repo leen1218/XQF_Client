@@ -35,6 +35,9 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
     
     var mapView: MAMapView!
     var mapSearch: AMapSearchAPI!
+	
+	// Request handler
+	var schoolHandler: SchoolHandler!
     
     func initMapView() {
         
@@ -111,7 +114,8 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 		}
 	}
 	
-	// 向服务器发送搜索请求
+	//Mark: Request for Server
+	//搜索请求
 	func search(searchText:String)
 	{
 		let request:XQFRequest = XQFRequestManager.shared().createRequest(ENUM_REQUEST_SEARCH)
@@ -119,6 +123,22 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 		request.params = params
 		request.handler = self
 		request.start()
+	}
+	//学校信息请求
+	func xiaoxueInfo(xiaoxueId:Int)
+	{
+		let request:XQFRequest = XQFRequestManager.shared().createRequest(ENUM_REQUEST_SCHOOL)
+		let params:Dictionary<String, String> = ["id":String(xiaoxueId)]
+		request.params = params
+		self.schoolHandler = SchoolHandler(delegateVC: self)
+		request.handler = self.schoolHandler
+		request.start()
+	}
+	
+	//小区信息请求
+	func xiaoquInfo(xiaoquId:Int)
+	{
+		
 	}
 	
 	//MARK: SearchBar Delegate
@@ -248,9 +268,16 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		// TODO : Go Server for selected item info
 		let selectedItem = self.useSearchRecord! ? self.searchRecords[indexPath.row] : self.searchResults[indexPath.row]
-		
+		// request for selected item info
+		if selectedItem.isXueXiao  // Search XueXiao
+		{
+			self.xiaoxueInfo(xiaoxueId: selectedItem.id)
+		}
+		else  // Search XiaoQu
+		{
+			
+		}
 		// 添加search records
 		self.updateSearchRecords(searchItem: selectedItem)
 		
@@ -261,10 +288,6 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 		self.searchResultTV.isHidden = true
 		
 		self.useSearchRecord = true
-        
-        let polygonPoints = getPointsFromPolygonString("120.119437,30.282234,120.119941,30.276262,120.110972,30.276114,120.109298,30.281821")
-        drawPolygon(polygonPoints: polygonPoints)
-        searchXueXiao(name: "嘉绿苑小学", withType: "小学", withPolygon: polygonPoints)
 	}
 	
 	//MARK: Search Request Delegate
@@ -289,7 +312,6 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 				self.searchResultTV.reloadData()
 			}
 		}
-		
 	}
 	
 	func onFailure(_ error: Error!) {

@@ -12,6 +12,7 @@
 typedef enum {
 	ENUM_REQUEST_TEST = 0,
 	ENUM_REQUEST_SEARCH,
+	ENUM_REQUEST_SCHOOL,
 } EnumRequestType;
 
 @interface XQFRequestManager : NSObject

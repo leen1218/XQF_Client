@@ -8,6 +8,7 @@
 
 #import "XQFRequestManager.h"
 #import "XQFSearchRequest.h"
+#import "XQFSchoolRequest.h"
 
 static XQFRequestManager* mSharedManager = nil;
 
@@ -37,6 +38,10 @@ NSString* const hostAPIURL = @"http://106.14.121.220:7600/%@";	// 云服务器
 		case ENUM_REQUEST_SEARCH:
 			request = [[XQFSearchRequest alloc] init];
 			request.method = [NSString stringWithFormat:hostAPIURL, @"search"];
+			break;
+		case ENUM_REQUEST_SCHOOL:
+			request = [[XQFSchoolRequest alloc] init];
+			request.method = [NSString stringWithFormat:hostAPIURL, @"school"];
 			break;
 		default:
 			break;

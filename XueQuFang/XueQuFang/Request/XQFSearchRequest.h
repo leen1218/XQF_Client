@@ -1,5 +1,5 @@
 //
-//  XQFRegisterRequest.h
+//  XQFSearchRequest.h
 //  XueQuFang
 //
 //  Created by en li on 16/5/10.
