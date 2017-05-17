@@ -300,11 +300,11 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	}
     
 	//MARK: Map Search API
-    func searchXiaoQu(name xiaoQu: String, inCity city: String) {
+    func searchXiaoQu(name xiaoQu: String, inCity city: String, withType type: String) {
         let request = AMapPOIKeywordsSearchRequest()
         request.keywords = xiaoQu
         request.requireExtension = true
-        request.types = "住宅区"
+        request.types = type
         request.city = city
         
         request.cityLimit = true
@@ -312,7 +312,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
         mapSearch.aMapPOIKeywordsSearch(request)
     }
     
-    func searchXiaoqu(address: String) {
+    func searchDetailAddress(address: String) {
         let request = AMapGeocodeSearchRequest()
         request.address = address
         mapSearch.aMapGeocodeSearch(request)
@@ -387,6 +387,8 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     func drawPolygon(polygonPoints: Array<CGPoint>) {
+        
+        self.mapView.removeOverlays(self.mapView.overlays)
         
         var coord = Array<CLLocationCoordinate2D>.init()
         for p in polygonPoints {
