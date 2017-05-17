@@ -276,7 +276,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let selectedItem = self.useSearchRecord! ? self.searchRecords[indexPath.row] : self.searchResults[indexPath.row]
 		// request for selected item info
-		if selectedItem.isXueXiao  // Search XueXiao
+		if selectedItem.isXueXiao == true  // Search XueXiao
 		{
 			self.xiaoxueInfo(xiaoxueId: selectedItem.id)
 		}
