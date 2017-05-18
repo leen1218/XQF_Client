@@ -8,39 +8,69 @@
 
 import Foundation
 
-class MapCustomDelegate : NSObject, MAMapViewDelegate, AMapSearchDelegate {
+class MapCustomDelegate : NSObject, MAMapViewDelegate, AMapSearchDelegate, CalloutViewDelegate {
     
     init(delegateVC: SearchMainVC) {
         super.init()
         self.delegate = delegateVC
     }
     
-    var delegate:SearchMainVC!
+    weak var delegate:SearchMainVC!
     
     //MARK: - MAMapViewDelegate
     
-    func mapView(_ mapView: MAMapView!, annotationView view: MAAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
-        // print("name: \(view.annotation.title)")
-    }
+//    func mapView(_ mapView: MAMapView!, annotationView view: MAAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
+//        // print("name: \(view.annotation.title)")
+//    }
     
     func mapView(_ mapView: MAMapView!, viewFor annotation: MAAnnotation!) -> MAAnnotationView! {
         
         if annotation.isKind(of: MAPointAnnotation.self) {
             let pointReuseIndetifier = "pointReuseIndetifier"
-            var annotationView: MAPinAnnotationView? = mapView.dequeueReusableAnnotationView(withIdentifier: pointReuseIndetifier) as! MAPinAnnotationView?
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: pointReuseIndetifier) as! CustomAnnotationView?
             
             if annotationView == nil {
-                annotationView = MAPinAnnotationView(annotation: annotation, reuseIdentifier: pointReuseIndetifier)
+                annotationView = CustomAnnotationView(annotation: annotation, reuseIdentifier: pointReuseIndetifier)
             }
             
             annotationView!.canShowCallout = true
-            annotationView!.isDraggable = false
-            annotationView!.rightCalloutAccessoryView = UIButton(type: UIButtonType.detailDisclosure)
+            annotationView!.setOrderId([1,2], self)
+//            annotationView!.isDraggable = false
+//            annotationView!.rightCalloutAccessoryView = UIButton(type: UIButtonType.detailDisclosure)
+            
+//            if let newAnnotation = annotation as? OrderAnnotation {
+//                if let newView = annotationView as CustomAnnotationView! {
+//                    annotationView!.setOrderId([1,1], self)
+//                }
+//            }
             
             return annotationView!
         }
         
         return nil
+        
+        
+        
+
+        
+//        if annotation.isKind(of: MAPointAnnotation.self) {
+//            let pointReuseIndetifier = "pointReuseIndetifier"
+//            var annotationView: MAPinAnnotationView? = mapView.dequeueReusableAnnotationView(withIdentifier: pointReuseIndetifier) as! MAPinAnnotationView?
+//            
+//            if annotationView == nil {
+//                annotationView = MAPinAnnotationView(annotation: annotation, reuseIdentifier: pointReuseIndetifier)
+//            }
+//            
+//            annotationView!.canShowCallout = true
+//            annotationView!.isDraggable = false
+//            annotationView!.rightCalloutAccessoryView = UIButton(type: UIButtonType.detailDisclosure)
+//            
+//            return annotationView!
+//        }
+//        
+//        return nil
+        
+        
     }
     
     func mapView(_ mapView: MAMapView!, rendererFor overlay: MAOverlay!) -> MAOverlayRenderer! {
@@ -121,6 +151,19 @@ class MapCustomDelegate : NSObject, MAMapViewDelegate, AMapSearchDelegate {
             }
         }
         
+    }
+    
+    // MARK: CalloutViewDelegate
+    func presentVC(_ viewControllerToPresent: UIViewController, animated: Bool, completion: (() -> Void)?) {
+        self.delegate.present(viewControllerToPresent, animated: animated, completion: completion)
+    }
+    
+    func dismissVC(animated: Bool, completion: (() -> Void)?) {
+        self.delegate.dismiss(animated: animated, completion: completion)
+    }
+    
+    func pushViewController(_ viewcontroller: UIViewController, animated: Bool) {
+        self.delegate.navigationController?.pushViewController(viewcontroller, animated: animated)
     }
     
 }

@@ -10,6 +10,10 @@
 		2761F62784C9F1D6E767D90E /* libPods-XueQuFang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D34607F5CE1D73146809B115 /* libPods-XueQuFang.a */; };
 		6D8A5F3F1ECA1842004D8D2C /* CommonUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A5F3E1ECA1842004D8D2C /* CommonUtility.m */; };
 		6DADE0161ECC8F640080FC7C /* MapCustomDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DADE0151ECC8F640080FC7C /* MapCustomDelegate.swift */; };
+		6DADE01A1ECCA7260080FC7C /* AnnotationCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DADE0171ECCA7260080FC7C /* AnnotationCalloutView.swift */; };
+		6DADE01B1ECCA7260080FC7C /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DADE0181ECCA7260080FC7C /* CustomAnnotationView.swift */; };
+		6DADE01C1ECCA7260080FC7C /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DADE0191ECCA7260080FC7C /* OrderViewController.swift */; };
+		6DADE01E1ECCA8710080FC7C /* OrderAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DADE01D1ECCA8710080FC7C /* OrderAnnotation.swift */; };
 		8D2EFE581ECC7C1900FBA2A7 /* XQFHouseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D2EFE571ECC7C1900FBA2A7 /* XQFHouseRequest.m */; };
 		8D2EFE5A1ECC7F2500FBA2A7 /* HouseInfoHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2EFE591ECC7F2500FBA2A7 /* HouseInfoHandler.swift */; };
 		8D2EFE5C1ECC7FA100FBA2A7 /* SchoolInfoHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2EFE5B1ECC7FA100FBA2A7 /* SchoolInfoHandler.swift */; };
@@ -32,6 +36,10 @@
 		6D8A5F3D1ECA1842004D8D2C /* CommonUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonUtility.h; sourceTree = "<group>"; };
 		6D8A5F3E1ECA1842004D8D2C /* CommonUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUtility.m; sourceTree = "<group>"; };
 		6DADE0151ECC8F640080FC7C /* MapCustomDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapCustomDelegate.swift; path = UI/MapCustomDelegate.swift; sourceTree = "<group>"; };
+		6DADE0171ECCA7260080FC7C /* AnnotationCalloutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnnotationCalloutView.swift; path = UI/AnnotationCalloutView.swift; sourceTree = "<group>"; };
+		6DADE0181ECCA7260080FC7C /* CustomAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomAnnotationView.swift; path = UI/CustomAnnotationView.swift; sourceTree = "<group>"; };
+		6DADE0191ECCA7260080FC7C /* OrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OrderViewController.swift; path = UI/OrderViewController.swift; sourceTree = "<group>"; };
+		6DADE01D1ECCA8710080FC7C /* OrderAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OrderAnnotation.swift; path = UI/OrderAnnotation.swift; sourceTree = "<group>"; };
 		8D2EFE561ECC7C1900FBA2A7 /* XQFHouseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQFHouseRequest.h; sourceTree = "<group>"; };
 		8D2EFE571ECC7C1900FBA2A7 /* XQFHouseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XQFHouseRequest.m; sourceTree = "<group>"; };
 		8D2EFE591ECC7F2500FBA2A7 /* HouseInfoHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HouseInfoHandler.swift; path = Handler/HouseInfoHandler.swift; sourceTree = "<group>"; };
@@ -143,6 +151,10 @@
 		8DACECF81EC48876008E3B31 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				6DADE01D1ECCA8710080FC7C /* OrderAnnotation.swift */,
+				6DADE0171ECCA7260080FC7C /* AnnotationCalloutView.swift */,
+				6DADE0181ECCA7260080FC7C /* CustomAnnotationView.swift */,
+				6DADE0191ECCA7260080FC7C /* OrderViewController.swift */,
 				8DACECF91EC488A5008E3B31 /* SearchMainVC.swift */,
 				6DADE0151ECC8F640080FC7C /* MapCustomDelegate.swift */,
 			);
@@ -313,12 +325,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DADE01A1ECCA7260080FC7C /* AnnotationCalloutView.swift in Sources */,
 				8D2EFE5C1ECC7FA100FBA2A7 /* SchoolInfoHandler.swift in Sources */,
 				8D5C01F01ECBF03900694C6B /* BaseHandler.swift in Sources */,
 				8DACED0A1EC765D7008E3B31 /* XQFSearchRequest.m in Sources */,
+				6DADE01E1ECCA8710080FC7C /* OrderAnnotation.swift in Sources */,
 				8DACED081EC765D7008E3B31 /* XQFRequestManager.m in Sources */,
 				6DADE0161ECC8F640080FC7C /* MapCustomDelegate.swift in Sources */,
 				8DACECFA1EC488A5008E3B31 /* SearchMainVC.swift in Sources */,
+				6DADE01B1ECCA7260080FC7C /* CustomAnnotationView.swift in Sources */,
 				8D2EFE581ECC7C1900FBA2A7 /* XQFHouseRequest.m in Sources */,
 				8D5C01EB1ECBE87E00694C6B /* XQFSchoolRequest.m in Sources */,
 				8DACECFD1EC4916F008E3B31 /* SearchResultItem.swift in Sources */,
@@ -328,6 +343,7 @@
 				8DACED091EC765D7008E3B31 /* XQFRequest.m in Sources */,
 				6D8A5F3F1ECA1842004D8D2C /* CommonUtility.m in Sources */,
 				8D5C01F21ECBF51100694C6B /* Utils.swift in Sources */,
+				6DADE01C1ECCA7260080FC7C /* OrderViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
