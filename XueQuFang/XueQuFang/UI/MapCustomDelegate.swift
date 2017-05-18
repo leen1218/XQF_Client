@@ -30,11 +30,11 @@ class MapCustomDelegate : NSObject, MAMapViewDelegate, AMapSearchDelegate, Callo
             var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: pointReuseIndetifier) as! CustomAnnotationView?
             
             if annotationView == nil {
-                annotationView = CustomAnnotationView(annotation: annotation, reuseIdentifier: pointReuseIndetifier)
+                annotationView = CustomAnnotationView(annotation: annotation, reuseIdentifier: pointReuseIndetifier, delegate: self)
             }
             
-            annotationView!.canShowCallout = true
-            annotationView!.setOrderId([1,2], self)
+            annotationView!.canShowCallout = false
+//            annotationView!.setOrderId([1,2], self)
 //            annotationView!.isDraggable = false
 //            annotationView!.rightCalloutAccessoryView = UIButton(type: UIButtonType.detailDisclosure)
             
@@ -104,7 +104,7 @@ class MapCustomDelegate : NSObject, MAMapViewDelegate, AMapSearchDelegate, Callo
             anno.title = geocode.formattedAddress
             anno.subtitle = geocode.location.description
             
-            delegate.addAnnotation(annotation: anno, animated: false)
+            delegate.addAnnotation(annotation: anno, animated: true)
             
 //            mapView.addAnnotation(anno)
 //            mapView.selectAnnotation(anno, animated: false)
@@ -113,7 +113,7 @@ class MapCustomDelegate : NSObject, MAMapViewDelegate, AMapSearchDelegate, Callo
     
     func onPOISearchDone(_ request: AMapPOISearchBaseRequest!, response: AMapPOISearchResponse!) {
         
-        if (request.isKind(of: AMapPOIKeywordsSearchRequest.classForCoder())) {
+        if (request.isKind(of: AMapPOIKeywordsSearchRequest.classForCoder()) || request.isKind(of: AMapPOIPolygonSearchRequest.classForCoder())) {
             
             if response.count == 0 {
                 return
@@ -126,25 +126,11 @@ class MapCustomDelegate : NSObject, MAMapViewDelegate, AMapSearchDelegate, Callo
                 anno.title = aPOI.name
                 anno.subtitle = aPOI.address
                 
-                delegate.addAnnotation(annotation: anno, animated: false)
-                
-//                mapView.addAnnotation(anno)
-//                mapView.selectAnnotation(anno, animated: false)
-            }
-        } else if (request.isKind(of: AMapPOIPolygonSearchRequest.classForCoder())) {
-            
-            if response.count == 0 {
-                return
-            }
-            
-            if let aPOI = response.pois.first {
-                let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(aPOI.location.latitude), longitude: CLLocationDegrees(aPOI.location.longitude))
-                let anno = MAPointAnnotation()
-                anno.coordinate = coordinate
-                anno.title = aPOI.name
-                anno.subtitle = aPOI.address
-                
-                delegate.addAnnotation(annotation: anno, animated: false)
+                if (request.isKind(of: AMapPOIKeywordsSearchRequest.classForCoder())) {
+                    // in case of polygon search, don't have to move the center
+                    delegate.setCenter(centerCoordinate: coordinate, animated: false)
+                }
+                delegate.addAnnotation(annotation: anno, animated: true)
                 
 //                mapView.addAnnotation(anno)
 //                mapView.selectAnnotation(anno, animated: false)

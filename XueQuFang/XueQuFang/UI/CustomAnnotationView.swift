@@ -9,24 +9,34 @@
 import Foundation
 
 class CustomAnnotationView : MAPinAnnotationView, UIPopoverPresentationControllerDelegate {
-    var calloutView: AnnotationCalloutView!
+//    var calloutView: AnnotationCalloutView!
     fileprivate static let calloutWidth = 200
     fileprivate static let calloutHeight = 70
     weak var delegate: CalloutViewDelegate!
     
     var orderIds: [Int] = []
     
-    override init(annotation: MAAnnotation, reuseIdentifier: String) {
+    init(annotation: MAAnnotation, reuseIdentifier: String, delegate: CalloutViewDelegate) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.handleAnnotationViewTap(sender:))))
+        self.delegate = delegate
+        // have to put the call here, otherwise no default popover
+        delay(0.0) {
+            self.showPopover()
+        }
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    func delay(_ delay:Double, closure:@escaping ()->()) {
+        let when = DispatchTime.now() + delay
+        DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
     }
 
     
@@ -35,7 +45,7 @@ class CustomAnnotationView : MAPinAnnotationView, UIPopoverPresentationControlle
         self.delegate = delegate
     }
     
-    func handleAnnotationViewTap(sender: UITapGestureRecognizer) {
+    func showPopover() {
         let calloutWidth = 100
         let calloutHeight = 100
         // we should present the callout view here with popover
@@ -51,12 +61,16 @@ class CustomAnnotationView : MAPinAnnotationView, UIPopoverPresentationControlle
         vc.modalPresentationStyle = UIModalPresentationStyle.popover
         
         let presentationController = vc.popoverPresentationController
-        presentationController?.permittedArrowDirections = .any
+        presentationController?.permittedArrowDirections = .down
         presentationController?.sourceView = self
         presentationController?.sourceRect = self.bounds
         presentationController?.delegate = self
         
-        delegate.presentVC(vc, animated: true, completion: nil)
+        self.delegate.presentVC(vc, animated: true, completion: nil)
+    }
+    
+    func handleAnnotationViewTap(sender: UITapGestureRecognizer) {
+        showPopover()
     }
     
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
@@ -88,14 +102,14 @@ class CustomAnnotationView : MAPinAnnotationView, UIPopoverPresentationControlle
 //            while((topVC!.presentedViewController) != nil) {
 //                topVC = topVC!.presentedViewController
 //            }
-//            let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OrderDetailsVC")
-//            if let newVC = vc as? OrderViewController {
-//                newVC.order = UserModel.SharedUserModel().orderManager.getUnreservedOrdersFromIds(self.orderIds)[0]                
-//                self.vc.navigationController?.pushViewController(newVC, animated: true)
+//            let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "XiaoQuXueXiaoDetailInfoVC")
+//            if let newVC = vc as? UIViewController {
+////                newVC.order = UserModel.SharedUserModel().orderManager.getUnreservedOrdersFromIds(self.orderIds)[0]                
+//                self.delegate.pushViewController(newVC, animated: true)
 //            }
 //            
 //        }
 //        super.setSelected(selected, animated: animated)
 //    }
-    
+
 }

@@ -36,6 +36,7 @@ class AnnotationCalloutView : UIView {
 //        self.addGestureRecognizer(tap)
     }
     
+    
     func handleTap(sender: UITapGestureRecognizer) {
 //        Logger.logToConsole("annotation calloutview tapped !!!")
         
