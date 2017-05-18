@@ -430,4 +430,8 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
         self.mapView.setVisibleMapRect(CommonUtility.mapRect(forOverlays: overlays), edgePadding: insets, animated: animated)
     }
     
+    func setCenter(centerCoordinate: CLLocationCoordinate2D, animated: Bool) {
+        self.mapView.setCenter(centerCoordinate, animated: animated)
+    }
+    
 }

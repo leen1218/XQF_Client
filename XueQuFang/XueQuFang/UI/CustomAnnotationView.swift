@@ -21,7 +21,9 @@ class CustomAnnotationView : MAPinAnnotationView, UIPopoverPresentationControlle
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.handleAnnotationViewTap(sender:))))
         self.delegate = delegate
         // have to put the call here, otherwise no default popover
-        showPopover()
+        delay(0.0) {
+            self.showPopover()
+        }
     }
 
     override init(frame: CGRect) {
@@ -30,6 +32,11 @@ class CustomAnnotationView : MAPinAnnotationView, UIPopoverPresentationControlle
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    func delay(_ delay:Double, closure:@escaping ()->()) {
+        let when = DispatchTime.now() + delay
+        DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
     }
 
     
@@ -54,7 +61,7 @@ class CustomAnnotationView : MAPinAnnotationView, UIPopoverPresentationControlle
         vc.modalPresentationStyle = UIModalPresentationStyle.popover
         
         let presentationController = vc.popoverPresentationController
-        presentationController?.permittedArrowDirections = .any
+        presentationController?.permittedArrowDirections = .down
         presentationController?.sourceView = self
         presentationController?.sourceRect = self.bounds
         presentationController?.delegate = self
