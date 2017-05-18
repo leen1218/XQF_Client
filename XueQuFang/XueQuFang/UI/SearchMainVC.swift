@@ -161,7 +161,8 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	
 	//MARK: SearchBar Delegate
 	func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-		self.searchbar.showsCancelButton = true
+		self.searchbar.setShowsCancelButton(true, animated: true)
+		//self.searchbar.showsCancelButton = true
 		self.searchResultTV.isHidden = false
 		if (searchBar.text == "") {
 			self.useSearchRecord = true
@@ -217,12 +218,14 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	
 	func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
 		self.searchbar.resignFirstResponder()
-		self.searchbar.showsCancelButton = false
+		//self.searchbar.showsCancelButton = false
+		self.searchbar.setShowsCancelButton(false, animated: true)
 	}
 	
 	func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
 		self.searchbar.resignFirstResponder()
-		self.searchbar.showsCancelButton = false
+		//self.searchbar.showsCancelButton = false
+		self.searchbar.setShowsCancelButton(false, animated: true)
 		self.searchbar.text = ""
 		self.searchResultTV.isHidden = true
 	}
@@ -301,7 +304,8 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 		
 		// 更新UI
 		self.searchbar.resignFirstResponder()
-		self.searchbar.showsCancelButton = false
+		self.searchbar.setShowsCancelButton(false, animated: true)
+		//self.searchbar.showsCancelButton = false
 		self.searchbar.text = ""
 		self.searchResultTV.isHidden = true
 		
