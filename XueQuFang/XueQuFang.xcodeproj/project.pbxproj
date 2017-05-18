@@ -44,6 +44,8 @@
 		8D2EFE571ECC7C1900FBA2A7 /* XQFHouseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XQFHouseRequest.m; sourceTree = "<group>"; };
 		8D2EFE591ECC7F2500FBA2A7 /* HouseInfoHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HouseInfoHandler.swift; path = Handler/HouseInfoHandler.swift; sourceTree = "<group>"; };
 		8D2EFE5B1ECC7FA100FBA2A7 /* SchoolInfoHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SchoolInfoHandler.swift; path = Handler/SchoolInfoHandler.swift; sourceTree = "<group>"; };
+		8D2EFE5D1ECD2F5500FBA2A7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		8D2EFE5E1ECD2F5500FBA2A7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		8D5C01E91ECBE87E00694C6B /* XQFSchoolRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQFSchoolRequest.h; sourceTree = "<group>"; };
 		8D5C01EA1ECBE87E00694C6B /* XQFSchoolRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XQFSchoolRequest.m; sourceTree = "<group>"; };
 		8D5C01EF1ECBF03900694C6B /* BaseHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseHandler.swift; path = Handler/BaseHandler.swift; sourceTree = "<group>"; };
@@ -354,6 +356,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				8D5E56441EC1F03B00132BBA /* Base */,
+				8D2EFE5D1ECD2F5500FBA2A7 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				8D5E56491EC1F03B00132BBA /* Base */,
+				8D2EFE5E1ECD2F5500FBA2A7 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -373,6 +377,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -423,6 +428,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
