@@ -21,6 +21,7 @@ class CustomAnnotationView : MAPinAnnotationView, UIPopoverPresentationControlle
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.handleAnnotationViewTap(sender:))))
         self.delegate = delegate
         // have to put the call here, otherwise no default popover
+        // also need to add the delay here to make sure this happens after center movement by setCenter call
         delay(0.0) {
             self.showPopover()
         }
