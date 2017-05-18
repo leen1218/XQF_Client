@@ -30,11 +30,14 @@ class MapCustomDelegate : NSObject, MAMapViewDelegate, AMapSearchDelegate, Callo
             var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: pointReuseIndetifier) as! CustomAnnotationView?
             
             if annotationView == nil {
-                annotationView = CustomAnnotationView(annotation: annotation, reuseIdentifier: pointReuseIndetifier)
+                annotationView = CustomAnnotationView(annotation: annotation, reuseIdentifier: pointReuseIndetifier, delegate: self)
+            } else {
+                annotationView?.annotation = annotation
             }
+
             
-            annotationView!.canShowCallout = true
-            annotationView!.setOrderId([1,2], self)
+            annotationView!.canShowCallout = false
+//            annotationView!.setOrderId([1,2], self)
 //            annotationView!.isDraggable = false
 //            annotationView!.rightCalloutAccessoryView = UIButton(type: UIButtonType.detailDisclosure)
             
