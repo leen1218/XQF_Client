@@ -82,6 +82,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
         // 搜索框
 		let searchbarTop = UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.height)!
 		self.searchbar = UISearchBar.init(frame: CGRect.init(x: 0, y: searchbarTop, width: self.view.bounds.size.width, height: 44))
+		self.searchbar.placeholder = "输入小学或者小区名称"
 		self.searchbar.delegate = self
 		self.view.addSubview(self.searchbar)
         
