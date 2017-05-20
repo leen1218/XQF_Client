@@ -7,7 +7,7 @@
 //
 
 import Foundation
-class OrderViewController: UIViewController {
+class XiaoquDetailViewController: UIViewController {
 	
 	
 	@IBOutlet weak var orderNO: UILabel!

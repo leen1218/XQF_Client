@@ -121,15 +121,15 @@ class MapCustomDelegate : NSObject, MAMapViewDelegate, AMapSearchDelegate, Callo
             
             if let aPOI = response.pois.first {
                 let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(aPOI.location.latitude), longitude: CLLocationDegrees(aPOI.location.longitude))
-                let anno = MAPointAnnotation()
-                anno.coordinate = coordinate
-                anno.title = aPOI.name
-                anno.subtitle = aPOI.address
-                
+                var type = SearchType.xuexiao
                 if (request.isKind(of: AMapPOIKeywordsSearchRequest.classForCoder())) {
                     // in case of polygon search, don't have to move the center
                     delegate.setCenter(centerCoordinate: coordinate, animated: false)
+                    type = SearchType.xiaoqu
                 }
+                let anno = SearchAnnotation.init(coordinate, title: aPOI.name, subtitle: aPOI.address, type: type)
+                
+                
                 delegate.addAnnotation(annotation: anno, animated: true)
                 
 //                mapView.addAnnotation(anno)

@@ -24,10 +24,10 @@
             </objects>
             <point key="canvasLocation" x="3079.1999999999998" y="670.61469265367316"/>
         </scene>
-        <!--View Controller-->
+        <!--Xuexiao Detail View Controller-->
         <scene sceneID="NFR-Bg-2Zf">
             <objects>
-                <viewController storyboardIdentifier="XiaoQuXueXiaoDetailInfoVC" id="4Tu-Cw-Tfy" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="XuexiaoDetailVC" id="4Tu-Cw-Tfy" customClass="XuexiaoDetailViewController" customModule="XueQuFang" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nVe-9w-vcu"/>
                         <viewControllerLayoutGuide type="bottom" id="mt2-TY-1hO"/>
@@ -36,8 +36,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJa-xy-t8S">
-                                <frame key="frameInset" minX="153" minY="211" width="42" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Xuexiao" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="smb-GG-3zE">
+                                <frame key="frameInset" minX="166" minY="275" width="61" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -49,7 +49,34 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XU2-iy-RbK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3007" y="1346"/>
+            <point key="canvasLocation" x="3005.5999999999999" y="1345.2773613193403"/>
+        </scene>
+        <!--Xiaoqu Detail View Controller-->
+        <scene sceneID="bV2-yN-4Ys">
+            <objects>
+                <viewController storyboardIdentifier="XiaoquDetailVC" id="Gb7-ql-Bgv" customClass="XiaoquDetailViewController" customModule="XueQuFang" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ueK-Wq-dde"/>
+                        <viewControllerLayoutGuide type="bottom" id="TJR-Yh-Y69"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EZL-gY-83u">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Xiaoqu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dck-uA-EI3">
+                                <frame key="frameInset" minX="166" minY="250" width="54" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p6i-EX-oAC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3742" y="1345"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OJi-qF-ShX">

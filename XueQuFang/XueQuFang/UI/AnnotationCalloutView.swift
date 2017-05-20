@@ -9,8 +9,8 @@
 import Foundation
 
 class AnnotationCalloutView : UIView {
-    var orderIds: [Int] = []
     weak var delegate: CalloutViewDelegate!
+    var searchType: SearchType?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,31 +23,26 @@ class AnnotationCalloutView : UIView {
         super.init(coder: coder)
     }
     
-    func setOrderId(_ orderIds: [Int]) {
-        self.orderIds = orderIds
-        
-        // currently add a uilabel, for testing purpose
-//        let label = UILabel.init(frame: self.bounds)
-//        label.text = "智能管家"
-//        self.addSubview(label)
-        
-        // tap event handling
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(sender:)))
-//        self.addGestureRecognizer(tap)
-    }
-    
-    
     func handleTap(sender: UITapGestureRecognizer) {
 //        Logger.logToConsole("annotation calloutview tapped !!!")
         
-        // here we goto the detail order view
-        
-        let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "XiaoQuXueXiaoDetailInfoVC")
-        if let newVC = vc as? UIViewController {
-//            newVC.order = UserModel.SharedUserModel().orderManager.getUnreservedOrdersFromIds(self.orderIds)[0]
-            delegate.dismissVC(animated: false, completion: nil)
-            delegate.pushViewController(vc, animated: true)
+        // here we goto the detail view
+        switch self.searchType! {
+        case .xiaoqu:
+            let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "XiaoquDetailVC")
+            if let newVC = vc as? XiaoquDetailViewController {
+                delegate.dismissVC(animated: false, completion: nil)
+                delegate.pushViewController(newVC, animated: true)
+                
+            }
             
+        case .xuexiao:
+            let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "XuexiaoDetailVC")
+            if let newVC = vc as? XuexiaoDetailViewController {
+                delegate.dismissVC(animated: false, completion: nil)
+                delegate.pushViewController(newVC, animated: true)
+                
+            }
         }
     }
 }

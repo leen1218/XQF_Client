@@ -14,10 +14,11 @@ class CustomAnnotationView : MAPinAnnotationView, UIPopoverPresentationControlle
     fileprivate static let calloutHeight = 70
     weak var delegate: CalloutViewDelegate!
     
-    var orderIds: [Int] = []
+    var searchAnnotation: SearchAnnotation?
     
     init(annotation: MAAnnotation, reuseIdentifier: String, delegate: CalloutViewDelegate) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
+        searchAnnotation = annotation as? SearchAnnotation
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.handleAnnotationViewTap(sender:))))
         self.delegate = delegate
         // have to put the call here, otherwise no default popover
@@ -39,20 +40,14 @@ class CustomAnnotationView : MAPinAnnotationView, UIPopoverPresentationControlle
         let when = DispatchTime.now() + delay
         DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
     }
-
-    
-    func setOrderId(_ orderIds: [Int], _ delegate: CalloutViewDelegate) {
-//        self.orderIds = orderIds
-        self.delegate = delegate
-    }
     
     func showPopover() {
         let calloutWidth = 100
         let calloutHeight = 100
         // we should present the callout view here with popover
         let calloutView = AnnotationCalloutView.init(frame: CGRect.init(x: 0, y: 0, width: calloutWidth, height: calloutHeight))
-        calloutView.setOrderId(self.orderIds)
         calloutView.delegate = self.delegate
+        calloutView.searchType = searchAnnotation!.type!
         
         // Present the view controller using the popover style.
         let vc = UIViewController.init()
