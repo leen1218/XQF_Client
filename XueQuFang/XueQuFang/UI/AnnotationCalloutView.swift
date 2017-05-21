@@ -11,16 +11,56 @@ import Foundation
 class AnnotationCalloutView : UIView {
     weak var delegate: CalloutViewDelegate!
     var searchType: SearchType?
+    var annotationName: String?
+    var annotationAddress: String?
     
-    override init(frame: CGRect) {
+    struct CalloutViewConstants {
+        static let imageXMargin = 2
+        static let imageYMargin = 2
+        static let labelXMargin = 5
+        static let imageWidth = 44
+        static let imageHeight = 44
+        static let labelWidth = 120
+        static let labelHeight = 20
+        static let titleFont: CGFloat = 14
+        static let subtitleFont: CGFloat = 12
+    }
+    
+    init(frame: CGRect, name: String, address: String) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = UIColor.clear
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(sender:)))
         self.addGestureRecognizer(tap)
+        
+        initSubviews(name: name, address: address)
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    func initSubviews(name: String, address: String) {
+        
+        
+        // provide the image in the left of popover
+        let imageView = UIImageView.init(frame: CGRect.init(x: CalloutViewConstants.imageXMargin, y: CalloutViewConstants.imageYMargin, width: CalloutViewConstants.imageWidth, height: CalloutViewConstants.imageHeight))
+        imageView.image = UIImage.init(imageLiteralResourceName: "zju.jpg")
+        self.addSubview(imageView)
+        
+        // provide the title, which is the name of the school or the house
+        let titleLabel = UILabel.init(frame: CGRect.init(x: CalloutViewConstants.imageXMargin + CalloutViewConstants.labelXMargin + CalloutViewConstants.imageWidth, y: CalloutViewConstants.imageYMargin, width: CalloutViewConstants.labelWidth, height: CalloutViewConstants.labelHeight))
+        titleLabel.font = UIFont.boldSystemFont(ofSize: CalloutViewConstants.titleFont)
+        titleLabel.textColor = UIColor.black
+        titleLabel.text = name
+        self.addSubview(titleLabel)
+        
+        // provide the subtitle, which is the detail address of the school or the house
+        let subtitleLabel = UILabel.init(frame: CGRect.init(x: CalloutViewConstants.imageXMargin + CalloutViewConstants.labelXMargin + CalloutViewConstants.imageWidth, y: CalloutViewConstants.imageYMargin * 2 + CalloutViewConstants.labelHeight, width: CalloutViewConstants.labelWidth, height: CalloutViewConstants.labelHeight))
+        subtitleLabel.font = UIFont.boldSystemFont(ofSize: CalloutViewConstants.subtitleFont)
+        subtitleLabel.textColor = UIColor.lightGray
+        subtitleLabel.text = address
+        self.addSubview(subtitleLabel)
+        
     }
     
     func handleTap(sender: UITapGestureRecognizer) {

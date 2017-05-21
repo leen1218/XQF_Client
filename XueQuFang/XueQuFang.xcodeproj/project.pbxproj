@@ -11,6 +11,7 @@
 		6D76BAE11ED0195A0094C98A /* SearchAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D76BADE1ED0195A0094C98A /* SearchAnnotation.swift */; };
 		6D76BAE21ED0195A0094C98A /* XiaoquDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D76BADF1ED0195A0094C98A /* XiaoquDetailViewController.swift */; };
 		6D76BAE31ED0195A0094C98A /* XuexiaoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D76BAE01ED0195A0094C98A /* XuexiaoDetailViewController.swift */; };
+		6D7A8D271ED1A3BA00122E29 /* zju.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6D7A8D261ED1A3BA00122E29 /* zju.jpg */; };
 		6D8A5F3F1ECA1842004D8D2C /* CommonUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A5F3E1ECA1842004D8D2C /* CommonUtility.m */; };
 		6DADE0161ECC8F640080FC7C /* MapCustomDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DADE0151ECC8F640080FC7C /* MapCustomDelegate.swift */; };
 		6DADE01A1ECCA7260080FC7C /* AnnotationCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DADE0171ECCA7260080FC7C /* AnnotationCalloutView.swift */; };
@@ -37,6 +38,7 @@
 		6D76BADE1ED0195A0094C98A /* SearchAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchAnnotation.swift; path = UI/SearchAnnotation.swift; sourceTree = "<group>"; };
 		6D76BADF1ED0195A0094C98A /* XiaoquDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XiaoquDetailViewController.swift; path = UI/XiaoquDetailViewController.swift; sourceTree = "<group>"; };
 		6D76BAE01ED0195A0094C98A /* XuexiaoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XuexiaoDetailViewController.swift; path = UI/XuexiaoDetailViewController.swift; sourceTree = "<group>"; };
+		6D7A8D261ED1A3BA00122E29 /* zju.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = zju.jpg; sourceTree = "<group>"; };
 		6D8A5F3D1ECA1842004D8D2C /* CommonUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonUtility.h; sourceTree = "<group>"; };
 		6D8A5F3E1ECA1842004D8D2C /* CommonUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUtility.m; sourceTree = "<group>"; };
 		6DADE0151ECC8F640080FC7C /* MapCustomDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapCustomDelegate.swift; path = UI/MapCustomDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +87,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6D7A8D251ED1A3BA00122E29 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6D7A8D261ED1A3BA00122E29 /* zju.jpg */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		6D8A5F3C1ECA1842004D8D2C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +145,7 @@
 		8D5E563E1EC1F03B00132BBA /* XueQuFang */ = {
 			isa = PBXGroup;
 			children = (
+				6D7A8D251ED1A3BA00122E29 /* Resources */,
 				8D5C01EE1ECBF01A00694C6B /* Handler */,
 				6D8A5F3C1ECA1842004D8D2C /* Utils */,
 				8DACED001EC765D7008E3B31 /* Manager */,
@@ -272,6 +283,7 @@
 				8D5E564A1EC1F03B00132BBA /* LaunchScreen.storyboard in Resources */,
 				8D5E56471EC1F03B00132BBA /* Assets.xcassets in Resources */,
 				8D5E56451EC1F03B00132BBA /* Main.storyboard in Resources */,
+				6D7A8D271ED1A3BA00122E29 /* zju.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
