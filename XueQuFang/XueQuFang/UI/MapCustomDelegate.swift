@@ -76,7 +76,8 @@ class MapCustomDelegate : NSObject, MAMapViewDelegate, AMapSearchDelegate, Callo
     func mapView(_ mapView: MAMapView!, rendererFor overlay: MAOverlay!) -> MAOverlayRenderer! {
         if (overlay.isKind(of: MAPolygon.classForCoder())) {
             let polygonRenderer = MAPolygonRenderer.init(overlay: overlay)
-            polygonRenderer?.fillColor   = UIColor.init(red: 0.29412, green: 0.6, blue: 0.98824, alpha: 0.35)
+//            polygonRenderer?.fillColor   = UIColor.init(red: 0.29412, green: 0.6, blue: 0.98824, alpha: 0.35)
+            polygonRenderer?.fillColor   = UIColor.init(red: 219/255.0, green: 81/255.0, blue: 73/255.0, alpha: 0.4)
             return polygonRenderer
         }
         return nil

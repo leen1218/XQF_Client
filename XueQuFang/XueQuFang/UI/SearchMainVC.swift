@@ -371,15 +371,17 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
         mapSearch.aMapGeocodeSearch(request)
     }
     
-    func searchXueXiao(name xueXiao: String, withType type: String, withPolygon polygonPoints: Array<CGPoint>) {
+    func searchXueXiao(name xueXiao: String, withType type: String, withPolygons polygons: String) {
         self.clearAnnotationsAndOverlays()
         
-        self.drawPolygon(polygonPoints: polygonPoints)
+        let polygonList = getPointsListFromPolygonString(polygons)
         
-        // search with polygon
+        self.drawPolygonList(polygonList: polygonList)
+        
+        // search with polygon[0], need to make sure the school is in the first polygon
         let request = AMapPOIPolygonSearchRequest()
         var points = Array<AMapGeoPoint>.init()
-        for p in polygonPoints {
+        for p in polygonList[0] {
             points.append(AMapGeoPoint.location(withLatitude: p.y, longitude: p.x))
         }
         request.polygon = AMapGeoPolygon.init(points: points)
@@ -392,7 +394,16 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
         
     }
     
-    func getPointsFromPolygonString(_ polygon: String) -> [CGPoint] {
+    private func getPointsListFromPolygonString(_ polygons: String) -> [[CGPoint]] {
+        let polygonList = polygons.components(separatedBy: ";")
+        var resultPolygons = [[CGPoint]].init()
+        for p in polygonList {
+            resultPolygons.append(getPointsFromPolygonString(p))
+        }
+        return resultPolygons
+    }
+    
+    private func getPointsFromPolygonString(_ polygon: String) -> [CGPoint] {
         let pointsXy = polygon.components(separatedBy: ",")
         let len = (pointsXy.count % 2 == 0) ? pointsXy.count : pointsXy.count - 1
         var result = Array<CGPoint>.init()
@@ -404,17 +415,18 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
         return result
     }
     
-    func drawPolygon(polygonPoints: Array<CGPoint>) {
-        
-        
-        var coord = Array<CLLocationCoordinate2D>.init()
-        for p in polygonPoints {
-            coord.append(CLLocationCoordinate2D.init(latitude: Double(p.y), longitude: Double(p.x)))
-        }
-        let polygon = MAPolygon.init(coordinates: &coord, count: UInt(coord.count))
+    private func drawPolygonList(polygonList: [[CGPoint]]) {
         
         var polygons = Array<MAPolygon>.init()
-        polygons.append(polygon!)
+        for polygon in polygonList {
+            var coord = Array<CLLocationCoordinate2D>.init()
+            for p in polygon {
+                coord.append(CLLocationCoordinate2D.init(latitude: Double(p.y), longitude: Double(p.x)))
+            }
+            let polygon = MAPolygon.init(coordinates: &coord, count: UInt(coord.count))
+            
+            polygons.append(polygon!)
+        }
         
         self.addOverlays(overlays: polygons, edgePadding: UIEdgeInsetsMake(40, 40, 40, 40), animated: true)
         
