@@ -96,14 +96,11 @@ class MapCustomDelegate : NSObject, MAMapViewDelegate, AMapSearchDelegate, Callo
             return
         }
         
-        
-        
         if let geocode = response.geocodes.first {
             let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(geocode.location.latitude), longitude: CLLocationDegrees(geocode.location.longitude))
-            let anno = MAPointAnnotation()
-            anno.coordinate = coordinate
-            anno.title = geocode.formattedAddress
-            anno.subtitle = geocode.location.description
+            
+            // here the type is xuexiao because we use this search instead of search polygon which has some problems.
+            let anno = SearchAnnotation.init(coordinate, title: geocode.formattedAddress, subtitle: geocode.location.description, type: .xuexiao)
             
             delegate.addAnnotation(annotation: anno, animated: true)
             

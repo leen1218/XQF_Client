@@ -363,11 +363,16 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
         mapSearch.aMapPOIKeywordsSearch(request)
     }
     
-    func searchDetailAddress(address: String) {
+    func searchXuexiao(address: String, city: String, withPolygons polygons: String) {
         self.clearAnnotationsAndOverlays()
-        self.mapView.setZoomLevel(defaultMapZoomLevel, animated: true)
+        
+        let polygonList = getPointsListFromPolygonString(polygons)
+        self.drawPolygonList(polygonList: polygonList)
+        
+//        self.mapView.setZoomLevel(defaultMapZoomLevel, animated: true)
         let request = AMapGeocodeSearchRequest()
         request.address = address
+        request.city = city
         mapSearch.aMapGeocodeSearch(request)
     }
     
@@ -375,7 +380,6 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
         self.clearAnnotationsAndOverlays()
         
         let polygonList = getPointsListFromPolygonString(polygons)
-        
         self.drawPolygonList(polygonList: polygonList)
         
         // search with polygon[0], need to make sure the school is in the first polygon
