@@ -15,30 +15,30 @@ class SearchResultItem
 	{
 		self.name = "default"
 		self.id = -1
-		self.isXueXiao = true
+		self.type = "1"
 	}
 	
 	init(item: SearchResultItem) {
 		self.name = item.name
 		self.id = item.id
-		self.isXueXiao = item.isXueXiao
+		self.type = item.type
 	}
 	
-	init(item_name:String, item_id:Int, item_isXueXiao:Bool)
+	init(item_name:String, item_id:Int, item_type:String)
 	{
 		self.name = item_name
 		self.id = item_id
-		self.isXueXiao = item_isXueXiao
+		self.type = item_type
 	}
 	
 	init(item_name:String)
 	{
 		self.name = item_name
 		self.id = -1
-		self.isXueXiao = true
+		self.type = "1"
 	}
 	
 	var name:String!
 	var id:Int!
-	var isXueXiao:Bool!
+	var type:String!  // 不同搜索类型, 1. xiaoxue 2. xiaoqu 3. 培训机构
 }

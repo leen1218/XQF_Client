@@ -122,7 +122,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 		for searchRecordSaved in searchRecordsSaved
 		{
 			var searchRecord = searchRecordSaved as! Dictionary<String, Any>
-			self.searchRecords.append(SearchResultItem.init(item_name: searchRecord["name"] as! String, item_id: searchRecord["id"] as! Int, item_isXueXiao: searchRecord["isXueXiao"] as! Bool))
+			self.searchRecords.append(SearchResultItem.init(item_name: searchRecord["name"] as! String, item_id: searchRecord["id"] as! Int, item_type: searchRecord["type"] as! String))
 			self.useSearchRecord = true
 		}
 	}
@@ -252,7 +252,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 			var searchRecord = Dictionary<String, Any>()
 			searchRecord["name"] = self.searchRecords[i].name
 			searchRecord["id"] = self.searchRecords[i].id
-			searchRecord["isXueXiao"] = self.searchRecords[i].isXueXiao
+			searchRecord["type"] = self.searchRecords[i].type
 			searchRecordSaved.append(searchRecord)
 		}
 		UserDefaults.standard.set(searchRecordSaved, forKey: "searchRecords")
@@ -291,13 +291,17 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let selectedItem = self.useSearchRecord! ? self.searchRecords[indexPath.row] : self.searchResults[indexPath.row]
 		// request for selected item info
-		if selectedItem.isXueXiao == true  // Search XueXiao
+		if selectedItem.type == "1"  // Search XueXiao
 		{
 			self.xiaoxueInfo(xiaoxueId: selectedItem.id)
 		}
-		else  // Search XiaoQu
+		else if selectedItem.type == "2"  // Search XiaoQu
 		{
 			self.xiaoquInfo(xiaoquId: selectedItem.id)
+		}
+		else
+		{
+			// TODO : 培训机构
 		}
 		// 添加search records
 		self.updateSearchRecords(searchItem: selectedItem)
@@ -321,7 +325,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 				let searchResults = result_json?["data"] as! [Dictionary<String, Any>]
 				for searchResult in searchResults
 				{
-					self.searchResults.append(SearchResultItem.init(item_name: searchResult["name"] as! String, item_id: searchResult["id"] as! Int, item_isXueXiao: searchResult["isXueXiao"] as! String == "0" ? false : true))
+					self.searchResults.append(SearchResultItem.init(item_name: searchResult["name"] as! String, item_id: searchResult["id"] as! Int, item_type: searchResult["type"] as! String))
 				}
 				self.useSearchRecord = false
 				self.searchResultTV.reloadData()

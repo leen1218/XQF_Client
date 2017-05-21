@@ -13,9 +13,9 @@
 
 static XQFRequestManager* mSharedManager = nil;
 
-NSString* const hostAPIURL = @"http://106.14.121.220:7600/%@";	// 云服务器
+//NSString* const hostAPIURL = @"http://106.14.121.220:7600/%@";	// 云服务器
 //NSString* const hostAPIURL = @"http://10.197.113.99:7600/%@";	//
-//NSString* const hostAPIURL = @"http://localhost:7600/%@";
+NSString* const hostAPIURL = @"http://localhost:7600/%@";
 
 @interface XQFRequestManager()
 
