@@ -232,18 +232,22 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	
 	func updateSearchRecords(searchItem:SearchResultItem)
 	{
+		var isUpdate = false
 		for i in 0 ..< self.searchRecords.count {
 			if self.searchRecords[i].name == searchItem.name
 			{
-				if i > 0 {
-					swap(&self.searchRecords[0], &self.searchRecords[i])
-				}
-				return
+				self.searchRecords.remove(at: i)
+				self.searchRecords.insert(SearchResultItem.init(item:searchItem), at: 0)
+				isUpdate = true
+				break
 			}
 		}
-		self.searchRecords.insert(SearchResultItem.init(item:searchItem), at: 0)
-		if (self.searchRecords.count > 10) {
-			self.searchRecords.removeLast()
+		if isUpdate == false
+		{
+			self.searchRecords.insert(SearchResultItem.init(item:searchItem), at: 0)
+			if (self.searchRecords.count > 10) {
+				self.searchRecords.removeLast()
+			}
 		}
 		// Save searchRecords into UserDefault
 		var searchRecordSaved = [Dictionary<String, Any>]()
