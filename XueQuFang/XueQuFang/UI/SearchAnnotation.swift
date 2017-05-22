@@ -9,21 +9,12 @@
 import Foundation
 import MapKit
 
-enum SearchType {
-    case xiaoqu
-    case xuexiao
-}
 
 class SearchAnnotation : MAPointAnnotation {
-    var type: SearchType?
-    var keyword: String?
-    var detailAddress: String?
+    var searchResultItem: BaseItem?
     
-    init(_ coordinate: CLLocationCoordinate2D, keyword: String, address: String, type: SearchType) {
+    init(item: BaseItem) {
         super.init()
-        self.coordinate = coordinate
-        self.keyword = keyword
-        self.detailAddress = address
-        self.type = type
+        self.searchResultItem = item
     }
 }
