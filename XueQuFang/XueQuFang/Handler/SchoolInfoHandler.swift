@@ -30,7 +30,7 @@ class SchoolHandler: BaseHandler
 //                    self.delegate.searchXueXiao(name: schoolInfo["xiaoxue_name"] as! String, withType: "小学", withPolygons: schoolInfo["xuequ_polygon"] as! String)
                     
                     // TODO: need to replace "杭州" with the real city from DB
-                    self.delegate.searchXuexiao(address: schoolInfo["xiaoxue_name"] as! String, city: "杭州", withPolygons: schoolInfo["xuequ_polygon"] as! String)
+                    self.delegate.searchXuexiao(name: schoolInfo["xiaoxue_name"] as! String, city: "杭州", withPolygons: schoolInfo["xuequ_polygon"] as! String, detailAddress: "详细地址")
 				}
 				else
 				{
