@@ -24,7 +24,7 @@ class SchoolHandler: BaseHandler
 				let schoolInfo = result_json?["schoolInfo"] as! Dictionary<String, Any>
 				if schoolInfo["xuequ_polygon"] != nil
 				{
-                    // TODO: need to replace "杭州" with the real city from DB
+					let schoolItem = SchoolItem.init(item_name: schoolInfo["xiaoxue_name"] as! String, item_id: schoolInfo["id"] as! Int, item_type: "学校", item_city: "杭州", item_detailAddress: schoolInfo["xiangxidizhi"] as! String, item_polygons: schoolInfo["xuequ_polygon"] as! String)
                     self.delegate.searchXuexiao(name: schoolInfo["xiaoxue_name"] as! String, city: "杭州", withPolygons: schoolInfo["xuequ_polygon"] as! String, detailAddress: schoolInfo["xiangxidizhi"] as! String)
 				}
 				else
