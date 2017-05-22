@@ -10,9 +10,7 @@ import Foundation
 
 class AnnotationCalloutView : UIView {
     weak var delegate: CalloutViewDelegate!
-    var searchType: SearchType?
-    var annotationName: String?
-    var annotationAddress: String?
+    var searchResultItem: BaseItem?
     
     struct CalloutViewConstants {
         static let imageXMargin = 2
@@ -26,20 +24,21 @@ class AnnotationCalloutView : UIView {
         static let subtitleFont: CGFloat = 12
     }
     
-    init(frame: CGRect, name: String, address: String) {
+    init(frame: CGRect, item: BaseItem) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.clear
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(sender:)))
         self.addGestureRecognizer(tap)
+        self.searchResultItem = item
         
-        initSubviews(name: name, address: address)
+        initSubviews()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
-    func initSubviews(name: String, address: String) {
+    func initSubviews() {
         
         
         // provide the image in the left of popover
@@ -51,14 +50,14 @@ class AnnotationCalloutView : UIView {
         let titleLabel = UILabel.init(frame: CGRect.init(x: CalloutViewConstants.imageXMargin + CalloutViewConstants.labelXMargin + CalloutViewConstants.imageWidth, y: CalloutViewConstants.imageYMargin, width: CalloutViewConstants.labelWidth, height: CalloutViewConstants.labelHeight))
         titleLabel.font = UIFont.boldSystemFont(ofSize: CalloutViewConstants.titleFont)
         titleLabel.textColor = UIColor.black
-        titleLabel.text = name
+        titleLabel.text = self.searchResultItem?.name
         self.addSubview(titleLabel)
         
         // provide the subtitle, which is the detail address of the school or the house
         let subtitleLabel = UILabel.init(frame: CGRect.init(x: CalloutViewConstants.imageXMargin + CalloutViewConstants.labelXMargin + CalloutViewConstants.imageWidth, y: CalloutViewConstants.imageYMargin * 2 + CalloutViewConstants.labelHeight, width: CalloutViewConstants.labelWidth, height: CalloutViewConstants.labelHeight))
         subtitleLabel.font = UIFont.boldSystemFont(ofSize: CalloutViewConstants.subtitleFont)
         subtitleLabel.textColor = UIColor.lightGray
-        subtitleLabel.text = address
+        subtitleLabel.text = self.searchResultItem?.detailAddress
         self.addSubview(subtitleLabel)
         
     }
@@ -67,16 +66,16 @@ class AnnotationCalloutView : UIView {
 //        Logger.logToConsole("annotation calloutview tapped !!!")
         
         // here we goto the detail view
-        switch self.searchType! {
-        case .xiaoqu:
+        if self.searchResultItem?.type == "1" {
+        
             let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "XiaoquDetailVC")
             if let newVC = vc as? XiaoquDetailViewController {
                 delegate.dismissVC(animated: false, completion: nil)
                 delegate.pushViewController(newVC, animated: true)
                 
             }
+        } else {
             
-        case .xuexiao:
             let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "XuexiaoDetailVC")
             if let newVC = vc as? XuexiaoDetailViewController {
                 delegate.dismissVC(animated: false, completion: nil)

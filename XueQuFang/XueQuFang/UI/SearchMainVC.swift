@@ -357,7 +357,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
         request.requireExtension = true
         request.types = houseItem.type
         request.city = houseItem.city
-        request.detailAddress = houseItem.detailAddress
+        request.searchResultItem = houseItem
         
         request.cityLimit = true
         request.requireSubPOIs = true
@@ -375,7 +375,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
         request.requireExtension = true
         request.types = schoolItem.type
         request.city = schoolItem.city
-        request.detailAddress = schoolItem.detailAddress
+        request.searchResultItem = schoolItem
         
         request.cityLimit = true
         request.requireSubPOIs = true
@@ -389,27 +389,28 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 //        mapSearch.aMapGeocodeSearch(request)
     }
     
-    func searchXueXiao(name xueXiao: String, withType type: String, withPolygons polygons: String) {
-        self.clearAnnotationsAndOverlays()
-        
-        let polygonList = getPointsListFromPolygonString(polygons)
-        self.drawPolygonList(polygonList: polygonList)
-        
-        // search with polygon[0], need to make sure the school is in the first polygon
-        let request = AMapPOIPolygonSearchRequest()
-        var points = Array<AMapGeoPoint>.init()
-        for p in polygonList[0] {
-            points.append(AMapGeoPoint.location(withLatitude: p.y, longitude: p.x))
-        }
-        request.polygon = AMapGeoPolygon.init(points: points)
-        
-        request.keywords            = xueXiao
-        request.types = type;
-        request.requireExtension    = true
-        
-        mapSearch.aMapPOIPolygonSearch(request)
-        
-    }
+    //deprecate method
+//    private func searchXueXiao(name xueXiao: String, withType type: String, withPolygons polygons: String) {
+//        self.clearAnnotationsAndOverlays()
+//        
+//        let polygonList = getPointsListFromPolygonString(polygons)
+//        self.drawPolygonList(polygonList: polygonList)
+//        
+//        // search with polygon[0], need to make sure the school is in the first polygon
+//        let request = AMapPOIPolygonSearchRequest()
+//        var points = Array<AMapGeoPoint>.init()
+//        for p in polygonList[0] {
+//            points.append(AMapGeoPoint.location(withLatitude: p.y, longitude: p.x))
+//        }
+//        request.polygon = AMapGeoPolygon.init(points: points)
+//        
+//        request.keywords            = xueXiao
+//        request.types = type;
+//        request.requireExtension    = true
+//        
+//        mapSearch.aMapPOIPolygonSearch(request)
+//        
+//    }
     
     private func getPointsListFromPolygonString(_ polygons: String) -> [[CGPoint]] {
         let polygonList = polygons.components(separatedBy: ";")

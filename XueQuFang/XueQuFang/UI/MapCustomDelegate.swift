@@ -90,28 +90,28 @@ class MapCustomDelegate : NSObject, MAMapViewDelegate, AMapSearchDelegate, Callo
         //        NSLog("Error:\(error) - \(ErrorInfoUtility.errorDescription(withCode: (nsErr?.code)!))")
     }
     
-    func onGeocodeSearchDone(_ request: AMapGeocodeSearchRequest!, response: AMapGeocodeSearchResponse!) {
-        
-        if response.geocodes == nil {
-            return
-        }
-        
-        if let geocode = response.geocodes.first {
-            let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(geocode.location.latitude), longitude: CLLocationDegrees(geocode.location.longitude))
-            var keyword = geocode.formattedAddress
-            var detailAddress = geocode.location.description
-            if let newRequest = request as? CustomGeocodeSearchRequest {
-                // here the type is xuexiao because we use this search instead of search polygon which has some problems.
-                keyword = newRequest.address
-                detailAddress = newRequest.detailAddress!
-            }
-            let anno = SearchAnnotation.init(coordinate, keyword: keyword!, address: detailAddress, type: .xuexiao)
-            delegate.addAnnotation(annotation: anno, animated: true)
-            
-//            mapView.addAnnotation(anno)
-//            mapView.selectAnnotation(anno, animated: false)
-        }
-    }
+//    func onGeocodeSearchDone(_ request: AMapGeocodeSearchRequest!, response: AMapGeocodeSearchResponse!) {
+//        
+//        if response.geocodes == nil {
+//            return
+//        }
+//        
+//        if let geocode = response.geocodes.first {
+//            let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(geocode.location.latitude), longitude: CLLocationDegrees(geocode.location.longitude))
+//            var keyword = geocode.formattedAddress
+//            var detailAddress = geocode.location.description
+//            if let newRequest = request as? CustomGeocodeSearchRequest {
+//                // here the type is xuexiao because we use this search instead of search polygon which has some problems.
+//                keyword = newRequest.address
+//                detailAddress = newRequest.detailAddress!
+//            }
+//            let anno = SearchAnnotation.init(coordinate, keyword: keyword!, address: detailAddress, type: .xuexiao)
+//            delegate.addAnnotation(annotation: anno, animated: true)
+//            
+////            mapView.addAnnotation(anno)
+////            mapView.selectAnnotation(anno, animated: false)
+//        }
+//    }
     
     func onPOISearchDone(_ request: AMapPOISearchBaseRequest!, response: AMapPOISearchResponse!) {
         
@@ -134,15 +134,14 @@ class MapCustomDelegate : NSObject, MAMapViewDelegate, AMapSearchDelegate, Callo
                 // in case of polygon search, don't have to move the center
                 delegate.setCenter(centerCoordinate: coordinate, animated: false)
 
-                var keyword = aPOI.name
-                var detailAddress = aPOI.address
                 if let newRequest = request as? CustomPOIKeywordsSearchRequest {
                     // here the type is xuexiao because we use this search instead of search polygon which has some problems.
-                    keyword = newRequest.keywords
-                    detailAddress = newRequest.detailAddress!
+                    let anno = SearchAnnotation.init(item: newRequest.searchResultItem!)
+                    delegate.addAnnotation(annotation: anno, animated: true)
+                } else {
+                    // TODO: log error message and notify error to user
                 }
-                let anno = SearchAnnotation.init(coordinate, keyword: keyword!, address: detailAddress!, type: .xiaoqu)
-                delegate.addAnnotation(annotation: anno, animated: true)
+                
                 
 //                mapView.addAnnotation(anno)
 //                mapView.selectAnnotation(anno, animated: false)
