@@ -69,10 +69,15 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="mu2-yG-lfd"/>
+                    <connections>
+                        <outlet property="introImage" destination="oQI-SA-esw" id="WFs-3P-ika"/>
+                        <outlet property="xuequTV" destination="DIf-4R-7Ht" id="ww8-lX-sdO"/>
+                        <outlet property="xuexiaoName" destination="smb-GG-3zE" id="11F-9r-HYT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XU2-iy-RbK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3005.5999999999999" y="1345.2773613193403"/>
+            <point key="canvasLocation" x="3079" y="1344"/>
         </scene>
         <!--Xiaoqu Detail View Controller-->
         <scene sceneID="bV2-yN-4Ys">
@@ -128,10 +133,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="introImage" destination="GWx-6r-f1D" id="7Bk-EU-GsO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p6i-EX-oAC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3741.5999999999999" y="1344.3778110944529"/>
+            <point key="canvasLocation" x="3980" y="1343"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OJi-qF-ShX">
