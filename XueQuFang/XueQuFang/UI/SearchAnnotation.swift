@@ -16,12 +16,14 @@ enum SearchType {
 
 class SearchAnnotation : MAPointAnnotation {
     var type: SearchType?
+    var keyword: String?
+    var detailAddress: String?
     
-    init(_ coordinate: CLLocationCoordinate2D, title: String, subtitle: String, type: SearchType) {
+    init(_ coordinate: CLLocationCoordinate2D, keyword: String, address: String, type: SearchType) {
         super.init()
         self.coordinate = coordinate
-        self.title = title
-        self.subtitle = subtitle
+        self.keyword = keyword
+        self.detailAddress = address
         self.type = type
     }
 }

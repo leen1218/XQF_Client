@@ -348,31 +348,33 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	}
     
 	//MARK: Map Search API
-    func searchXiaoQu(name xiaoQu: String, inCity city: String, withType type: String) {
+    func searchXiaoQu(name xiaoQu: String, inCity city: String, withType type: String, detailAddress: String) {
         self.clearAnnotationsAndOverlays()
         self.mapView.setZoomLevel(defaultMapZoomLevel, animated: true)
         
-        let request = AMapPOIKeywordsSearchRequest()
+        let request = CustomPOIKeywordsSearchRequest()
         request.keywords = xiaoQu
         request.requireExtension = true
         request.types = type
         request.city = city
+        request.detailAddress = detailAddress
         
         request.cityLimit = true
         request.requireSubPOIs = true
         mapSearch.aMapPOIKeywordsSearch(request)
     }
     
-    func searchXuexiao(address: String, city: String, withPolygons polygons: String) {
+    func searchXuexiao(name: String, city: String, withPolygons polygons: String, detailAddress: String) {
         self.clearAnnotationsAndOverlays()
         
         let polygonList = getPointsListFromPolygonString(polygons)
         self.drawPolygonList(polygonList: polygonList)
         
 //        self.mapView.setZoomLevel(defaultMapZoomLevel, animated: true)
-        let request = AMapGeocodeSearchRequest()
-        request.address = address
+        let request = CustomGeocodeSearchRequest()
+        request.address = name
         request.city = city
+        request.detailAddress = detailAddress
         mapSearch.aMapGeocodeSearch(request)
     }
     
