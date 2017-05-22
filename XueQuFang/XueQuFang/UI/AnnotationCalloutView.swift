@@ -10,7 +10,7 @@ import Foundation
 
 class AnnotationCalloutView : UIView {
     weak var delegate: CalloutViewDelegate!
-    var searchResultItem: BaseItem?
+    var baseItem: BaseItem?
     
     struct CalloutViewConstants {
         static let imageXMargin = 2
@@ -29,7 +29,7 @@ class AnnotationCalloutView : UIView {
         self.backgroundColor = UIColor.clear
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(sender:)))
         self.addGestureRecognizer(tap)
-        self.searchResultItem = item
+        self.baseItem = item
         
         initSubviews()
     }
@@ -50,14 +50,14 @@ class AnnotationCalloutView : UIView {
         let titleLabel = UILabel.init(frame: CGRect.init(x: CalloutViewConstants.imageXMargin + CalloutViewConstants.labelXMargin + CalloutViewConstants.imageWidth, y: CalloutViewConstants.imageYMargin, width: CalloutViewConstants.labelWidth, height: CalloutViewConstants.labelHeight))
         titleLabel.font = UIFont.boldSystemFont(ofSize: CalloutViewConstants.titleFont)
         titleLabel.textColor = UIColor.black
-        titleLabel.text = self.searchResultItem?.name
+        titleLabel.text = self.baseItem?.name
         self.addSubview(titleLabel)
         
         // provide the subtitle, which is the detail address of the school or the house
         let subtitleLabel = UILabel.init(frame: CGRect.init(x: CalloutViewConstants.imageXMargin + CalloutViewConstants.labelXMargin + CalloutViewConstants.imageWidth, y: CalloutViewConstants.imageYMargin * 2 + CalloutViewConstants.labelHeight, width: CalloutViewConstants.labelWidth, height: CalloutViewConstants.labelHeight))
         subtitleLabel.font = UIFont.boldSystemFont(ofSize: CalloutViewConstants.subtitleFont)
         subtitleLabel.textColor = UIColor.lightGray
-        subtitleLabel.text = self.searchResultItem?.detailAddress
+        subtitleLabel.text = self.baseItem?.detailAddress
         self.addSubview(subtitleLabel)
         
     }
@@ -66,7 +66,7 @@ class AnnotationCalloutView : UIView {
 //        Logger.logToConsole("annotation calloutview tapped !!!")
         
         // here we goto the detail view
-        if self.searchResultItem?.type == "住宅区" {
+        if self.baseItem?.type == "住宅区" {
         
             let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "XiaoquDetailVC")
             if let newVC = vc as? XiaoquDetailViewController {
@@ -78,7 +78,7 @@ class AnnotationCalloutView : UIView {
             
             let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "XuexiaoDetailVC")
             if let newVC = vc as? XuexiaoDetailViewController {
-				newVC.model = self.searchResultItem as! SchoolItem
+				newVC.model = self.baseItem as! SchoolItem
                 delegate.dismissVC(animated: false, completion: nil)
                 delegate.pushViewController(newVC, animated: true)
                 

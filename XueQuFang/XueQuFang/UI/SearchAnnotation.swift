@@ -11,11 +11,11 @@ import MapKit
 
 
 class SearchAnnotation : MAPointAnnotation {
-    var searchResultItem: BaseItem?
+    var baseItem: BaseItem?
     
     init(_ coordinate: CLLocationCoordinate2D, item: BaseItem) {
         super.init()
 		self.coordinate = coordinate
-        self.searchResultItem = item
+        self.baseItem = item
     }
 }
