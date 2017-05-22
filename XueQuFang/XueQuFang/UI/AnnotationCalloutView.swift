@@ -66,7 +66,7 @@ class AnnotationCalloutView : UIView {
 //        Logger.logToConsole("annotation calloutview tapped !!!")
         
         // here we goto the detail view
-        if self.searchResultItem?.type == "小区" {
+        if self.searchResultItem?.type == "xiaoqu" {
         
             let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "XiaoquDetailVC")
             if let newVC = vc as? XiaoquDetailViewController {
