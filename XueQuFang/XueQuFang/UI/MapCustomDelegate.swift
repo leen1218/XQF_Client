@@ -136,7 +136,7 @@ class MapCustomDelegate : NSObject, MAMapViewDelegate, AMapSearchDelegate, Callo
 
                 if let newRequest = request as? CustomPOIKeywordsSearchRequest {
                     // here the type is xuexiao because we use this search instead of search polygon which has some problems.
-                    let anno = SearchAnnotation.init(item: newRequest.searchResultItem!)
+                    let anno = SearchAnnotation.init(coordinate, item: newRequest.searchResultItem!)
                     delegate.addAnnotation(annotation: anno, animated: true)
                 } else {
                     // TODO: log error message and notify error to user

@@ -78,6 +78,7 @@ class AnnotationCalloutView : UIView {
             
             let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "XuexiaoDetailVC")
             if let newVC = vc as? XuexiaoDetailViewController {
+				newVC.model = self.searchResultItem as! SchoolItem
                 delegate.dismissVC(animated: false, completion: nil)
                 delegate.pushViewController(newVC, animated: true)
                 

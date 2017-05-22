@@ -20,7 +20,8 @@ class XuexiaoDetailViewController: UIViewController, UITableViewDataSource, UITa
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		self.navigationController?.setNavigationBarHidden(true, animated: true)
+		//self.navigationController?.setNavigationBarHidden(true, animated: true)
+		self.navigationController?.setNavigationBarHidden(false, animated: true)
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
@@ -46,9 +47,12 @@ class XuexiaoDetailViewController: UIViewController, UITableViewDataSource, UITa
 		
 		// 学校名称
 		self.xuexiaoName.frame = CGRect.init(x: 0, y: self.view.frame.height * 0.3, width: self.view.frame.width, height: 44)
+		self.xuexiaoName.text = self.model.name
 		
 		// 学区列表
 		self.xuequTV.translatesAutoresizingMaskIntoConstraints = false
+		self.xuequTV.delegate = self
+		self.xuequTV.dataSource = self
 		// Left
 		self.view.addConstraint(NSLayoutConstraint.init(item: self.xuequTV, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.left, multiplier: 1.0, constant: 0.0))
 		// Top
@@ -61,10 +65,6 @@ class XuexiaoDetailViewController: UIViewController, UITableViewDataSource, UITa
 	
 	//MARK: XueQu TableView Delegate
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		if self.model == nil
-		{
-			return 0
-		}
 		return self.model.xiaoqus.count
 	}
 	func numberOfSections(in tableView: UITableView) -> Int {

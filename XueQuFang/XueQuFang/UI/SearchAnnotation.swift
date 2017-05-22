@@ -13,8 +13,9 @@ import MapKit
 class SearchAnnotation : MAPointAnnotation {
     var searchResultItem: BaseItem?
     
-    init(item: BaseItem) {
+    init(_ coordinate: CLLocationCoordinate2D, item: BaseItem) {
         super.init()
+		self.coordinate = coordinate
         self.searchResultItem = item
     }
 }
