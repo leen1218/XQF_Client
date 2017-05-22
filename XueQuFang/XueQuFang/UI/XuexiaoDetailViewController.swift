@@ -61,14 +61,29 @@ class XuexiaoDetailViewController: UIViewController, UITableViewDataSource, UITa
 	
 	//MARK: XueQu TableView Delegate
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 0
+		if self.model == nil
+		{
+			return 0
+		}
+		return self.model.xiaoqus.count
 	}
 	func numberOfSections(in tableView: UITableView) -> Int {
 		return 1
 	}
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		return UITableViewCell.init()
+		let cellId = "cell"
+		var cell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: cellId)
+		
+		if cell == nil
+		{
+			cell = UITableViewCell.init(style: UITableViewCellStyle.subtitle, reuseIdentifier: cellId)
+		}
+		
+		cell!.textLabel?.text = self.model.xiaoqus[indexPath.row].name
+		cell!.detailTextLabel?.text = self.model.xiaoqus[indexPath.row].detailAddress
+		return cell!
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		
 	}}
