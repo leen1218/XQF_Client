@@ -123,18 +123,13 @@ class MapCustomDelegate : NSObject, MAMapViewDelegate, AMapSearchDelegate, Callo
             
             if let aPOI = response.pois.first {
                 let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(aPOI.location.latitude), longitude: CLLocationDegrees(aPOI.location.longitude))
-//                var type = SearchType.xuexiao
-//                if (request.isKind(of: AMapPOIKeywordsSearchRequest.classForCoder())) {
-//                    // in case of polygon search, don't have to move the center
-//                    delegate.setCenter(centerCoordinate: coordinate, animated: false)
-//                    type = SearchType.xiaoqu
-//                }
-                
 
-                // in case of polygon search, don't have to move the center
-                delegate.setCenter(centerCoordinate: coordinate, animated: false)
+
 
                 if let newRequest = request as? CustomPOIKeywordsSearchRequest {
+                    if newRequest.searchResultItem?.type == "住宅区" {
+                        delegate.setCenter(centerCoordinate: coordinate, animated: false)
+                    }
                     // here the type is xuexiao because we use this search instead of search polygon which has some problems.
                     let anno = SearchAnnotation.init(coordinate, item: newRequest.searchResultItem!)
                     delegate.addAnnotation(annotation: anno, animated: true)
