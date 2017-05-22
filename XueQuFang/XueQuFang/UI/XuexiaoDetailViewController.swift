@@ -15,7 +15,7 @@ class XuexiaoDetailViewController: UIViewController, UITableViewDataSource, UITa
 	@IBOutlet weak var xuexiaoName: UILabel!
 	@IBOutlet weak var xuequTV: UITableView!
 	
-	var model:Dictionary<String, Any>!
+	var model:SchoolItem!
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
@@ -35,8 +35,8 @@ class XuexiaoDetailViewController: UIViewController, UITableViewDataSource, UITa
 		// 初始化UI
 		self.setupUI()
 		
-		// 请求数据
-		self.setupModel()
+		//TODO， 以后数据太大了，可以单独请求数据
+		//self.setupModel()
 	}
 	
 	func setupUI()
@@ -57,11 +57,6 @@ class XuexiaoDetailViewController: UIViewController, UITableViewDataSource, UITa
 		self.view.addConstraint(NSLayoutConstraint.init(item: self.xuequTV, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.bottom, multiplier: 1.0, constant: 0.0))
 		// Width
 		self.view.addConstraint(NSLayoutConstraint.init(item: self.xuequTV, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.width, multiplier: 1.0, constant: 0.0))
-	}
-	
-	func setupModel()
-	{
-		
 	}
 	
 	//MARK: XueQu TableView Delegate

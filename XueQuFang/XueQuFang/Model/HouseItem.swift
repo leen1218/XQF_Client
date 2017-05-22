@@ -8,36 +8,25 @@
 
 import Foundation
 
-class HouseItem
+class HouseItem : BaseItem
 {
-	init()
-	{
-		self.name = "嘉绿北苑"
-		self.id = -1
-		self.city = "杭州"
-		self.detailAddress = "华星路174号"
-		self.type = "住宅区"
-	}
-	
 	init(item: HouseItem) {
+		super.init()
+		
 		self.name = item.name
 		self.id = item.id
 		self.city = item.city
 		self.detailAddress = item.detailAddress
+		self.type = item.type
 	}
 	
-	init(item_name:String, item_id:Int, item_city:String, item_detailAddress:String)
+	init(item_name:String, item_id:Int, item_type:String, item_city:String, item_detailAddress:String)
 	{
+		super.init()
 		self.name = item_name
 		self.id = item_id
 		self.city = item_city
 		self.detailAddress = item_detailAddress
+		self.type = item_type
 	}
-	
-	
-	var name:String!
-	var city:String!
-	var detailAddress:String!
-	var id:Int!
-	var type:String!
 }
