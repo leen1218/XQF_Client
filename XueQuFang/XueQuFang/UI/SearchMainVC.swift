@@ -348,34 +348,45 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	}
     
 	//MARK: Map Search API
-    func searchXiaoQu(name xiaoQu: String, inCity city: String, withType type: String, detailAddress: String) {
+    func searchXiaoQu(_ houseItem: HouseItem) {
         self.clearAnnotationsAndOverlays()
         self.mapView.setZoomLevel(defaultMapZoomLevel, animated: true)
         
         let request = CustomPOIKeywordsSearchRequest()
-        request.keywords = xiaoQu
+        request.keywords = houseItem.name
         request.requireExtension = true
-        request.types = type
-        request.city = city
-        request.detailAddress = detailAddress
+        request.types = houseItem.type
+        request.city = houseItem.city
+        request.detailAddress = houseItem.detailAddress
         
         request.cityLimit = true
         request.requireSubPOIs = true
         mapSearch.aMapPOIKeywordsSearch(request)
     }
     
-    func searchXuexiao(name: String, city: String, withPolygons polygons: String, detailAddress: String) {
+    func searchXuexiao(_ schoolItem: SchoolItem) {
         self.clearAnnotationsAndOverlays()
         
-        let polygonList = getPointsListFromPolygonString(polygons)
+        let polygonList = getPointsListFromPolygonString(schoolItem.polygons)
         self.drawPolygonList(polygonList: polygonList)
         
+        let request = CustomPOIKeywordsSearchRequest()
+        request.keywords = schoolItem.name
+        request.requireExtension = true
+        request.types = schoolItem.type
+        request.city = schoolItem.city
+        request.detailAddress = schoolItem.detailAddress
+        
+        request.cityLimit = true
+        request.requireSubPOIs = true
+        mapSearch.aMapPOIKeywordsSearch(request)
+        
 //        self.mapView.setZoomLevel(defaultMapZoomLevel, animated: true)
-        let request = CustomGeocodeSearchRequest()
-        request.address = name
-        request.city = city
-        request.detailAddress = detailAddress
-        mapSearch.aMapGeocodeSearch(request)
+//        let request = CustomGeocodeSearchRequest()
+//        request.address = name
+//        request.city = city
+//        request.detailAddress = detailAddress
+//        mapSearch.aMapGeocodeSearch(request)
     }
     
     func searchXueXiao(name xueXiao: String, withType type: String, withPolygons polygons: String) {

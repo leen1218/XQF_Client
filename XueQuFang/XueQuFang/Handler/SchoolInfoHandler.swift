@@ -37,7 +37,7 @@ class SchoolHandler: BaseHandler
 						}
 					}
 					
-                    self.delegate.searchXuexiao(name: schoolInfo["xiaoxue_name"] as! String, city: "杭州", withPolygons: schoolInfo["xuequ_polygon"] as! String, detailAddress: schoolInfo["xiangxidizhi"] as! String)
+                    self.delegate.searchXuexiao(schoolItem)
 				}
 				else
 				{
