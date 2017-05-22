@@ -13,7 +13,6 @@
 		6D76BAE31ED0195A0094C98A /* XuexiaoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D76BAE01ED0195A0094C98A /* XuexiaoDetailViewController.swift */; };
 		6D7A8D271ED1A3BA00122E29 /* zju.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6D7A8D261ED1A3BA00122E29 /* zju.jpg */; };
 		6D7A8D291ED2799B00122E29 /* CustomPOIKeywordsSearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7A8D281ED2799B00122E29 /* CustomPOIKeywordsSearchRequest.swift */; };
-		6D7A8D2B1ED279B000122E29 /* CustomGeocodeSearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7A8D2A1ED279B000122E29 /* CustomGeocodeSearchRequest.swift */; };
 		6D8A5F3F1ECA1842004D8D2C /* CommonUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A5F3E1ECA1842004D8D2C /* CommonUtility.m */; };
 		6DADE0161ECC8F640080FC7C /* MapCustomDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DADE0151ECC8F640080FC7C /* MapCustomDelegate.swift */; };
 		6DADE01A1ECCA7260080FC7C /* AnnotationCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DADE0171ECCA7260080FC7C /* AnnotationCalloutView.swift */; };
@@ -45,7 +44,6 @@
 		6D76BAE01ED0195A0094C98A /* XuexiaoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XuexiaoDetailViewController.swift; path = UI/XuexiaoDetailViewController.swift; sourceTree = "<group>"; };
 		6D7A8D261ED1A3BA00122E29 /* zju.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = zju.jpg; sourceTree = "<group>"; };
 		6D7A8D281ED2799B00122E29 /* CustomPOIKeywordsSearchRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomPOIKeywordsSearchRequest.swift; path = UI/CustomPOIKeywordsSearchRequest.swift; sourceTree = "<group>"; };
-		6D7A8D2A1ED279B000122E29 /* CustomGeocodeSearchRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomGeocodeSearchRequest.swift; path = UI/CustomGeocodeSearchRequest.swift; sourceTree = "<group>"; };
 		6D8A5F3D1ECA1842004D8D2C /* CommonUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonUtility.h; sourceTree = "<group>"; };
 		6D8A5F3E1ECA1842004D8D2C /* CommonUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUtility.m; sourceTree = "<group>"; };
 		6DADE0151ECC8F640080FC7C /* MapCustomDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapCustomDelegate.swift; path = UI/MapCustomDelegate.swift; sourceTree = "<group>"; };
@@ -184,7 +182,6 @@
 				8DACECF91EC488A5008E3B31 /* SearchMainVC.swift */,
 				6DADE0151ECC8F640080FC7C /* MapCustomDelegate.swift */,
 				6D7A8D281ED2799B00122E29 /* CustomPOIKeywordsSearchRequest.swift */,
-				6D7A8D2A1ED279B000122E29 /* CustomGeocodeSearchRequest.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -380,7 +377,6 @@
 				8D5E56401EC1F03B00132BBA /* AppDelegate.swift in Sources */,
 				8DACED091EC765D7008E3B31 /* XQFRequest.m in Sources */,
 				6D8A5F3F1ECA1842004D8D2C /* CommonUtility.m in Sources */,
-				6D7A8D2B1ED279B000122E29 /* CustomGeocodeSearchRequest.swift in Sources */,
 				8D5C01F21ECBF51100694C6B /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
