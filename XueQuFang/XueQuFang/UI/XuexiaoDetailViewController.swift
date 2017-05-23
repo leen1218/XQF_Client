@@ -15,14 +15,14 @@ class XuexiaoDetailViewController: UIViewController, UITableViewDataSource, UITa
 	@IBOutlet weak var introImage: UIImageView!
 	@IBOutlet weak var xuexiaoName: UILabel!
 	@IBOutlet weak var xuequTV: UITableView!
+	@IBOutlet weak var backButton: UIButton!
 	
 	var model:SchoolItem!
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		//self.navigationController?.setNavigationBarHidden(true, animated: true)
-		self.navigationController?.setNavigationBarHidden(false, animated: true)
+		self.navigationController?.setNavigationBarHidden(true, animated: true)
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
@@ -64,6 +64,9 @@ class XuexiaoDetailViewController: UIViewController, UITableViewDataSource, UITa
 		self.view.addConstraint(NSLayoutConstraint.init(item: self.xuequTV, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.bottom, multiplier: 1.0, constant: 0.0))
 		// Width
 		self.view.addConstraint(NSLayoutConstraint.init(item: self.xuequTV, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.width, multiplier: 1.0, constant: 0.0))
+		
+		// 回退按钮
+		self.backButton.frame = CGRect.init(x: 12, y: 12, width: 44, height: 44)
 	}
 	
 	//MARK: XueQu TableView Delegate
@@ -93,4 +96,10 @@ class XuexiaoDetailViewController: UIViewController, UITableViewDataSource, UITa
 			newVC.model = self.model.xiaoqus[indexPath.row]
 			self.navigationController?.pushViewController(newVC, animated: true)
 		}
-	}}
+	}
+	
+	@IBAction func back(_ sender: UIButton) {
+		self.navigationController?.popViewController(animated: true)
+	}
+	
+}

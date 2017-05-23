@@ -65,11 +65,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="riA-lz-mG1">
+                                <rect key="frame" x="24" y="44" width="31" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="返回"/>
+                                <connections>
+                                    <action selector="back:" destination="4Tu-Cw-Tfy" eventType="touchUpInside" id="V1v-L1-ZdQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="mu2-yG-lfd"/>
                     <connections>
+                        <outlet property="backButton" destination="riA-lz-mG1" id="Qwy-Wm-PeU"/>
                         <outlet property="introImage" destination="oQI-SA-esw" id="WFs-3P-ika"/>
                         <outlet property="xuequTV" destination="DIf-4R-7Ht" id="ww8-lX-sdO"/>
                         <outlet property="xuexiaoName" destination="smb-GG-3zE" id="11F-9r-HYT"/>
@@ -158,6 +167,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GKX-TX-Bon">
+                                <rect key="frame" x="16" y="43" width="31" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="返回"/>
+                                <connections>
+                                    <action selector="back:" destination="Gb7-ql-Bgv" eventType="touchUpInside" id="wN5-t5-WSh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -166,6 +183,7 @@
                         <outlet property="address_k" destination="aAE-Ii-Z69" id="fzU-eq-DXm"/>
                         <outlet property="age" destination="QR6-e0-vWi" id="ANa-qo-JRv"/>
                         <outlet property="age_k" destination="kAt-fA-l9a" id="ZtI-yK-vYv"/>
+                        <outlet property="backButton" destination="GKX-TX-Bon" id="Xfn-ZY-itA"/>
                         <outlet property="introImage" destination="GWx-6r-f1D" id="7Bk-EU-GsO"/>
                         <outlet property="name" destination="Dck-uA-EI3" id="kwS-a9-mCI"/>
                         <outlet property="xingzhengquyu_k" destination="VMG-3f-oFz" id="aoq-4l-dda"/>

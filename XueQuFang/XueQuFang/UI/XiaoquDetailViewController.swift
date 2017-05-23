@@ -21,8 +21,21 @@ class XiaoquDetailViewController: UIViewController {
 	@IBOutlet weak var address_k: UILabel!
 	@IBOutlet weak var age: UILabel!
 	@IBOutlet weak var age_k: UILabel!
+	@IBOutlet weak var backButton: UIButton!
 	
 	var model:HouseItem!
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		self.navigationController?.setNavigationBarHidden(true, animated: true)
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		
+		self.navigationController?.setNavigationBarHidden(false, animated: true)
+	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -79,6 +92,12 @@ class XiaoquDetailViewController: UIViewController {
 		self.age.textColor = UIColor.black
 		self.age.text = self.model.age
 		
-
+		// 回退按钮
+		self.backButton.frame = CGRect.init(x: 12, y: 12, width: 44, height: 44)
 	}
+	
+	@IBAction func back(_ sender: UIButton) {
+		self.navigationController?.popViewController(animated: true)
+	}
+	
 }
