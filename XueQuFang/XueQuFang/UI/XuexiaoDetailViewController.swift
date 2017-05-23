@@ -46,7 +46,7 @@ class XuexiaoDetailViewController: UIViewController, UITableViewDataSource, UITa
 		self.introImage.frame = CGRect.init(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height * 0.3)
 		
 		// 学校名称
-		self.xuexiaoName.frame = CGRect.init(x: 0, y: self.view.frame.height * 0.3, width: self.view.frame.width, height: 44)
+		self.xuexiaoName.frame = CGRect.init(x: 10, y: self.view.frame.height * 0.3, width: self.view.frame.width, height: 44)
 		self.xuexiaoName.text = self.model.name
 		
 		// 学区列表
