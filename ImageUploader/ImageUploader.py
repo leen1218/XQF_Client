@@ -4,7 +4,6 @@
 from qiniu import Auth, put_file
 import os
 import inspect
-import json
 
 #需要填写你的 Access Key 和 Secret Key
 _access_key = 'l1NMMFf-xmqnqwQ3xibbiScwBjjZYHLiFIaTGFod'
