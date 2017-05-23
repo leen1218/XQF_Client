@@ -48,6 +48,7 @@ class XiaoquDetailViewController: UIViewController {
 		self.xuequ_name.frame = CGRect.init(x: 12 + self.view.frame.width * 0.15 + 5, y: self.view.frame.height * 0.3 + 44 + 5, width: self.view.frame.width * 0.25, height: 44)
 		self.xuequ_name.font = UIFont.boldSystemFont(ofSize: 16)
 		self.xuequ_name.textColor = UIColor.black
+		self.xuequ_name.text = self.model.xiaoxue["xiaoxue_name"] as? String
 		
 		// 小区行政区域
 		self.xingzhengquyu_k.frame = CGRect.init(x: 12 + self.view.frame.width * 0.5, y: self.view.frame.height * 0.3 + 44 + 5, width: self.view.frame.width * 0.2, height: 44)
@@ -56,6 +57,7 @@ class XiaoquDetailViewController: UIViewController {
 		self.xingzhenquyu.frame = CGRect.init(x: 12 + self.view.frame.width * 0.5 + self.view.frame.width * 0.2 + 5, y: self.view.frame.height * 0.3 + 44 + 5, width: self.view.frame.width * 0.25, height: 44)
 		self.xingzhenquyu.font = UIFont.boldSystemFont(ofSize: 16)
 		self.xingzhenquyu.textColor = UIColor.black
+		self.xingzhenquyu.text = self.model.xingzhengquyu
 		
 		// 小区地址
 		self.address_k.frame = CGRect.init(x: 12, y: self.view.frame.height * 0.3 + 44 + 5 + 44 + 5, width: self.view.frame.width * 0.15, height: 44)
@@ -64,6 +66,7 @@ class XiaoquDetailViewController: UIViewController {
 		self.address.frame = CGRect.init(x: 12 + self.view.frame.width * 0.15 + 5, y: self.view.frame.height * 0.3 + 44 + 5 + 44 + 5, width: self.view.frame.width * 0.25, height: 44)
 		self.address.font = UIFont.boldSystemFont(ofSize: 16)
 		self.address.textColor = UIColor.black
+		self.address.text = self.model.detailAddress
 		
 		// 小区年代
 		self.age_k.frame = CGRect.init(x: 12 + self.view.frame.width * 0.5, y: self.view.frame.height * 0.3 + 44 + 5 + 44 + 5, width: self.view.frame.width * 0.2, height: 44)
@@ -72,6 +75,7 @@ class XiaoquDetailViewController: UIViewController {
 		self.age.frame = CGRect.init(x: 12 + self.view.frame.width * 0.5 + self.view.frame.width * 0.2 + 5, y: self.view.frame.height * 0.3 + 44 + 5 + 44 + 5, width: self.view.frame.width * 0.25, height: 44)
 		self.age.font = UIFont.boldSystemFont(ofSize: 16)
 		self.age.textColor = UIColor.black
+		self.age.text = self.model.age
 		
 
 	}

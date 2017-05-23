@@ -85,5 +85,9 @@ class XuexiaoDetailViewController: UIViewController, UITableViewDataSource, UITa
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		
+		let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "XiaoquDetailVC")
+		if let newVC = vc as? XiaoquDetailViewController {
+			newVC.model = self.model.xiaoqus[indexPath.row]
+			self.navigationController?.pushViewController(newVC, animated: true)
+		}
 	}}

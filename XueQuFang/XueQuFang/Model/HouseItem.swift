@@ -18,15 +18,32 @@ class HouseItem : BaseItem
 		self.city = item.city
 		self.detailAddress = item.detailAddress
 		self.type = item.type
+		self.xiaoxue = item.xiaoxue
+		self.chuzhong = item.chuzhong
+		self.youeryuan = item.youeryuan
+		self.xingzhengquyu = item.xingzhengquyu
+		self.age = item.age
 	}
 	
-	init(item_name:String, item_id:Int, item_type:String, item_city:String, item_detailAddress:String)
+	init(house_data:Dictionary<String, Any>)
 	{
 		super.init()
-		self.name = item_name
-		self.id = item_id
-		self.city = item_city
-		self.detailAddress = item_detailAddress
-		self.type = item_type
+		
+		self.name = house_data["xiaoqu_name"] as! String
+		self.id = house_data["id"] as! Int
+		self.city = "杭州"
+		self.detailAddress = house_data["xiangxidizhi"] as! String
+		self.type = "住宅区"
+		self.xiaoxue = house_data["xiaoxue_info"] as! Dictionary<String, Any>
+		self.chuzhong = house_data["xiaoxue_info"] as! Dictionary<String, Any>
+		self.youeryuan = house_data["xiaoxue_info"] as! Dictionary<String, Any>
+		self.xingzhengquyu = house_data["xingzhengquyu"] as! String
+		self.age = house_data["jianzhuniandai"] as! String
 	}
+	
+	var xiaoxue:Dictionary<String, Any>!
+	var chuzhong:Dictionary<String, Any>!
+	var youeryuan:Dictionary<String, Any>!
+	var xingzhengquyu:String!
+	var age:String!
 }

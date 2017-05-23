@@ -24,19 +24,7 @@ class SchoolHandler: BaseHandler
 				let schoolInfo = result_json?["schoolInfo"] as! Dictionary<String, Any>
 				if schoolInfo["xuequ_polygon"] != nil
 				{
-					let schoolItem = SchoolItem.init(item_name: schoolInfo["xiaoxue_name"] as! String, item_id: schoolInfo["id"] as! Int, item_type: "学校", item_city: "杭州", item_detailAddress: schoolInfo["xiangxidizhi"] as! String, item_polygons: schoolInfo["xuequ_polygon"] as! String)
-					// 添加小学学区
-					if schoolInfo["xiaoqus"] != nil
-					{
-						let houseItems = schoolInfo["xiaoqus"] as! [Dictionary<String, Any>]
-						for houseInfo in houseItems
-						{
-							//let houseInfo = house as! Dictionary<String, Any>
-							let houseItem = HouseItem.init(item_name: houseInfo["xiaoqu_name"] as! String, item_id: houseInfo["id"] as! Int, item_type: "住宅区", item_city: "杭州", item_detailAddress: houseInfo["xiangxidizhi"] as! String)
-							schoolItem.xiaoqus.append(houseItem)
-						}
-					}
-					
+					let schoolItem = SchoolItem.init(school_data: schoolInfo)
                     self.delegate.searchXuexiao(schoolItem)
 				}
 				else

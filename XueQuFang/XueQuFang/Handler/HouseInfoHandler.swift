@@ -22,7 +22,7 @@ class HouseHandler: BaseHandler
 		if (result_json != nil) {
 			if (result_json?["status"] != nil && result_json?["status"] as! String == "200") {
 				let houseInfo = result_json?["houseInfo"] as! Dictionary<String, Any>
-				let houseItem = HouseItem.init(item_name: houseInfo["xiaoqu_name"] as! String, item_id: houseInfo["id"] as! Int, item_type: "住宅区", item_city: "杭州", item_detailAddress: houseInfo["xiangxidizhi"] as! String)
+				let houseItem = HouseItem.init(house_data: houseInfo)
 				self.delegate.searchXiaoQu(houseItem)
 			}
 			if (result_json?["status"] != nil && result_json?["status"] as! String == "401")

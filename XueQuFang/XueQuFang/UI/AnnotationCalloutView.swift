@@ -63,20 +63,16 @@ class AnnotationCalloutView : UIView {
     }
     
     func handleTap(sender: UITapGestureRecognizer) {
-//        Logger.logToConsole("annotation calloutview tapped !!!")
-        
+		
         // here we goto the detail view
         if self.baseItem?.type == "住宅区" {
-        
             let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "XiaoquDetailVC")
             if let newVC = vc as? XiaoquDetailViewController {
-				
+				newVC.model = self.baseItem as! HouseItem
                 delegate.dismissVC(animated: false, completion: nil)
                 delegate.pushViewController(newVC, animated: true)
-                
             }
         } else {
-            
             let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "XuexiaoDetailVC")
             if let newVC = vc as? XuexiaoDetailViewController {
 				newVC.model = self.baseItem as! SchoolItem
