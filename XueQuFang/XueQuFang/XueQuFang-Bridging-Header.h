@@ -8,6 +8,7 @@
 
 // AFNetworking Request
 #import "XQFRequestManager.h"
+#import "XQFImageDownloadManager.h"
 
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import <AMapSearchKit/AMapSearchKit.h>

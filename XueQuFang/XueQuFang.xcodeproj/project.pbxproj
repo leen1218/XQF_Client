@@ -23,6 +23,7 @@
 		8D2EFE581ECC7C1900FBA2A7 /* XQFHouseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D2EFE571ECC7C1900FBA2A7 /* XQFHouseRequest.m */; };
 		8D2EFE5A1ECC7F2500FBA2A7 /* HouseInfoHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2EFE591ECC7F2500FBA2A7 /* HouseInfoHandler.swift */; };
 		8D2EFE5C1ECC7FA100FBA2A7 /* SchoolInfoHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2EFE5B1ECC7FA100FBA2A7 /* SchoolInfoHandler.swift */; };
+		8D301A6D1ED4215500D03941 /* XQFImageDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D301A6C1ED4215500D03941 /* XQFImageDownloadManager.m */; };
 		8D5C01EB1ECBE87E00694C6B /* XQFSchoolRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5C01EA1ECBE87E00694C6B /* XQFSchoolRequest.m */; };
 		8D5C01F01ECBF03900694C6B /* BaseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5C01EF1ECBF03900694C6B /* BaseHandler.swift */; };
 		8D5C01F21ECBF51100694C6B /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5C01F11ECBF51100694C6B /* Utils.swift */; };
@@ -58,6 +59,8 @@
 		8D2EFE5B1ECC7FA100FBA2A7 /* SchoolInfoHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SchoolInfoHandler.swift; path = Handler/SchoolInfoHandler.swift; sourceTree = "<group>"; };
 		8D2EFE5D1ECD2F5500FBA2A7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		8D2EFE5E1ECD2F5500FBA2A7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		8D301A6B1ED4215500D03941 /* XQFImageDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQFImageDownloadManager.h; sourceTree = "<group>"; };
+		8D301A6C1ED4215500D03941 /* XQFImageDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XQFImageDownloadManager.m; sourceTree = "<group>"; };
 		8D5C01E91ECBE87E00694C6B /* XQFSchoolRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQFSchoolRequest.h; sourceTree = "<group>"; };
 		8D5C01EA1ECBE87E00694C6B /* XQFSchoolRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XQFSchoolRequest.m; sourceTree = "<group>"; };
 		8D5C01EF1ECBF03900694C6B /* BaseHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseHandler.swift; path = Handler/BaseHandler.swift; sourceTree = "<group>"; };
@@ -202,6 +205,8 @@
 			children = (
 				8DACED011EC765D7008E3B31 /* XQFRequestManager.h */,
 				8DACED021EC765D7008E3B31 /* XQFRequestManager.m */,
+				8D301A6B1ED4215500D03941 /* XQFImageDownloadManager.h */,
+				8D301A6C1ED4215500D03941 /* XQFImageDownloadManager.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -361,6 +366,7 @@
 				6D76BAE31ED0195A0094C98A /* XuexiaoDetailViewController.swift in Sources */,
 				8D2EFE5C1ECC7FA100FBA2A7 /* SchoolInfoHandler.swift in Sources */,
 				8D07A7D61ED312C900B5A9BB /* HouseItem.swift in Sources */,
+				8D301A6D1ED4215500D03941 /* XQFImageDownloadManager.m in Sources */,
 				8D5C01F01ECBF03900694C6B /* BaseHandler.swift in Sources */,
 				8DACED0A1EC765D7008E3B31 /* XQFSearchRequest.m in Sources */,
 				8DACED081EC765D7008E3B31 /* XQFRequestManager.m in Sources */,
