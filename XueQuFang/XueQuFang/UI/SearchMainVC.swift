@@ -361,7 +361,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
         request.requireExtension = true
         request.types = houseItem.type
         request.city = houseItem.city
-        request.searchResultItem = houseItem
+        request.baseItem = houseItem
         
         request.cityLimit = true
         request.requireSubPOIs = true
@@ -379,7 +379,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
         request.requireExtension = true
         request.types = schoolItem.type
         request.city = schoolItem.city
-        request.searchResultItem = schoolItem
+        request.baseItem = schoolItem
         
         request.cityLimit = true
         request.requireSubPOIs = true

@@ -45,7 +45,7 @@ class CustomAnnotationView : MAPinAnnotationView, UIPopoverPresentationControlle
         let calloutWidth = 170
         let calloutHeight = 48
         // we should present the callout view here with popover
-        let calloutView = AnnotationCalloutView.init(frame: CGRect.init(x: 0, y: 0, width: calloutWidth, height: calloutHeight), item:self.searchAnnotation!.searchResultItem!)
+        let calloutView = AnnotationCalloutView.init(frame: CGRect.init(x: 0, y: 0, width: calloutWidth, height: calloutHeight), item:self.searchAnnotation!.baseItem!)
         calloutView.delegate = self.delegate
         
         // Present the view controller using the popover style.

@@ -9,6 +9,6 @@
 import Foundation
 
 class CustomPOIKeywordsSearchRequest : AMapPOIKeywordsSearchRequest {
-    var searchResultItem: BaseItem?
+    var baseItem: BaseItem?
     
 }
