@@ -22,6 +22,10 @@ class XiaoquDetailViewController: UIViewController {
 	@IBOutlet weak var age: UILabel!
 	@IBOutlet weak var age_k: UILabel!
 	@IBOutlet weak var backButton: UIButton!
+	@IBOutlet weak var chuzhong_name: UILabel!
+	@IBOutlet weak var chuzhong_k: UILabel!
+	@IBOutlet weak var youeryuan_name: UILabel!
+	@IBOutlet weak var youeryuan_k: UILabel!
 	
 	var model:HouseItem!
 	
@@ -56,38 +60,56 @@ class XiaoquDetailViewController: UIViewController {
 		self.name.frame = CGRect.init(x: 12, y: self.view.frame.height * 0.3, width: self.view.frame.width, height: 44)
 		self.name.text = self.model.name
 		
-		// 小区学区
-		self.xuequ_k.frame = CGRect.init(x: 12, y: self.view.frame.height * 0.3 + 44 + 5, width: self.view.frame.width * 0.15, height: 44)
+		// 小学学区
+		self.xuequ_k.frame = CGRect.init(x: 12, y: self.view.frame.height * 0.3 + 44 + 5, width: self.view.frame.width , height: 44)
 		self.xuequ_k.font = UIFont.boldSystemFont(ofSize: 16)
 		self.xuequ_k.textColor = UIColor.lightGray
-		self.xuequ_name.frame = CGRect.init(x: 12 + self.view.frame.width * 0.15 + 5, y: self.view.frame.height * 0.3 + 44 + 5, width: self.view.frame.width * 0.25, height: 44)
+		self.xuequ_name.frame = CGRect.init(x: 12 + self.view.frame.width * 0.2 + 5, y: self.view.frame.height * 0.3 + 44 + 5, width: self.view.frame.width, height: 44)
 		self.xuequ_name.font = UIFont.boldSystemFont(ofSize: 16)
 		self.xuequ_name.textColor = UIColor.black
 		self.xuequ_name.text = self.model.xiaoxue["xiaoxue_name"] as? String
 		
+		// 初中学区
+		self.chuzhong_k.frame = CGRect.init(x: 12, y: self.view.frame.height * 0.3 + (44 + 5) * 2, width: self.view.frame.width, height: 44)
+		self.chuzhong_k.font = UIFont.boldSystemFont(ofSize: 16)
+		self.chuzhong_k.textColor = UIColor.lightGray
+		self.chuzhong_name.frame = CGRect.init(x: 12 + self.view.frame.width * 0.2 + 5, y: self.view.frame.height * 0.3 + (44 + 5) * 2, width: self.view.frame.width, height: 44)
+		self.chuzhong_name.font = UIFont.boldSystemFont(ofSize: 16)
+		self.chuzhong_name.textColor = UIColor.black
+		self.chuzhong_name.text = self.model.chuzhong["chuzhong_name"] as? String
+		
+		// 幼儿园学区
+		self.youeryuan_k.frame = CGRect.init(x: 12, y: self.view.frame.height * 0.3 + (44 + 5) * 3, width: self.view.frame.width, height: 44)
+		self.youeryuan_k.font = UIFont.boldSystemFont(ofSize: 16)
+		self.youeryuan_k.textColor = UIColor.lightGray
+		self.youeryuan_name.frame = CGRect.init(x: 12 + self.view.frame.width * 0.2 + 5, y: self.view.frame.height * 0.3 + (44 + 5) * 3, width: self.view.frame.width, height: 44)
+		self.youeryuan_name.font = UIFont.boldSystemFont(ofSize: 16)
+		self.youeryuan_name.textColor = UIColor.black
+		self.youeryuan_name.text = self.model.youeryuan["youeryuan_name"] as? String
+		
 		// 小区行政区域
-		self.xingzhengquyu_k.frame = CGRect.init(x: 12 + self.view.frame.width * 0.5, y: self.view.frame.height * 0.3 + 44 + 5, width: self.view.frame.width * 0.2, height: 44)
+		self.xingzhengquyu_k.frame = CGRect.init(x: 12, y: self.view.frame.height * 0.3 + (44 + 5) * 4, width: self.view.frame.width, height: 44)
 		self.xingzhengquyu_k.font = UIFont.boldSystemFont(ofSize: 16)
 		self.xingzhengquyu_k.textColor = UIColor.lightGray
-		self.xingzhenquyu.frame = CGRect.init(x: 12 + self.view.frame.width * 0.5 + self.view.frame.width * 0.2 + 5, y: self.view.frame.height * 0.3 + 44 + 5, width: self.view.frame.width * 0.25, height: 44)
+		self.xingzhenquyu.frame = CGRect.init(x: 12 + self.view.frame.width * 0.2 + 5, y: self.view.frame.height * 0.3 + (44 + 5) * 4, width: self.view.frame.width, height: 44)
 		self.xingzhenquyu.font = UIFont.boldSystemFont(ofSize: 16)
 		self.xingzhenquyu.textColor = UIColor.black
 		self.xingzhenquyu.text = self.model.xingzhengquyu
 		
 		// 小区地址
-		self.address_k.frame = CGRect.init(x: 12, y: self.view.frame.height * 0.3 + 44 + 5 + 44 + 5, width: self.view.frame.width * 0.15, height: 44)
+		self.address_k.frame = CGRect.init(x: 12, y: self.view.frame.height * 0.3 + (44 + 5) * 5, width: self.view.frame.width, height: 44)
 		self.address_k.font = UIFont.boldSystemFont(ofSize: 16)
 		self.address_k.textColor = UIColor.lightGray
-		self.address.frame = CGRect.init(x: 12 + self.view.frame.width * 0.15 + 5, y: self.view.frame.height * 0.3 + 44 + 5 + 44 + 5, width: self.view.frame.width * 0.25, height: 44)
+		self.address.frame = CGRect.init(x: 12 + self.view.frame.width * 0.2 + 5, y: self.view.frame.height * 0.3 + (44 + 5) * 5, width: self.view.frame.width, height: 44)
 		self.address.font = UIFont.boldSystemFont(ofSize: 16)
 		self.address.textColor = UIColor.black
 		self.address.text = self.model.detailAddress
 		
 		// 小区年代
-		self.age_k.frame = CGRect.init(x: 12 + self.view.frame.width * 0.5, y: self.view.frame.height * 0.3 + 44 + 5 + 44 + 5, width: self.view.frame.width * 0.2, height: 44)
+		self.age_k.frame = CGRect.init(x: 12, y: self.view.frame.height * 0.3 + (44 + 5) * 6, width: self.view.frame.width, height: 44)
 		self.age_k.font = UIFont.boldSystemFont(ofSize: 16)
 		self.age_k.textColor = UIColor.lightGray
-		self.age.frame = CGRect.init(x: 12 + self.view.frame.width * 0.5 + self.view.frame.width * 0.2 + 5, y: self.view.frame.height * 0.3 + 44 + 5 + 44 + 5, width: self.view.frame.width * 0.25, height: 44)
+		self.age.frame = CGRect.init(x: 12 + self.view.frame.width * 0.2 + 5, y: self.view.frame.height * 0.3 + (44 + 5) * 6, width: self.view.frame.width, height: 44)
 		self.age.font = UIFont.boldSystemFont(ofSize: 16)
 		self.age.textColor = UIColor.black
 		self.age.text = self.model.age

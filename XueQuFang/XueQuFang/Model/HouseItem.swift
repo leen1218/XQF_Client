@@ -35,8 +35,8 @@ class HouseItem : BaseItem
 		self.detailAddress = house_data["xiangxidizhi"] as! String
 		self.type = "住宅区"
 		self.xiaoxue = house_data["xiaoxue_info"] as! Dictionary<String, Any>
-		self.chuzhong = house_data["xiaoxue_info"] as! Dictionary<String, Any>
-		self.youeryuan = house_data["xiaoxue_info"] as! Dictionary<String, Any>
+		self.chuzhong = house_data["chuzhong_info"] as! Dictionary<String, Any>
+		self.youeryuan = house_data["youeryuan_info"] as! Dictionary<String, Any>
 		self.xingzhengquyu = house_data["xingzhengquyu"] as! String
 		self.age = house_data["jianzhuniandai"] as! String
 	}
