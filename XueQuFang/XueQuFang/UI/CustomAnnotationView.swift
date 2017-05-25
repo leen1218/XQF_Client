@@ -23,9 +23,10 @@ class CustomAnnotationView : MAPinAnnotationView, UIPopoverPresentationControlle
         self.delegate = delegate
         // have to put the call here, otherwise no default popover
         // also need to add the delay here to make sure this happens after center movement by setCenter call
-        delay(0.0) {
+        // cause we use no animation, no delay needed anymore
+//        delay(0.0) {
             self.showPopover()
-        }
+//        }
     }
 
     override init(frame: CGRect) {
