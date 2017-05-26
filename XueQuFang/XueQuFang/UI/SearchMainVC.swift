@@ -496,7 +496,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 			{
 				print(keyboardSize.height)
 				let searchbarTop = UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.height)!
-				self.searchResultTV.frame = CGRect.init(x: 0, y: searchbarTop + 44, width: self.view.frame.width, height: self.view.frame.height - searchbarTop - 44 - 22)
+				self.searchResultTV.frame = CGRect.init(x: 0, y: searchbarTop + 44, width: self.view.frame.width, height: self.view.frame.height - searchbarTop - 44 - keyboardSize.height - 22)
 			}
 			else
 			{
