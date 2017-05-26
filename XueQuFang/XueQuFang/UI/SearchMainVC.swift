@@ -482,6 +482,6 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 			// 跳转到维修主界面
 			action in self.navigationController!.popToRootViewController(animated: true)
 		})
-		showAlert(title: "用户登录", message: "登录后可查看详细信息，是否去登录？", parentVC: self, okAction: okaction, cancel: true)
+		showAlert(title: "查看详情", message: "登录后可查看详细信息，是否去登录？", parentVC: self, okAction: okaction, cancel: true)
 	}
 }
