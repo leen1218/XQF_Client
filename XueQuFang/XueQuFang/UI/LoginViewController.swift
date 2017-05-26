@@ -48,7 +48,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, RequestHandler
 	
 	func setupUI()
 	{
-		self.preview_b.frame = CGRect.init(x: self.view.frame.width - 80, y: self.view.frame.height - 50, width: 60, height: 30)
+		self.preview_b.frame = CGRect.init(x: self.view.frame.width - 110, y: self.view.frame.height - 50, width: 90, height: 30)
 	}
 	
 	func autoLogin()
