@@ -92,23 +92,13 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
         initMapCustomDelegate()
 		
 		// 搜索结果的TableView
-		self.searchResultTV = UITableView.init()
+		self.searchResultTV = UITableView.init(frame: CGRect.init(x: 0, y: searchbarTop + 44, width: self.view.frame.width, height: self.view.frame.height - searchbarTop - 44))
 		self.searchResultTV.translatesAutoresizingMaskIntoConstraints = false
 		self.searchResultTV.delegate = self
 		self.searchResultTV.dataSource = self
 		self.searchResultTV.tableFooterView?.frame = CGRect.init()
 		self.searchResultTV.isHidden = true // Invisible at initial
 		self.view.addSubview(self.searchResultTV)
-		
-		// Left
-		self.searchResultTV.translatesAutoresizingMaskIntoConstraints = false
-		self.view.addConstraint(NSLayoutConstraint.init(item: self.searchResultTV, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.left, multiplier: 1.0, constant: 0.0))
-		// Top
-		self.view.addConstraint(NSLayoutConstraint.init(item: self.searchResultTV, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self.searchbar, attribute: NSLayoutAttribute.bottom, multiplier: 1.0, constant: 0.0))
-		// Bottom
-		self.view.addConstraint(NSLayoutConstraint.init(item: self.searchResultTV, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.bottom, multiplier: 1.0, constant: 0.0))
-		// Width
-		self.view.addConstraint(NSLayoutConstraint.init(item: self.searchResultTV, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.width, multiplier: 1.0, constant: 0.0))
 	}
 	
 	func setupModel()
@@ -483,5 +473,37 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 			action in self.navigationController!.popToRootViewController(animated: true)
 		})
 		showAlert(title: "查看详情", message: "登录后可查看详细信息，是否去登录？", parentVC: self, okAction: okaction, cancel: true)
+	}
+	
+	//
+	// 键盘弹出时调整搜索结果tableview的高度
+	override func viewWillAppear(_ animated: Bool) {
+		// register for keyboard notifications
+		NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+	}
+	
+	// 调整搜索结果frame
+	func keyboardWillShow(_ notif: NSNotification)
+	{
+		//keyboard will be shown now. depending for which textfield is active, move up or move down the view appropriately
+		if let userInfo = notif.userInfo
+		{
+			if let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
+			{
+				print(keyboardSize.height)
+				let searchbarTop = UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.height)!
+				self.searchResultTV.frame = CGRect.init(x: 0, y: searchbarTop + 44, width: self.view.frame.width, height: self.view.frame.height - searchbarTop - 44 - 22)
+			}
+			else
+			{
+				// no UIKeyboardFrameBeginUserInfoKey entry in userInfo
+			}
+		} else {
+			// no userInfo dictionary in notification
+		}
 	}
 }
