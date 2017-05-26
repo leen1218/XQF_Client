@@ -18,6 +18,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, RequestHandler
 	@IBOutlet weak var autoLoginCheckBox: UIButton!
 	@IBOutlet weak var rememberPWCheckBox: UIButton!
 	
+	@IBOutlet weak var preview_b: UIButton!
+	
 	// 用户名密码默认全部记录在userdefault standard中
 	var rememberPasswordCheck: Bool = true
 	var autoLoginCheck: Bool = true
@@ -25,6 +27,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate, RequestHandler
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		// UI
+		self.setupUI()
 		
 		// 设置文本框格式
 		self.setupTextField()
@@ -34,6 +39,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate, RequestHandler
 		
 		// Try to login directly
 		self.autoLogin()
+	}
+	@IBAction func preview(_ sender: UIButton) {
+		let mainSearchVC = self.storyboard!.instantiateViewController(withIdentifier: "SearchMainView")
+		let navigationVC = UINavigationController.init(rootViewController: mainSearchVC)
+		self.view.window?.rootViewController = navigationVC
+	}
+	
+	func setupUI()
+	{
+		self.preview_b.frame = CGRect.init(x: self.view.frame.width - 80, y: self.view.frame.height - 50, width: 60, height: 30)
 	}
 	
 	func autoLogin()
@@ -187,7 +202,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, RequestHandler
 					UserModel.SharedUserModel().setup(data: user_info!)
 				}
 				
-				// 4. 到客户管理界面
+				// 4. 搜索主界面
 				let mainSearchVC = self.storyboard!.instantiateViewController(withIdentifier: "SearchMainView")
 				let navigationVC = UINavigationController.init(rootViewController: mainSearchVC)
 				self.view.window?.rootViewController = navigationVC

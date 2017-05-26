@@ -307,6 +307,14 @@
                                     <action selector="checkRecordPassword:" destination="7Tm-O6-LyI" eventType="touchUpInside" id="RYy-73-N4d"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="izD-Lk-1AR">
+                                <rect key="frame" x="156" y="469" width="62" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="随便看看"/>
+                                <connections>
+                                    <action selector="preview:" destination="7Tm-O6-LyI" eventType="touchUpInside" id="ACe-Fw-bJi"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -346,6 +354,7 @@
                         <outlet property="autoLoginCheckBox" destination="x2X-jB-Rif" id="i7n-MY-zps"/>
                         <outlet property="cellphone" destination="xcJ-si-Vgw" id="70p-YR-Yj7"/>
                         <outlet property="password" destination="FL4-Oi-inb" id="Sig-pm-ldp"/>
+                        <outlet property="preview_b" destination="izD-Lk-1AR" id="BmH-Bj-blr"/>
                         <outlet property="rememberPWCheckBox" destination="7U4-e1-8kl" id="QtY-Me-4uB"/>
                     </connections>
                 </viewController>
