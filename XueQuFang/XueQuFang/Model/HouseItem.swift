@@ -29,16 +29,41 @@ class HouseItem : BaseItem
 	{
 		super.init()
 		
-		self.name = house_data["xiaoqu_name"] as! String
-		self.id = house_data["id"] as! Int
+		if ((house_data["xiaoqu_name"] as? String) != nil)
+		{
+			self.name = house_data["xiaoqu_name"] as! String
+		}
+		if house_data["id"] as? Int != nil
+		{
+			self.id = house_data["id"] as! Int
+		}
+		if house_data["xiangxidizhi"] as? String != nil
+		{
+			self.detailAddress = house_data["xiangxidizhi"] as! String
+		}
+		
 		self.city = "杭州"
-		self.detailAddress = house_data["xiangxidizhi"] as! String
 		self.type = "住宅区"
-		self.xiaoxue = house_data["xiaoxue_info"] as! Dictionary<String, Any>
-		self.chuzhong = house_data["chuzhong_info"] as! Dictionary<String, Any>
-		self.youeryuan = house_data["youeryuan_info"] as! Dictionary<String, Any>
-		self.xingzhengquyu = house_data["xingzhengquyu"] as! String
-		self.age = house_data["jianzhuniandai"] as! String
+		if ((house_data["xiaoxue_info"] as? Dictionary<String, Any>) != nil)
+		{
+			self.xiaoxue = house_data["xiaoxue_info"] as! Dictionary<String, Any>
+		}
+		if house_data["chuzhong_info"] as? Dictionary<String, Any> != nil
+		{
+			self.chuzhong = house_data["chuzhong_info"] as! Dictionary<String, Any>
+		}
+		if house_data["youeryuan_info"] as? Dictionary<String, Any> != nil
+		{
+			self.youeryuan = house_data["youeryuan_info"] as! Dictionary<String, Any>
+		}
+		if house_data["xingzhengquyu"] as? String != nil
+		{
+			self.xingzhengquyu = house_data["xingzhengquyu"] as! String
+		}
+		if house_data["jianzhuniandai"] as? String != nil
+		{
+			self.age = house_data["jianzhuniandai"] as! String
+		}
 	}
 	
 	var xiaoxue:Dictionary<String, Any>!

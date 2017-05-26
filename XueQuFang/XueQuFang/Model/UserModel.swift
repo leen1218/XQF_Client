@@ -11,6 +11,8 @@ import Foundation
 class UserModel
 {
 	private init() {
+		self.userID = -1
+		self.token = ""
 	}
 	
 	private static var model:UserModel? = nil

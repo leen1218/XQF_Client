@@ -21,18 +21,6 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 		self.setupModel()
 	}
 	
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-		
-		self.navigationController?.setNavigationBarHidden(true, animated: true)
-	}
-	
-	override func viewWillDisappear(_ animated: Bool) {
-		super.viewWillDisappear(animated)
-		
-		self.navigationController?.setNavigationBarHidden(false, animated: true)
-	}
-	
 	// Search Bar
 	var searchbar:UISearchBar!
 
@@ -92,7 +80,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	func setupUI()
 	{
         // 搜索框
-		let searchbarTop = UIApplication.shared.statusBarFrame.height
+		let searchbarTop = UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.height)!
 		self.searchbar = UISearchBar.init(frame: CGRect.init(x: 0, y: searchbarTop, width: self.view.bounds.size.width, height: 44))
 		self.searchbar.placeholder = "输入小学或者小区名称"
 		self.searchbar.delegate = self
@@ -112,7 +100,6 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 		self.searchResultTV.isHidden = true // Invisible at initial
 		self.view.addSubview(self.searchResultTV)
 		
-		//TODO: 根据结果数据计算frame
 		// Left
 		self.searchResultTV.translatesAutoresizingMaskIntoConstraints = false
 		self.view.addConstraint(NSLayoutConstraint.init(item: self.searchResultTV, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.left, multiplier: 1.0, constant: 0.0))
@@ -153,7 +140,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	func xiaoxueInfo(xiaoxueId:Int)
 	{
 		let request:XQFRequest = XQFRequestManager.shared().createRequest(ENUM_REQUEST_SCHOOL)
-		let params:Dictionary<String, String> = ["id":String(xiaoxueId)]
+		let params:Dictionary<String, String> = ["id":String(xiaoxueId), "userID":String(UserModel.SharedUserModel().userID!), "token":UserModel.SharedUserModel().token!]
 		request.params = params
 		self.schoolHandler = SchoolHandler(delegateVC: self)
 		request.handler = self.schoolHandler
@@ -164,7 +151,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	func xiaoquInfo(xiaoquId:Int)
 	{
 		let request:XQFRequest = XQFRequestManager.shared().createRequest(ENUM_REQUEST_HOUSE)
-		let params:Dictionary<String, String> = ["id":String(xiaoquId)]
+		let params:Dictionary<String, String> = ["id":String(xiaoquId), "userID":String(UserModel.SharedUserModel().userID!), "token":UserModel.SharedUserModel().token!]
 		request.params = params
 		self.houseHandler = HouseHandler(delegateVC: self)
 		request.handler = self.houseHandler
@@ -487,5 +474,14 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
     func setCenter(centerCoordinate: CLLocationCoordinate2D, animated: Bool) {
         self.mapView.setCenter(centerCoordinate, animated: animated)
     }
-    
+	
+	// 引导去登录注册界面
+	func popToLoginViewController()
+	{
+		let okaction = UIAlertAction(title: "登录", style: .default, handler: {
+			// 跳转到维修主界面
+			action in self.navigationController!.popToRootViewController(animated: true)
+		})
+		showAlert(title: "用户登录", message: "登录后可查看详细信息，是否去登录？", parentVC: self, okAction: okaction, cancel: true)
+	}
 }

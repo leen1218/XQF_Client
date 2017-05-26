@@ -42,8 +42,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate, RequestHandler
 	}
 	@IBAction func preview(_ sender: UIButton) {
 		let mainSearchVC = self.storyboard!.instantiateViewController(withIdentifier: "SearchMainView")
-		let navigationVC = UINavigationController.init(rootViewController: mainSearchVC)
-		self.view.window?.rootViewController = navigationVC
+		//let navigationVC = UINavigationController.init(rootViewController: mainSearchVC)
+		//self.view.window?.rootViewController = navigationVC
+		//self.present(navigationVC, animated: true, completion: nil)
+		self.navigationController?.pushViewController(mainSearchVC, animated: true)
 	}
 	
 	func setupUI()

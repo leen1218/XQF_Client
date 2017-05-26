@@ -157,5 +157,9 @@ class MapCustomDelegate : NSObject, MAMapViewDelegate, AMapSearchDelegate, Callo
     func pushViewController(_ viewcontroller: UIViewController, animated: Bool) {
         self.delegate.navigationController?.pushViewController(viewcontroller, animated: animated)
     }
+	
+	func popLoginViewController() {
+		self.delegate.popToLoginViewController()
+	}
     
 }

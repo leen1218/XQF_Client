@@ -27,20 +27,35 @@ class SchoolItem : BaseItem
 	init(school_data:Dictionary<String, Any>)
 	{
 		super.init()
-		
-		self.name = school_data["xiaoxue_name"] as! String
-		self.id = school_data["id"] as! Int
+
+		if ((school_data["xiaoxue_name"] as? String) != nil)
+		{
+			self.name = school_data["xiaoxue_name"] as! String
+		}
+		if school_data["id"] as? Int != nil
+		{
+			self.id = school_data["id"] as! Int
+		}
+		if school_data["xiangxidizhi"] as? String != nil
+		{
+			self.detailAddress = school_data["xiangxidizhi"] as! String
+		}
+		if school_data["xuequ_polygon"] as? String != nil
+		{
+			self.polygons = school_data["xuequ_polygon"] as! String
+		}
 		self.city = "杭州"
-		self.detailAddress = school_data["xiangxidizhi"] as! String
-		self.polygons = school_data["xuequ_polygon"] as! String
 		self.type = "学校"
 		self.xiaoqus = []
-		// 解析学区房信息
-		let xuequList = school_data["xiaoqus"] as! [Dictionary<String, Any>]
-		for xiaoqu in xuequList
+		if school_data["xiaoqus"] as? [Dictionary<String, Any>] != nil
 		{
-			let houseItem = HouseItem.init(house_data: xiaoqu)
-			self.xiaoqus.append(houseItem)
+			// 解析学区房信息
+			let xuequList = school_data["xiaoqus"] as! [Dictionary<String, Any>]
+			for xiaoqu in xuequList
+			{
+				let houseItem = HouseItem.init(house_data: xiaoqu)
+				self.xiaoqus.append(houseItem)
+			}
 		}
 	}
 

@@ -66,6 +66,15 @@ class AnnotationCalloutView : UIView {
     
     func handleTap(sender: UITapGestureRecognizer) {
 		
+		// 是否注册用户？
+		if UserModel.SharedUserModel().userID < 0   // 游客
+		{
+			// 到客户注册登录界面
+			delegate.dismissVC(animated: false, completion: nil)
+			delegate.popLoginViewController()
+			return
+		}
+		
         // here we goto the detail view
         if self.baseItem?.type == "住宅区" {
             let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "XiaoquDetailVC")
@@ -90,6 +99,6 @@ public protocol CalloutViewDelegate : NSObjectProtocol {
     func presentVC(_ viewControllerToPresent: UIViewController, animated: Bool, completion: (() -> Void)?)
     func dismissVC(animated: Bool, completion: (() -> Void)?)
     func pushViewController(_ viewcontroller: UIViewController, animated: Bool)
-    
+    func popLoginViewController()
 }
 
