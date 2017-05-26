@@ -21,6 +21,18 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 		self.setupModel()
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		self.navigationController?.setNavigationBarHidden(true, animated: true)
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		
+		self.navigationController?.setNavigationBarHidden(false, animated: true)
+	}
+	
 	// Search Bar
 	var searchbar:UISearchBar!
 
@@ -80,7 +92,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	func setupUI()
 	{
         // 搜索框
-		let searchbarTop = UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.height)!
+		let searchbarTop = UIApplication.shared.statusBarFrame.height
 		self.searchbar = UISearchBar.init(frame: CGRect.init(x: 0, y: searchbarTop, width: self.view.bounds.size.width, height: 44))
 		self.searchbar.placeholder = "输入小学或者小区名称"
 		self.searchbar.delegate = self
