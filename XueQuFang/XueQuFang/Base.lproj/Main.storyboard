@@ -71,6 +71,34 @@
             </objects>
             <point key="canvasLocation" x="2780" y="1821.1394302848578"/>
         </scene>
+        <!--MessageTVC-->
+        <scene sceneID="byz-b2-WhN">
+            <objects>
+                <tableViewController storyboardIdentifier="MessageTCV" id="rge-7q-j4v" customClass="MessageTVC" customModule="XueQuFang" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="bDO-y8-KsE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Mdd-EO-Req">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Mdd-EO-Req" id="cR4-2w-XA8">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="rge-7q-j4v" id="Yre-7h-MX2"/>
+                            <outlet property="delegate" destination="rge-7q-j4v" id="95c-WP-QWU"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Vr-7C-CU0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3654" y="1820"/>
+        </scene>
         <!--Title-->
         <scene sceneID="NFR-Bg-2Zf">
             <objects>

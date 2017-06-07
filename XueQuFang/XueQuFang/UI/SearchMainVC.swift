@@ -45,6 +45,12 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	var settingPanel: MySettingViewController!
 	var coverPanel: UIView!
 	
+	// 消息界面
+	var messagePanel: MessageTVC!
+	
+	// 城市选择界面
+	var cityPanel: MessageTVC!
+	
 	// Request handler
 	var schoolHandler: SchoolHandler!
 	var houseHandler: HouseHandler!
@@ -101,13 +107,13 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 		// 中: 选择城市
 		let cityB = UIButton.init(frame: CGRect.init(x: self.view.bounds.width / 2 - 40, y: 10, width: 60, height:24))
 		cityB.setTitle("城市", for: UIControlState.normal)
-		cityB.addTarget(self, action: #selector(self.personalSettingTap), for: UIControlEvents.touchUpInside)
+		cityB.addTarget(self, action: #selector(self.cityTap), for: UIControlEvents.touchUpInside)
 		self.toolbar.addSubview(cityB)
 		
 		// 右: 消息界面
 		let messageB = UIButton.init(frame: CGRect.init(x: self.view.bounds.width - 70, y: 10, width: 60, height:24))
 		messageB.setTitle("消息", for: UIControlState.normal)
-		messageB.addTarget(self, action: #selector(self.personalSettingTap), for: UIControlEvents.touchUpInside)
+		messageB.addTarget(self, action: #selector(self.messageTap), for: UIControlEvents.touchUpInside)
 		self.toolbar.addSubview(messageB)
 		
         // 搜索框
@@ -131,11 +137,21 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 		self.searchResultTV.isHidden = true // Invisible at initial
 		self.view.addSubview(self.searchResultTV)
 		
-		// 个人设置界面
-		self.settingPanel = self.storyboard!.instantiateViewController(withIdentifier: "MySettingViewController") as! MySettingViewController
-		self.addChildViewController(self.settingPanel)
-		self.settingPanel.view.frame = CGRect.init(x: -self.view.frame.width * 2.0 / 3.0, y: 0, width: self.view.frame.width * 2.0 / 3.0, height: self.view.frame.height)
-		self.view.addSubview(self.settingPanel.view)
+	}
+	func personalSettingTap()
+	{
+		self.addCover()
+		self.showSettingPanel()
+	}
+	func cityTap()
+	{
+		self.addCover()
+		self.showCityPanel()
+	}
+	func messageTap()
+	{
+		self.addCover()
+		self.showMessagePanel()
 	}
 	
 	func addCover()
@@ -146,7 +162,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 			self.coverPanel.backgroundColor = UIColor.black
 			self.coverPanel.alpha = 0.3
 			self.view.addSubview(self.coverPanel)
-			let tap = UITapGestureRecognizer(target: self, action: #selector(self.tap))
+			let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapCover))
 			self.coverPanel.addGestureRecognizer(tap)
 		}
 		self.coverPanel.isHidden = false
@@ -158,7 +174,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 			self.coverPanel.isHidden = true
 		}
 	}
-	func tap()
+	func tapCover()
 	{
 		// 1. 移除阴影封面
 		self.removeCover()
@@ -166,16 +182,24 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 		// 2. 收起个人设置界面
 		self.hideSettingPanel()
 		
-	}
-	
-	func personalSettingTap()
-	{
-		self.addCover()
-		self.showSettingPanel()
+		// 3. 收起消息界面
+		self.hideMessagePanel()
+		
+		// 4. 收起城市选择界面
+		self.hideCityPanel()
 	}
 	
 	func showSettingPanel()
 	{
+		if (self.settingPanel == nil) {
+			// 个人设置界面
+			self.settingPanel = self.storyboard!.instantiateViewController(withIdentifier: "MySettingViewController") as! MySettingViewController
+			self.addChildViewController(self.settingPanel)
+			let toolbarTop = UIApplication.shared.statusBarFrame.height
+			self.settingPanel.view.frame = CGRect.init(x: -self.view.frame.width * 2.0 / 3.0, y: toolbarTop, width: self.view.frame.width * 2.0 / 3.0, height: self.view.frame.height)
+			self.view.addSubview(self.settingPanel.view)
+		}
+		
 		UIView.animate(withDuration: 0.25, animations: {
 			() -> Void in
 			self.settingPanel.view.frame.origin.x = 0.0
@@ -184,10 +208,82 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	}
 	func hideSettingPanel()
 	{
+		if (self.settingPanel == nil)
+		{
+			return
+		}
+		
 		UIView.animate(withDuration: 0.25, animations: {
 			() -> Void in
 			self.settingPanel.view.frame.origin.x = -self.view.frame.width * 2.0 / 3.0
 		});
+	}
+	
+	func showMessagePanel()
+	{
+		if (self.messagePanel == nil) {
+			// 个人设置界面
+			self.messagePanel = self.storyboard!.instantiateViewController(withIdentifier: "MessageTCV") as! MessageTVC
+			self.messagePanel.itemType = "Message"
+			self.addChildViewController(self.messagePanel)
+			let toolbarTop = UIApplication.shared.statusBarFrame.height
+			self.messagePanel.view.frame = CGRect.init(x: self.view.frame.width, y: toolbarTop, width: self.view.frame.width * 2.0 / 3.0, height: self.view.frame.height)
+			self.view.addSubview(self.messagePanel.view)
+		}
+		
+		UIView.animate(withDuration: 0.25, animations: {
+			() -> Void in
+			self.messagePanel.view.frame.origin.x = self.view.frame.width / 3.0
+			self.view.bringSubview(toFront: self.messagePanel.view)
+		});
+	}
+	func hideMessagePanel()
+	{
+		if (self.messagePanel == nil)
+		{
+			return
+		}
+		
+		UIView.animate(withDuration: 0.25, animations: {
+			() -> Void in
+			self.messagePanel.view.frame.origin.x = self.view.frame.width
+		});
+	}
+	
+	func showCityPanel()
+	{
+		if (self.cityPanel == nil) {
+			// 城市选择界面
+			self.cityPanel = self.storyboard!.instantiateViewController(withIdentifier: "MessageTCV") as! MessageTVC
+			self.cityPanel.itemType = "City"
+			self.addChildViewController(self.cityPanel)
+			let toolbarTop = UIApplication.shared.statusBarFrame.height
+			self.cityPanel.view.frame = CGRect.init(x: self.view.frame.width / 6.0, y: toolbarTop + 44, width: self.view.frame.width * 2.0 / 3.0, height: self.view.frame.height)
+			self.cityPanel.view.alpha = 0.0
+			self.view.addSubview(self.cityPanel.view)
+			self.cityPanel.view.isHidden = true
+		}
+		
+		UIView.animate(withDuration: 0.25, animations: {
+			() -> Void in
+			self.cityPanel.view.alpha = 1.0
+			self.view.bringSubview(toFront: self.cityPanel.view)
+			self.cityPanel.view.isHidden = false
+		});
+	}
+	func hideCityPanel()
+	{
+		if (self.cityPanel == nil)
+		{
+			return
+		}
+		
+		UIView.animate(withDuration: 0.25, animations: { 
+			() -> Void in
+			self.cityPanel.view.alpha = 0.0
+		}) { (finished) in
+			self.cityPanel.view.isHidden = true
+		}
 	}
 	
 	func setupModel()

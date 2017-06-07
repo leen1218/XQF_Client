@@ -32,6 +32,7 @@
 		8D5E564A1EC1F03B00132BBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D5E56481EC1F03B00132BBA /* LaunchScreen.storyboard */; };
 		8D85060A1EDC1DCB00E0DECD /* MySettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8506091EDC1DCB00E0DECD /* MySettingViewController.swift */; };
 		8D85060D1EDFCD7F00E0DECD /* XQFLogoutRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D85060C1EDFCD7F00E0DECD /* XQFLogoutRequest.m */; };
+		8D85060F1EE83B0600E0DECD /* MessageTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D85060E1EE83B0600E0DECD /* MessageTVC.swift */; };
 		8DACECFA1EC488A5008E3B31 /* SearchMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DACECF91EC488A5008E3B31 /* SearchMainVC.swift */; };
 		8DACECFD1EC4916F008E3B31 /* SearchResultItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DACECFC1EC4916F008E3B31 /* SearchResultItem.swift */; };
 		8DACED081EC765D7008E3B31 /* XQFRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DACED021EC765D7008E3B31 /* XQFRequestManager.m */; };
@@ -84,6 +85,7 @@
 		8D8506091EDC1DCB00E0DECD /* MySettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MySettingViewController.swift; path = UI/MySettingViewController.swift; sourceTree = "<group>"; };
 		8D85060B1EDFCD7F00E0DECD /* XQFLogoutRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQFLogoutRequest.h; sourceTree = "<group>"; };
 		8D85060C1EDFCD7F00E0DECD /* XQFLogoutRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XQFLogoutRequest.m; sourceTree = "<group>"; };
+		8D85060E1EE83B0600E0DECD /* MessageTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageTVC.swift; path = UI/MessageTVC.swift; sourceTree = "<group>"; };
 		8DACECF91EC488A5008E3B31 /* SearchMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchMainVC.swift; path = UI/SearchMainVC.swift; sourceTree = "<group>"; };
 		8DACECFC1EC4916F008E3B31 /* SearchResultItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchResultItem.swift; path = Model/SearchResultItem.swift; sourceTree = "<group>"; };
 		8DACED011EC765D7008E3B31 /* XQFRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQFRequestManager.h; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 				8DF6152D1ED70406008E8796 /* LoginViewController.swift */,
 				8DF615341ED70FF7008E8796 /* RegisterViewController.swift */,
 				8D8506091EDC1DCB00E0DECD /* MySettingViewController.swift */,
+				8D85060E1EE83B0600E0DECD /* MessageTVC.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D07A7D81ED31D6B00B5A9BB /* BaseItem.swift in Sources */,
+				8D85060F1EE83B0600E0DECD /* MessageTVC.swift in Sources */,
 				6D76BAE21ED0195A0094C98A /* XiaoquDetailViewController.swift in Sources */,
 				6D76BAE11ED0195A0094C98A /* SearchAnnotation.swift in Sources */,
 				6DADE01A1ECCA7260080FC7C /* AnnotationCalloutView.swift in Sources */,
