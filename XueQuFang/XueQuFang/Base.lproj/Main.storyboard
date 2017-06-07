@@ -27,7 +27,49 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ux2-80-YdZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2241" y="1063"/>
+            <point key="canvasLocation" x="2785" y="1063"/>
+        </scene>
+        <!--My Setting View Controller-->
+        <scene sceneID="S36-wS-uqy">
+            <objects>
+                <viewController storyboardIdentifier="MySettingViewController" id="xwA-Er-O9F" customClass="MySettingViewController" customModule="XueQuFang" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1Ly-7s-6Sd"/>
+                        <viewControllerLayoutGuide type="bottom" id="5rh-OT-U1L"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="joo-Cm-fV9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jJZ-Rm-QkW">
+                                <rect key="frame" x="77" y="449" width="62" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="退出登录"/>
+                                <connections>
+                                    <action selector="logout:" destination="xwA-Er-O9F" eventType="touchUpInside" id="e4N-au-Z8z"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="个人主界面" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QTo-gC-vLb">
+                                <rect key="frame" x="65" y="239" width="87" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TaJ-04-fwA">
+                                <rect key="frame" x="61" y="36" width="94" height="84"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="profile" destination="TaJ-04-fwA" id="PrO-hr-HhJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6hb-qe-atJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2780" y="1821.1394302848578"/>
         </scene>
         <!--Title-->
         <scene sceneID="NFR-Bg-2Zf">
@@ -88,7 +130,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XU2-iy-RbK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3180" y="732"/>
+            <point key="canvasLocation" x="3911" y="1063"/>
         </scene>
         <!--Xiaoqu Detail View Controller-->
         <scene sceneID="bV2-yN-4Ys">
@@ -228,7 +270,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p6i-EX-oAC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3180" y="1523"/>
+            <point key="canvasLocation" x="4690" y="1063"/>
         </scene>
         <!--登录-->
         <scene sceneID="Zf6-bQ-8dm">
@@ -375,58 +417,58 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="手机号获取验证码" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fTk-Tk-hXv" userLabel="cellphone_T">
-                                <rect key="frame" x="88" y="61.5" width="187.5" height="30"/>
+                                <rect key="frame" x="88" y="105.5" width="187.5" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Ij-cM-JNp" userLabel="passward_T">
-                                <rect key="frame" x="87.5" y="107.5" width="187.5" height="30"/>
+                                <rect key="frame" x="87.5" y="151.5" width="187.5" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5dL-QX-fhu" userLabel="confirmPasswart_T">
-                                <rect key="frame" x="87.5" y="153.5" width="187.5" height="30"/>
+                                <rect key="frame" x="87.5" y="197.5" width="187.5" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wTb-xh-2sr" userLabel="authtication_T">
-                                <rect key="frame" x="87.5" y="199.5" width="187.5" height="30"/>
+                                <rect key="frame" x="87.5" y="243.5" width="187.5" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="确认密码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHz-YY-JDt">
-                                <rect key="frame" x="17" y="158" width="70" height="21"/>
+                                <rect key="frame" x="17" y="202" width="70" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xI1-mP-Ek0">
-                                <rect key="frame" x="26" y="66" width="52" height="21"/>
+                                <rect key="frame" x="26" y="110" width="52" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="密码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ePA-00-IZY">
-                                <rect key="frame" x="34.5" y="112" width="35" height="21"/>
+                                <rect key="frame" x="34.5" y="156" width="35" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="验证码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MWY-1A-GrH">
-                                <rect key="frame" x="26" y="204" width="52" height="21"/>
+                                <rect key="frame" x="26" y="248" width="52" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ySs-fu-Ksp">
-                                <rect key="frame" x="282" y="61.5" width="77" height="30"/>
+                                <rect key="frame" x="282" y="105.5" width="77" height="30"/>
                                 <state key="normal" title="获取验证码"/>
                                 <connections>
                                     <action selector="getAuthCode:" destination="jlm-MW-5zw" eventType="touchUpInside" id="Cbs-82-c6r"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u6c-2e-ULe">
-                                <rect key="frame" x="172" y="279.5" width="31" height="30"/>
+                                <rect key="frame" x="172" y="323.5" width="31" height="30"/>
                                 <state key="normal" title="注册"/>
                                 <connections>
                                     <action selector="register:" destination="jlm-MW-5zw" eventType="touchUpInside" id="5I9-8Z-LqK"/>

@@ -20,6 +20,8 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 		// 初始化数据
 		self.setupModel()
 	}
+	// Toolbar View
+	var toolbar:UIView!
 	
 	// Search Bar
 	var searchbar:UISearchBar!
@@ -33,10 +35,15 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	var searchRecords = [SearchResultItem]()
 	var searchResults = [SearchResultItem]()
 	var useSearchRecord:Bool!
-    
+	
+	// Map
     var mapView: MAMapView!
     var mapSearch: AMapSearchAPI!
     var mapCustomDelegate: MapCustomDelegate!
+	
+	// Setting panel
+	var settingPanel: MySettingViewController!
+	var coverPanel: UIView!
 	
 	// Request handler
 	var schoolHandler: SchoolHandler!
@@ -79,8 +86,32 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	
 	func setupUI()
 	{
+		// 顶部Toolbar效果, 用一张单独的UIView加上三个按钮空间实现
+		// 高度 44
+		let toolbarTop = UIApplication.shared.statusBarFrame.height
+		self.toolbar = UIView.init(frame: CGRect.init(x: 0.0, y: toolbarTop, width: self.view.bounds.size.width, height: 44))
+		self.toolbar.backgroundColor = UIColor.lightGray
+		self.view.addSubview(self.toolbar)
+		// 左: 个人设置
+		let settingB = UIButton.init(frame: CGRect.init(x: 10, y: 10, width: 60, height:24))
+		settingB.setTitle("个人", for: UIControlState.normal)
+		settingB.addTarget(self, action: #selector(self.personalSettingTap), for: UIControlEvents.touchUpInside)
+		self.toolbar.addSubview(settingB)
+		
+		// 中: 选择城市
+		let cityB = UIButton.init(frame: CGRect.init(x: self.view.bounds.width / 2 - 40, y: 10, width: 60, height:24))
+		cityB.setTitle("城市", for: UIControlState.normal)
+		cityB.addTarget(self, action: #selector(self.personalSettingTap), for: UIControlEvents.touchUpInside)
+		self.toolbar.addSubview(cityB)
+		
+		// 右: 消息界面
+		let messageB = UIButton.init(frame: CGRect.init(x: self.view.bounds.width - 70, y: 10, width: 60, height:24))
+		messageB.setTitle("消息", for: UIControlState.normal)
+		messageB.addTarget(self, action: #selector(self.personalSettingTap), for: UIControlEvents.touchUpInside)
+		self.toolbar.addSubview(messageB)
+		
         // 搜索框
-		let searchbarTop = UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.height)!
+		let searchbarTop = UIApplication.shared.statusBarFrame.height + 44
 		self.searchbar = UISearchBar.init(frame: CGRect.init(x: 0, y: searchbarTop, width: self.view.bounds.size.width, height: 44))
 		self.searchbar.placeholder = "输入小学或者小区名称"
 		self.searchbar.delegate = self
@@ -99,6 +130,64 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 		self.searchResultTV.tableFooterView?.frame = CGRect.init()
 		self.searchResultTV.isHidden = true // Invisible at initial
 		self.view.addSubview(self.searchResultTV)
+		
+		// 个人设置界面
+		self.settingPanel = self.storyboard!.instantiateViewController(withIdentifier: "MySettingViewController") as! MySettingViewController
+		self.addChildViewController(self.settingPanel)
+		self.settingPanel.view.frame = CGRect.init(x: -self.view.frame.width * 2.0 / 3.0, y: 0, width: self.view.frame.width * 2.0 / 3.0, height: self.view.frame.height)
+		self.view.addSubview(self.settingPanel.view)
+	}
+	
+	func addCover()
+	{
+		if self.coverPanel == nil
+		{
+			self.coverPanel = UIView.init(frame: self.view.frame)
+			self.coverPanel.backgroundColor = UIColor.black
+			self.coverPanel.alpha = 0.3
+			self.view.addSubview(self.coverPanel)
+			let tap = UITapGestureRecognizer(target: self, action: #selector(self.tap))
+			self.coverPanel.addGestureRecognizer(tap)
+		}
+		self.coverPanel.isHidden = false
+	}
+	func removeCover()
+	{
+		if self.coverPanel != nil
+		{
+			self.coverPanel.isHidden = true
+		}
+	}
+	func tap()
+	{
+		// 1. 移除阴影封面
+		self.removeCover()
+		
+		// 2. 收起个人设置界面
+		self.hideSettingPanel()
+		
+	}
+	
+	func personalSettingTap()
+	{
+		self.addCover()
+		self.showSettingPanel()
+	}
+	
+	func showSettingPanel()
+	{
+		UIView.animate(withDuration: 0.25, animations: {
+			() -> Void in
+			self.settingPanel.view.frame.origin.x = 0.0
+			self.view.bringSubview(toFront: self.settingPanel.view)
+		});
+	}
+	func hideSettingPanel()
+	{
+		UIView.animate(withDuration: 0.25, animations: {
+			() -> Void in
+			self.settingPanel.view.frame.origin.x = -self.view.frame.width * 2.0 / 3.0
+		});
 	}
 	
 	func setupModel()
@@ -478,11 +567,18 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 	//
 	// 键盘弹出时调整搜索结果tableview的高度
 	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		self.navigationController?.setNavigationBarHidden(true, animated: true)
+		
 		// register for keyboard notifications
 		NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
 	}
-	
+
 	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		self.navigationController?.setNavigationBarHidden(false, animated: true)
+		
 		NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
 	}
 	

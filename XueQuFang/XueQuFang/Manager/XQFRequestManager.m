@@ -13,6 +13,7 @@
 #import "XQFLoginRequest.h"
 #import "XQFRegisterRequest.h"
 #import "XQFAuthenticationCodeRequest.h"
+#import "XQFLogoutRequest.h"
 
 static XQFRequestManager* mSharedManager = nil;
 
@@ -63,6 +64,10 @@ NSString* const hostAuthAPIURL = @"http://106.14.121.220:7600/auth/%@";
 		case ENUM_REQUEST_AUTHENTICATION_CODE:
 			request = [[XQFAuthenticationCodeRequest alloc] init];
 			request.method = [NSString stringWithFormat:hostAuthAPIURL, @"message_auth"];
+			break;
+		case ENUM_REQUEST_LOGOUT:
+			request = [[XQFLogoutRequest alloc] init];
+			request.method = [NSString stringWithFormat:hostAuthAPIURL, @"logout"];
 			break;
 		default:
 			break;

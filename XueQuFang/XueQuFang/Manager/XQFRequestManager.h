@@ -17,6 +17,7 @@ typedef enum {
 	ENUM_REQUEST_LOGIN,
 	ENUM_REQUEST_REGISTER,
 	ENUM_REQUEST_AUTHENTICATION_CODE,
+	ENUM_REQUEST_LOGOUT,
 } EnumRequestType;
 
 @interface XQFRequestManager : NSObject

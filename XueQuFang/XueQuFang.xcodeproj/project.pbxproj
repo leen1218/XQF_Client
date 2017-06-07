@@ -30,6 +30,8 @@
 		8D5E56421EC1F03B00132BBA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5E56411EC1F03B00132BBA /* ViewController.swift */; };
 		8D5E56451EC1F03B00132BBA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D5E56431EC1F03B00132BBA /* Main.storyboard */; };
 		8D5E564A1EC1F03B00132BBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D5E56481EC1F03B00132BBA /* LaunchScreen.storyboard */; };
+		8D85060A1EDC1DCB00E0DECD /* MySettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8506091EDC1DCB00E0DECD /* MySettingViewController.swift */; };
+		8D85060D1EDFCD7F00E0DECD /* XQFLogoutRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D85060C1EDFCD7F00E0DECD /* XQFLogoutRequest.m */; };
 		8DACECFA1EC488A5008E3B31 /* SearchMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DACECF91EC488A5008E3B31 /* SearchMainVC.swift */; };
 		8DACECFD1EC4916F008E3B31 /* SearchResultItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DACECFC1EC4916F008E3B31 /* SearchResultItem.swift */; };
 		8DACED081EC765D7008E3B31 /* XQFRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DACED021EC765D7008E3B31 /* XQFRequestManager.m */; };
@@ -79,6 +81,9 @@
 		8D5E56441EC1F03B00132BBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8D5E56491EC1F03B00132BBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D5E564B1EC1F03B00132BBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D8506091EDC1DCB00E0DECD /* MySettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MySettingViewController.swift; path = UI/MySettingViewController.swift; sourceTree = "<group>"; };
+		8D85060B1EDFCD7F00E0DECD /* XQFLogoutRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQFLogoutRequest.h; sourceTree = "<group>"; };
+		8D85060C1EDFCD7F00E0DECD /* XQFLogoutRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XQFLogoutRequest.m; sourceTree = "<group>"; };
 		8DACECF91EC488A5008E3B31 /* SearchMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchMainVC.swift; path = UI/SearchMainVC.swift; sourceTree = "<group>"; };
 		8DACECFC1EC4916F008E3B31 /* SearchResultItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchResultItem.swift; path = Model/SearchResultItem.swift; sourceTree = "<group>"; };
 		8DACED011EC765D7008E3B31 /* XQFRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQFRequestManager.h; sourceTree = "<group>"; };
@@ -208,6 +213,7 @@
 				6D7A8D281ED2799B00122E29 /* CustomPOIKeywordsSearchRequest.swift */,
 				8DF6152D1ED70406008E8796 /* LoginViewController.swift */,
 				8DF615341ED70FF7008E8796 /* RegisterViewController.swift */,
+				8D8506091EDC1DCB00E0DECD /* MySettingViewController.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -252,6 +258,8 @@
 				8DF615371ED710C2008E8796 /* XQFRegisterRequest.m */,
 				8DF615391ED7129F008E8796 /* XQFAuthenticationCodeRequest.h */,
 				8DF6153A1ED7129F008E8796 /* XQFAuthenticationCodeRequest.m */,
+				8D85060B1EDFCD7F00E0DECD /* XQFLogoutRequest.h */,
+				8D85060C1EDFCD7F00E0DECD /* XQFLogoutRequest.m */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -427,9 +435,11 @@
 				8DF6153B1ED7129F008E8796 /* XQFAuthenticationCodeRequest.m in Sources */,
 				8D2EFE5A1ECC7F2500FBA2A7 /* HouseInfoHandler.swift in Sources */,
 				8D5E56421EC1F03B00132BBA /* ViewController.swift in Sources */,
+				8D85060D1EDFCD7F00E0DECD /* XQFLogoutRequest.m in Sources */,
 				8D07A7D41ED3103800B5A9BB /* SchoolItem.swift in Sources */,
 				8D5E56401EC1F03B00132BBA /* AppDelegate.swift in Sources */,
 				8DACED091EC765D7008E3B31 /* XQFRequest.m in Sources */,
+				8D85060A1EDC1DCB00E0DECD /* MySettingViewController.swift in Sources */,
 				6D8A5F3F1ECA1842004D8D2C /* CommonUtility.m in Sources */,
 				8DF6152E1ED70406008E8796 /* LoginViewController.swift in Sources */,
 				8D5C01F21ECBF51100694C6B /* Utils.swift in Sources */,
