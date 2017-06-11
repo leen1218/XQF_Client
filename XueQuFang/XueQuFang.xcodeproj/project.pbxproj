@@ -33,6 +33,7 @@
 		8D85060A1EDC1DCB00E0DECD /* MySettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8506091EDC1DCB00E0DECD /* MySettingViewController.swift */; };
 		8D85060D1EDFCD7F00E0DECD /* XQFLogoutRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D85060C1EDFCD7F00E0DECD /* XQFLogoutRequest.m */; };
 		8D85060F1EE83B0600E0DECD /* MessageTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D85060E1EE83B0600E0DECD /* MessageTVC.swift */; };
+		8D8506161EEC4EB000E0DECD /* XueQuFangCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8506151EEC4EB000E0DECD /* XueQuFangCustomCell.swift */; };
 		8DACECFA1EC488A5008E3B31 /* SearchMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DACECF91EC488A5008E3B31 /* SearchMainVC.swift */; };
 		8DACECFD1EC4916F008E3B31 /* SearchResultItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DACECFC1EC4916F008E3B31 /* SearchResultItem.swift */; };
 		8DACED081EC765D7008E3B31 /* XQFRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DACED021EC765D7008E3B31 /* XQFRequestManager.m */; };
@@ -86,6 +87,7 @@
 		8D85060B1EDFCD7F00E0DECD /* XQFLogoutRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQFLogoutRequest.h; sourceTree = "<group>"; };
 		8D85060C1EDFCD7F00E0DECD /* XQFLogoutRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XQFLogoutRequest.m; sourceTree = "<group>"; };
 		8D85060E1EE83B0600E0DECD /* MessageTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageTVC.swift; path = UI/MessageTVC.swift; sourceTree = "<group>"; };
+		8D8506151EEC4EB000E0DECD /* XueQuFangCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XueQuFangCustomCell.swift; sourceTree = "<group>"; };
 		8DACECF91EC488A5008E3B31 /* SearchMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchMainVC.swift; path = UI/SearchMainVC.swift; sourceTree = "<group>"; };
 		8DACECFC1EC4916F008E3B31 /* SearchResultItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchResultItem.swift; path = Model/SearchResultItem.swift; sourceTree = "<group>"; };
 		8DACED011EC765D7008E3B31 /* XQFRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQFRequestManager.h; sourceTree = "<group>"; };
@@ -202,9 +204,19 @@
 			path = XueQuFang;
 			sourceTree = "<group>";
 		};
+		8D8506141EEC4E7A00E0DECD /* CutomTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				8D8506151EEC4EB000E0DECD /* XueQuFangCustomCell.swift */,
+			);
+			name = CutomTableViewCell;
+			path = UI/CutomTableViewCell;
+			sourceTree = "<group>";
+		};
 		8DACECF81EC48876008E3B31 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				8D8506141EEC4E7A00E0DECD /* CutomTableViewCell */,
 				6D76BADE1ED0195A0094C98A /* SearchAnnotation.swift */,
 				6D76BADF1ED0195A0094C98A /* XiaoquDetailViewController.swift */,
 				6D76BAE01ED0195A0094C98A /* XuexiaoDetailViewController.swift */,
@@ -426,6 +438,7 @@
 				8DF615381ED710C2008E8796 /* XQFRegisterRequest.m in Sources */,
 				8D301A6D1ED4215500D03941 /* XQFImageDownloadManager.m in Sources */,
 				8D5C01F01ECBF03900694C6B /* BaseHandler.swift in Sources */,
+				8D8506161EEC4EB000E0DECD /* XueQuFangCustomCell.swift in Sources */,
 				8DACED0A1EC765D7008E3B31 /* XQFSearchRequest.m in Sources */,
 				8DACED081EC765D7008E3B31 /* XQFRequestManager.m in Sources */,
 				6DADE0161ECC8F640080FC7C /* MapCustomDelegate.swift in Sources */,

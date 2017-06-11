@@ -43,9 +43,9 @@ class AnnotationCalloutView : UIView {
         
         // provide the image in the left of popover
         let imageView = UIImageView.init(frame: CGRect.init(x: CalloutViewConstants.imageXMargin, y: CalloutViewConstants.imageYMargin, width: CalloutViewConstants.imageWidth, height: CalloutViewConstants.imageHeight))
-        //imageView.image = UIImage.init(imageLiteralResourceName: "zju.jpg")
 		let imageName = (self.baseItem?.name)! + "_shortcut.jpg"
-		XQFImageDownloadManager.shared().downloadImage(imageView, withName: imageName)
+		//XQFImageDownloadManager.shared().downloadImage(imageView, withName: imageName)
+		XQFImageDownloadManager.shared().downloadImage(imageView, withName: "启真名苑_detail.jpg")
         self.addSubview(imageView)
         
         // provide the title, which is the name of the school or the house

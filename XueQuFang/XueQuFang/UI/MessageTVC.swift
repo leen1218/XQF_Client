@@ -17,6 +17,8 @@ class MessageTVC: UITableViewController
 	// 目前支持的城市列表
 	let city : [String] = ["杭州"]
 	
+	// Delegate
+	var delegate: SearchMainVC!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -52,6 +54,8 @@ class MessageTVC: UITableViewController
 				cell = UITableViewCell.init(style: UITableViewCellStyle.default, reuseIdentifier: cellId)
 			}
 			
+			cell?.selectionStyle = UITableViewCellSelectionStyle.none
+			
 			cell!.textLabel?.text = self.city[indexPath.row]
 			return cell!
 		}
@@ -60,6 +64,7 @@ class MessageTVC: UITableViewController
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		if (self.itemType == "City")
 		{
+			self.delegate.tapCover()
 		}
 	}
 }

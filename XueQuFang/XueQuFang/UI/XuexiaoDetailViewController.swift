@@ -46,7 +46,8 @@ class XuexiaoDetailViewController: UIViewController, UITableViewDataSource, UITa
 		// 介绍图片
 		self.introImage.frame = CGRect.init(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height * 0.3)
 		let imageName = self.model.name + "_detail.jpg"
-		XQFImageDownloadManager.shared().downloadImage(self.introImage, withName: imageName)
+		//XQFImageDownloadManager.shared().downloadImage(self.introImage, withName: imageName)
+		XQFImageDownloadManager.shared().downloadImage(self.introImage, withName: "启真名苑_detail.jpg")
 		
 		// 学校名称
 		self.xuexiaoName.frame = CGRect.init(x: 10, y: self.view.frame.height * 0.3, width: self.view.frame.width, height: 44)
@@ -54,6 +55,7 @@ class XuexiaoDetailViewController: UIViewController, UITableViewDataSource, UITa
 		
 		// 学区列表
 		self.xuequTV.translatesAutoresizingMaskIntoConstraints = false
+		self.xuequTV.rowHeight = 80
 		self.xuequTV.delegate = self
 		self.xuequTV.dataSource = self
 		// Left
@@ -77,16 +79,19 @@ class XuexiaoDetailViewController: UIViewController, UITableViewDataSource, UITa
 		return 1
 	}
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cellId = "cell"
-		var cell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: cellId)
+		let cellId = "XueQuFangCustomCell"
+		var cell: XueQuFangCustomCell? = tableView.dequeueReusableCell(withIdentifier: cellId) as? XueQuFangCustomCell
 		
 		if cell == nil
 		{
-			cell = UITableViewCell.init(style: UITableViewCellStyle.subtitle, reuseIdentifier: cellId)
+			cell = UITableViewCell.init(style: UITableViewCellStyle.default, reuseIdentifier: cellId) as? XueQuFangCustomCell
 		}
 		
-		cell!.textLabel?.text = self.model.xiaoqus[indexPath.row].name
-		cell!.detailTextLabel?.text = self.model.xiaoqus[indexPath.row].detailAddress
+		cell!.XueQuFangAddress_L.text = self.model.xiaoqus[indexPath.row].detailAddress
+		cell!.XueQuFangName_L.text = self.model.xiaoqus[indexPath.row].name
+		//let xuequfangName = self.model.xiaoqus[indexPath.row].name + "_shortcut.jpg"
+		//XQFImageDownloadManager.shared().downloadImage(cell!.XueQuFangShortcut_img, withName: xuequfangName)
+		XQFImageDownloadManager.shared().downloadImage(cell!.XueQuFangShortcut_img, withName: "启真名苑_detail.jpg")
 		return cell!
 	}
 	

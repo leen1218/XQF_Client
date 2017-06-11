@@ -23,7 +23,9 @@ class MySettingViewController: UIViewController, RequestHandler{
 	{
 		self.profile.frame = CGRect.init(x: self.view.frame.width / 2 - 30, y: 50, width: 60, height: 60)
 		let imageName = "profiles/" + String(UserModel.SharedUserModel().userID!) + "_profile.jpg"
-		XQFImageDownloadManager.shared().downloadImage(profile, withName: imageName)
+		//XQFImageDownloadManager.shared().downloadImage(profile, withName: imageName)
+		XQFImageDownloadManager.shared().downloadImage(profile, withName: "启真名苑_detail.jpg")
+		
 	}
 	
 	@IBAction func logout(_ sender: UIButton) {

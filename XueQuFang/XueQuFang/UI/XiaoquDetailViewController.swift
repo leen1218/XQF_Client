@@ -54,8 +54,8 @@ class XiaoquDetailViewController: UIViewController {
 		// 介绍图片
 		self.introImage.frame = CGRect.init(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height * 0.3)
 		let imageName = self.model.name + "_detail.jpg"
-		XQFImageDownloadManager.shared().downloadImage(self.introImage, withName: imageName)
-		
+		//XQFImageDownloadManager.shared().downloadImage(self.introImage, withName: imageName)
+		XQFImageDownloadManager.shared().downloadImage(self.introImage, withName: "启真名苑_detail.jpg")
 		// 学校名称
 		self.name.frame = CGRect.init(x: 12, y: self.view.frame.height * 0.3, width: self.view.frame.width, height: 44)
 		self.name.text = self.model.name

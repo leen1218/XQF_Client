@@ -224,6 +224,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 		if (self.messagePanel == nil) {
 			// 个人设置界面
 			self.messagePanel = self.storyboard!.instantiateViewController(withIdentifier: "MessageTCV") as! MessageTVC
+			self.messagePanel.delegate = self
 			self.messagePanel.itemType = "Message"
 			self.addChildViewController(self.messagePanel)
 			let toolbarTop = UIApplication.shared.statusBarFrame.height
@@ -255,6 +256,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
 		if (self.cityPanel == nil) {
 			// 城市选择界面
 			self.cityPanel = self.storyboard!.instantiateViewController(withIdentifier: "MessageTCV") as! MessageTVC
+			self.cityPanel.delegate = self
 			self.cityPanel.itemType = "City"
 			self.addChildViewController(self.cityPanel)
 			let toolbarTop = UIApplication.shared.statusBarFrame.height
