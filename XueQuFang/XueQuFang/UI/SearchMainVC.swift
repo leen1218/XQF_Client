@@ -551,7 +551,7 @@ class SearchMainVC : UIViewController, UITableViewDataSource, UITableViewDelegat
         self.drawPolygonList(polygonList: polygonList)
         
         let request = CustomPOIKeywordsSearchRequest()
-        request.keywords = schoolItem.name
+        request.keywords = schoolItem.detailAddress
         request.requireExtension = true
         request.types = schoolItem.type
         request.city = schoolItem.city
